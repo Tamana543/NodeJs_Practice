@@ -1,4 +1,5 @@
 // const fs = require('fs')
+const fs = require('fs')
 // fs.writeFileSync('Test.html', "A File Made by React")
 // To creat a server by node.js
 const http = require('http') // in here you called the http path from node js and import it 
@@ -15,6 +16,26 @@ const serverNew = http.createServer(function(req,res){
           res.write('</html>')
         return res.end()
      }
+   if(url === "/Tamana" && req.method == "POST"){
+     const body = []; // lets add data as an external file
+     req.on('data',(chunk)=> {
+          console.log(chunk);
+          body.push(chunk)
+
+     }) 
+     req.on('end',()=>{
+          const parsedBody = Buffer.concat(body).toString()
+          // console.log(parsedBody);
+          const messageServer = parsedBody.split("=")[1]
+
+          fs.writeFileSync("message.txt",messageServer)
+     })
+     res.statusCode = 302;// the code for sending data to server
+     res.setHeader("location",'/')
+     return res.end()
+   }
+
+  
      res.setHeader("Created-Server","txt/html")
      res.write("<html></html>")
      res.write("<body></body>")
