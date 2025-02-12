@@ -1,4 +1,5 @@
 // const fs = require('fs')
+const { error } = require('console');
 const fs = require('fs')
 // fs.writeFileSync('Test.html', "A File Made by React")
 // To creat a server by node.js
@@ -23,16 +24,18 @@ const serverNew = http.createServer(function(req,res){
           body.push(chunk)
 
      }) 
-     req.on('end',()=>{
+     return req.on('end',()=>{
           const parsedBody = Buffer.concat(body).toString()
           // console.log(parsedBody);
           const messageServer = parsedBody.split("=")[1]
 
-          fs.writeFileSync("message.txt",messageServer)
+          fs.writeFile("message.txt",messageServer, error => {
+               res.statusCode = 302;// the code for sending data to server
+               res.setHeader("location",'/')
+               return res.end()
+
+          })
      })
-     res.statusCode = 302;// the code for sending data to server
-     res.setHeader("location",'/')
-     return res.end()
    }
 
   
