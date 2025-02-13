@@ -1,7 +1,7 @@
 // const fs = require('fs')
 
 // const fs = require('fs')
-const root = require("./root")
+const root = require("./root.js")
 // fs.writeFileSync('Test.html', "A File Made by React")
 // To creat a server by node.js
 const http = require('http') // in here you called the http path from node js and import it 
