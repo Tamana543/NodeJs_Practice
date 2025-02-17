@@ -9,7 +9,7 @@ const mainEng = (req,res) =>{
  const url = req.url;
  if(url === "/"){
       res.write("<html>")
-      res.write("<body><form method='POST' action='/Tamana'><input type='text' name='message'/><button type='submit'>Send</button></form></body>")
+      res.write("<body><form method='POST' action='/Tamana'><input type='text' name='message'/><button type='submit' style='color:purple'>Send</button></form></body>")
       res.write('</html>')
     return res.end()
  }
