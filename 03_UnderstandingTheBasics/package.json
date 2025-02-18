@@ -1,6 +1,5 @@
 {
-  
-    "name": "node.js_practice",
+  "name": "node.js_practice",
     "version": "1.0.0",
     "description": "Practice for node js ",
     "main": "app.js",
