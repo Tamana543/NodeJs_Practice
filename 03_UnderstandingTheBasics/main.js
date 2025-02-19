@@ -12,7 +12,7 @@ app.use("/app-product" , (req, res, next)=> {
      // next() // call this so it can go through the rest of code, if we dont have res.Otherwise the req will die 
 
 }) 
-app.use("/product", (req ,res ,next)=> {
+app.post("/product", (req ,res ,next)=> { // we use post instead of use to filter the request for only post  
      console.log(req.body);
      res.redirect('/')
 })
