@@ -1,16 +1,21 @@
-// const fs = require('fs')
 
-// const fs = require('fs')
-// const root = require("./root.js")
-const time = require("./date.js")
-// fs.writeFileSync('Test.html', "A File Made by React")
-// To creat a server by node.js
-const http = require('http') // in here you called the http path from node js and import it 
+// const time = require("./date.js")
+// doing the app.js stafs with easily express
+
+const http = require('http') 
 const express = require("express")
-// const serverNew = http.createServer(root) // remember it need to be stored in a variable so that you can listen  it then. // it takes a function with 2 parametes (reqest and response)
+// const serverNew = http.createServer(root) 
 const app = express()
-const serverNew = http.createServer(app)
-console.log(time);
+app.use((req, res, next)=> {
+     console.log("Hello from Midleware First");
+     next() // call this so it can go through the rest of code, if we dont have res.Otherwise the req will die 
 
-serverNew.listen(5430) // you need to add a path to the listener, and if you do not add it, it will get something automatically be itself
-// now then oحen terminal and write the node first.js , then open the browser and write the localhost:..(above path)
+}) 
+app.use((req, res, next)=> {
+     // console.log("Hello form Midleware 2 ");
+     res.send('<h1> Tamana Farzami </h1>')
+}) 
+const serverNew = http.createServer(app)
+// console.log(time);
+
+serverNew.listen(5430) 

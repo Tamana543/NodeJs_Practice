@@ -1,7 +1,12 @@
-const http = require('http');
+const http = require('http');// in here you called the http path from node js and import it 
+// const fs = require('fs')
+
+// const fs = require('fs')
+// const root = require("./root.js")
+// fs.writeFileSync('Test.html', "A File Made by React")
 const fs = require('fs');
 
-const server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => { // To creat a server by node.js  // remember it need to be stored in a variable so that you can listen  it then. // it takes a function with 2 parametes (reqest and response)
   const url = req.url;
   const method = req.method;
   if (url === '/') {
@@ -34,4 +39,5 @@ const server = http.createServer((req, res) => {
   res.end();
 });
 
-server.listen(3000);
+server.listen(3000);// you need to add a path to the listener, and if you do not add it, it will get something automatically be itself
+// now then oحen terminal and write the node first.js , then open the browser and write the localhost:..(above path)
