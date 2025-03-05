@@ -1,0 +1,14 @@
+{
+  "name": "assignment",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tamana Farzami ",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "nodeman": "^1.1.2"
+  }
+}
