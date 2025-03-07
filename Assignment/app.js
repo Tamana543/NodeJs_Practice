@@ -11,8 +11,7 @@ app.get('/users',(req,res,next)=>{
      res.render('user',{pageTitle : "User"})
 })
 app.post('/add-user',(req,res,next)=>{
-     users.push()
+     users.push({userName : req.users.userName})
      res.redirect('/users')
 })
-// 8:00
 app.listen(5430)
