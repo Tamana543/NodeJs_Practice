@@ -10,10 +10,10 @@ app.set('views','views')
 
 app.use(body.urlencoded({extended: false}))
 app.get('/',(req,res,nest)=>{
-res.render('index',{pageTitle : 'Add User'})
+res.render('index',{pageTitle : 'Add User',path : 'add-User'})
 })
 app.get('/users',(req,res,next)=>{
-     res.render('user',{pageTitle : "User",users : users})
+     res.render('user',{pageTitle : "User",users : users,path : 'users'})
 })
 app.post('/add-user',(req,res,next)=>{
      users.push({userName: req.body.userName})
