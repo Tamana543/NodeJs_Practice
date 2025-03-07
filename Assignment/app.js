@@ -1,7 +1,10 @@
 const express = require('express')
 const app  = express()
 const body = require('body-parser')
+const path = require("path")
 const users = [];
+
+app.use(express.static(path.join(__dirname,'public')))
 app.set('view engine','ejs')
 app.set('views','views')
 
