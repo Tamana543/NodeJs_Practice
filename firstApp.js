@@ -13,5 +13,6 @@ const server = http.createServer((req,res)=>{
 // console.log(res);
 // console.log("MEEEEEE");
 console.log(req);
+// process.exit() // to show that the process sstop excution and exit 
 })
 server.listen(5430)
