@@ -24,23 +24,23 @@ res.write('</html>')
 return res.end()  // we return this from function to avoid excution of the next codes if the url is /   
 }
 if(url === "/message" && method === "POST") {
-     // Hundling data to be sent  inside the data file 
-     const body = [];
-     req.on("data",(chunk)=>{
-body.push(chunk) // search the chunk
-console.log(chunk);
+// Hundling data to be sent  inside the data file 
+const body = [];
+req.on("data",(chunk)=>{
+     body.push(chunk) // search the chunk
+     console.log(chunk);
      })
-  req.on("end",()=>{
+return req.on("end",()=>{
      const parsedData = Buffer.concat(body).toString()
      const data = parsedData.split("=")[1]
      // console.log(data);
      fs.writeFileSync("data.txt",data) // to store the data getted from form into a file 
-  })
      // to redirect to the / again 
      //  res.redirect(301, '/new-route') or 
      res.statusCode = 301; // used for redirecd 
-res.setHeader('Location','/')
-return res.end()
+     res.setHeader('Location','/')
+     return res.end()
+  })
 }
 // process.exit() // to show that the process sstop excution and exit 
 res.setHeader('content-type','text/Html')// to create the header for the page and the first parameter is saging .. the 2nd para tell you what type it should be
