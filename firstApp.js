@@ -1,5 +1,5 @@
 // console.log("Hello from node js");
-// const fs = require('fs')
+const fs = require('fs')
 // fs.writeFileSync("text.txt","Hell I am new")
 const file = require('fs');
 // const data = "I am from data";
@@ -14,6 +14,7 @@ const server = http.createServer((req,res)=>{
 // console.log("MEEEEEE");
 // console.log(req.url,req.method,req.headers);
 const url = req.url
+const method =req.method;
 if(url === "/") {
  res.setHeader('content-type','text/Html')
 res.write('<html>')
@@ -21,6 +22,14 @@ res.write('<head><title> My first Page of nodejs</title></head>')
 res.write('<body><form action="/message" method="POST"><input type="text" name="message"/><button type="submit">Submit</button></form></body> </li></ul>')
 res.write('</html>')
 return res.end()  // we return this from function to avoid excution of the next codes if the url is /   
+}
+if(url === "/message" && method === "POST") {
+     fs.writeFileSync("data.txt","موقت") // to store the data getted from form into a file 
+     // to redirect to the / again 
+     //  res.redirect(301, '/new-route') or 
+     res.statusCode = 301; // used for redirecd 
+res.setHeader('Location','/')
+return res.end()
 }
 // process.exit() // to show that the process sstop excution and exit 
 res.setHeader('content-type','text/Html')// to create the header for the page and the first parameter is saging .. the 2nd para tell you what type it should be
