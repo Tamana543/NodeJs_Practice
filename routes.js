@@ -47,3 +47,11 @@ res.write(`<body><h2>Hello From NodeJs</h2><ul> <li> <a href="https://www.nation
 res.write('</html>')
 res.end()// to teel the respond it is end of the project
 }
+// you can do the export with many different ways :
+
+// module.exports = requestHundler;
+// module.exports.handler = requestHandler
+module.exports = {
+     handler : requestHundler, 
+     text:"Some random text "
+}
