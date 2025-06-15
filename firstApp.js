@@ -1,3 +1,4 @@
+// keep in mind if you try to manipulate anything from imported roots, it will not effect the main file in the given rout.
 // console.log("Hello from node js");
 const fs = require('fs')
 // fs.writeFileSync("text.txt","Hell I am new")
