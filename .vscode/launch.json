@@ -11,7 +11,10 @@
                "skipFiles": [
                     "<node_internals>/**"
                ],
-               "program": "${workspaceFolder}\\firstApp.js"
-          }
+               "program": "${workspaceFolder}\\firstApp.js",
+               "restart":true,// Automatically restart the program while the debugger is running
+               "runtimeExecutable": "nodemon",// Use nodemon to automatically restart the program
+               "console": "integratedTerminal"// Use the integrated terminal for input/output of the program
+                   }
      ]
 }
