@@ -1,12 +1,11 @@
-const http = require('http')
-const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const express = require('express')
-
+const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
+const app = express() // Create an Express application (it is a function call as the express module exports a function)
 const adminRoutes = require('./routes/admin')
-
 const shopRoutes = require('./routes/shop')
 
-const app = express() // Create an Express application (it is a function call as the express module exports a function)
+
+
 app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware to parse URL-encoded bodies (like form submissions) and make the data available in req.body
 
 // express is working as a middleware here, it is not a server, it is a framework to build web applications ( middleware is a function that takes a request and response object and does something with them, like logging, parsing, etc.)
@@ -16,6 +15,10 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 app.use(adminRoutes)
 
 app.use(shopRoutes)
+
+app.use((req,res)=>{
+     res.status(404).send("<h1> Page Not Found :( </h1>")
+})
 // const server = http.createServer(app)// Create an HTTP server using the Express application
 // server.listen(5430) or
 app.listen(5430) 
