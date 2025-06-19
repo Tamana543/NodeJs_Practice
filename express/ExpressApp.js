@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 
 //keep in mind that the order of the middleware is important, the first one will run first and then the next one, so if you want to run a middleware after another one, you have to put it after the first one
 
-app.use(adminRoutes)
+app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
 
