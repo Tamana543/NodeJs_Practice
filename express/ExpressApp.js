@@ -3,7 +3,7 @@ const bodyParser = require('body-parser') // Import body-parser to parse incomin
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
-
+const path = require('path')
 
 
 app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware to parse URL-encoded bodies (like form submissions) and make the data available in req.body
@@ -17,7 +17,7 @@ app.use('/admin',adminRoutes)
 app.use(shopRoutes)
 
 app.use((req,res)=>{
-     res.status(404).send("<h1> Page Not Found :( </h1>")
+     res.status(404).sendFile(path.join(__dirname,'Views','404.html'))
 })
 // const server = http.createServer(app)// Create an HTTP server using the Express application
 // server.listen(5430) or
