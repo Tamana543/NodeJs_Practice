@@ -41,8 +41,14 @@ button {
   border-radius: 15px;
   outline: none;
   border: none;
-  background: #0046d4;
+  background: #d468d4;
   color: #fff;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+button:hover,
+button:active {
+    background-color: #580258;
+    color: white;
 }
