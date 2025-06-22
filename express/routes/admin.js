@@ -11,10 +11,11 @@ res.sendFile(path.join(rootDir,'Views','add-product.html')) // Use the rootDir u
      // next()
 })
 
-
+const product = [];
 router.post('/add-product',(req,res)=>{
-     console.log(req.body);
+     product.push({title : req.body.title})
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 })
 
-module.exports = router ;// Export the router so it can be used in other files
+exports.routes = router ;// Export the router so it can be used in other files
+exports.product = product

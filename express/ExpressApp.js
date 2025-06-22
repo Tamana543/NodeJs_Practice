@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
-const adminRoutes = require('./routes/admin')
+const adminData = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 
 //keep in mind that the order of the middleware is important, the first one will run first and then the next one, so if you want to run a middleware after another one, you have to put it after the first one
 app.use(express.static(path.join(__dirname,'public')))// use thi line so that you would e able to connect the public css to your file and the css will be availabel and the html file will have access to it 
-app.use('/admin',adminRoutes)
+app.use('/admin',adminData.routes)
 
 app.use(shopRoutes)
 

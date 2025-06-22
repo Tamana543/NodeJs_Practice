@@ -2,6 +2,7 @@ const path = require('path') // Import the path module to work with file and dir
 
 const express= require('express');
 const rootDir = require('../util/paths') 
+const adminData = require('./admin')
 const router = express.Router()
 
 router.get('/',(req,res)=>{
