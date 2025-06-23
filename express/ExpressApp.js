@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 
-app.set('view engine','pug')
+app.set('view engine','pug')// setting the default templating enginge to the pug file 
 app.set('views','views')
+
 const adminData = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
