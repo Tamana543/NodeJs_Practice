@@ -22,7 +22,7 @@ app.use(shopRoutes)
 
 app.use((req,res)=>{
      // res.status(404).sendFile(path.join(__dirname,'Views','404.html'))
-     res.status(404).render('404')
+     res.status(404).render('404',{pageTitle : 'Page Not Found'})
 })
 // const server = http.createServer(app)// Create an HTTP server using the Express application
 // server.listen(5430) or
