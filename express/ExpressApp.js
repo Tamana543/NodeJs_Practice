@@ -1,15 +1,20 @@
 const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
+const expressHBS = require('express-handlebars')
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 
 const adminData = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
 
-app.set('view engine','pug')// setting the default templating enginge to the pug file 
+// Wiew enjine hundlers 
+app.engine('hbs',expressHBS())//it give you the engine and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above
+app.set('view engine','hbs')// setting the default templating enginge to the handlebar file 
+// app.set('view engine','pug')// setting the default templating enginge to the pug file 
 app.set('views',path.join(__dirname,'views'))// In this line we are looking for the files that express should run the pug file
 
 
+//Midlewares
 app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware to parse URL-encoded bodies (like form submissions) and make the data available in req.body
 
 // express is working as a middleware here, it is not a server, it is a framework to build web applications ( middleware is a function that takes a request and response object and does something with them, like logging, parsing, etc.)
