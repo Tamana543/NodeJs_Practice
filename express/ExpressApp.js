@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
-const expressHBS = require('express-handlebars')
+const expressHbs = require('express-handlebars');
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 
 const adminData = require('./routes/admin')
@@ -8,7 +8,7 @@ const shopRoutes = require('./routes/shop')
 const path = require('path')
 
 // Wiew enjine hundlers 
-app.engine('hbs',expressHBS())//it give you the engine and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above
+app.engine('hbs', expressHbs())//it use with the templating language engines that are not inide express js itself and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above (there is a bugg with it)
 app.set('view engine','hbs')// setting the default templating enginge to the handlebar file 
 // app.set('view engine','pug')// setting the default templating enginge to the pug file 
 app.set('views',path.join(__dirname,'views'))// In this line we are looking for the files that express should run the pug file
