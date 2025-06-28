@@ -6,12 +6,12 @@ app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
 
 app.get('/',(req,res,next)=>{
-    res.render('') 
+    res.render('index',{pageTitle : 'Admins'}) 
 })
 app.get('/users',(req,res,next)=>{
-  
+   res.render('admin',{pageTitle: 'Add admin'}) 
 })
 app.post('/',(req,res,next)=>{
-
+ res.redirect('/') 
 })
 app.listen(3000)
