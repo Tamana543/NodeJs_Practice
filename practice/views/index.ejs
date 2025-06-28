@@ -1,10 +1,17 @@
 <%- include('main-layout.ejs') %>
 <body>
      <main>
-          <h1>Admins</h1>
-          <ul>
-           <li>Here</li> 
-        </ul>    
+          <% if (user.length > 0) { %>
+               <h1>Admins</h1>
+               <% for (admin of user) { %> 
+               <ul>
+                    <li><%= admin.name %></li> 
+               </ul>
+               <% } %>
+          <% } else { %>    
+               <h1>Admins</h1>
+               <P>No Admin Yet..</P>
+          <% } %>
 
      </main>
 

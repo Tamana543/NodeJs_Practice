@@ -9,13 +9,15 @@ app.use(bodyPars.urlencoded({extended:false}))
 
 const users = []
 app.get('/',(req,res,next)=>{
-    res.render('index',{pageTitle : 'Admins'}) 
+    res.render('index',{pageTitle : 'Admins', user:users}) 
+   
 })
 app.get('/users',(req,res,next)=>{
    res.render('admin',{pageTitle: 'Add admin'}) 
 })
 app.post('/add-user',(req,res,next)=>{
-     users.push()
+     users.push({name : req.body.user})
+     // console.log(users);
  res.redirect('/') 
 })
 app.listen(3000)
