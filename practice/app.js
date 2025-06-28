@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
-app.get((req,res,next)=>{
+app.set('view engine','ejs')
+app.set('views',path.join(__dirname,'views'))
+
+app.get('/',(req,res,next)=>{
+    res.render('') 
 })
-app.get((req,res,next)=>{
-     res.render('/users')
-     res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title" placeholder="Enter product title" /><button type="submit">Add Product</button></form>')
+app.get('/users',(req,res,next)=>{
+  
 })
 app.post('/',(req,res,next)=>{
 
