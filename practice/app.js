@@ -11,7 +11,7 @@ app.get('/',(req,res,next)=>{
 app.get('/users',(req,res,next)=>{
    res.render('admin',{pageTitle: 'Add admin'}) 
 })
-app.post('/',(req,res,next)=>{
+app.post('/add-user',(req,res,next)=>{
  res.redirect('/') 
 })
 app.listen(3000)
