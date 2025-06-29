@@ -6,8 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./express/ExpressApp.js",
     "start_sec": "nodemon ./3_0/firstApp.js",
-    "start-server": "nodemon server.js",
-    "start_practice" : "nodemon ./practice/app.js"
+    "start-server": "nodemon server.js"
+
   },
   "author": "Tamana Farzami ",
   "license": "ISC",
