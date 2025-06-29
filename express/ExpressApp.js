@@ -2,10 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 // const expressHbs = require('express-handlebars');
-
+const errorController = require('./controllers/404')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const path = require('path')
+const { error } = require('console')
 
 // Wiew enjine hundlers 
 // app.engine('hbs', expressHbs({layoutsDir : 'views/layouts',defaultLayout : 'main-layout',extname : 'hbs'}))//it use with the templating language engines that are not inide express js itself and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above (there is a bugg with it)
@@ -25,10 +26,7 @@ app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
 
-app.use((req,res)=>{
-     // res.status(404).sendFile(path.join(__dirname,'Views','404.html'))
-     res.status(404).render('404',{pageTitle : 'Page Not Found'})
-})
+app.use(errorController.get404)
 // const server = http.createServer(app)// Create an HTTP server using the Express application
 // server.listen(5430) or
 app.listen(5430) 
