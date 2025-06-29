@@ -2,6 +2,7 @@ const path = require('path') // Import the path module to work with file and dir
 const rootDir = require('../util/paths') 
 
 const product = [];
+// if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
      res.render('add-product',{pageTitle : "Add Product",
           path:'/admin/add-product',
@@ -18,7 +19,7 @@ exports.postAddProduct = (req,res)=>{
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 }
 
-exports.postShopPage = (req,res)=>{
+exports.getShopPage = (req,res)=>{
  
      // console.log(products);
      res.render('shop',{prods : product ,

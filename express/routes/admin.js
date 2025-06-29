@@ -8,4 +8,5 @@ router.get('/add-product',productController.getAddProduct)
 
 router.post('/add-product', productController.postAddProduct)
 
-exports.routes = router ;// Export the router so it can be used in other files
+module.exports = router ;// Export the router so it can be used in other files// it returns a function 
+
