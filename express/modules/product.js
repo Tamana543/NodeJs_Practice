@@ -6,7 +6,7 @@ constructor(t){
 save(){
      products.push(this)
 }
-FetchAll(){
+ static FetchAll(){
  return products    
 }
 }

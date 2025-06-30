@@ -3,6 +3,7 @@ const rootDir = require('../util/paths')
 const Product = require('../modules/product')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
+
      res.render('add-product',{pageTitle : "Add Product",
           path:'/admin/add-product',
           addProductPage:true,
@@ -14,13 +15,14 @@ exports.getAddProduct = (req,res,next)=>{
      // next()
 }
 exports.postAddProduct = (req,res)=>{
-   const product = new Product(req.body.title)
-   product.save()
+   const product = new Product(req.body.title);
+product.save()
+
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 }
 
 exports.getShopPage = (req,res)=>{
- const product = Product.FetchAll()
+       const product = Product.FetchAll()
      // console.log(products);
      res.render('shop',{prods : product ,
            pageTitle : 'Shop',
