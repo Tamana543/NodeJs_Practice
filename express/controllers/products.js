@@ -1,7 +1,6 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
-
-const product = [];
+const Product = require('../modules/product')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
      res.render('add-product',{pageTitle : "Add Product",
@@ -15,12 +14,13 @@ exports.getAddProduct = (req,res,next)=>{
      // next()
 }
 exports.postAddProduct = (req,res)=>{
-     product.push({title : req.body.title})
+   const product = new Product(req.body.title)
+   product.save()
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 }
 
 exports.getShopPage = (req,res)=>{
- 
+ const product = Product.FetchAll()
      // console.log(products);
      res.render('shop',{prods : product ,
            pageTitle : 'Shop',
