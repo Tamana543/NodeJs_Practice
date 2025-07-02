@@ -16,6 +16,7 @@ exports.getAddProduct = (req,res,next)=>{
 }
 exports.postAddProduct = (req,res)=>{
    const product = new Product(req.body.title);
+   console.log(product);
 product.save()
 
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
@@ -25,7 +26,8 @@ exports.getShopPage = (req,res)=>{
       Product.FetchAll((product)=>{
 
            // console.log(products);
-           res.render('shop',{prods : product ,
+           res.render('shop',{
+               prods : product ,
                  pageTitle : 'Shop',
                 path: '/',
                 prodsExist : product.length > 0,
