@@ -36,9 +36,17 @@ module.exports = class Product{
         );console.log(p);
         fs.readFile(p, (err, fileContent) => {
           if (err) {
-            cb([]);
+               return cb([]);
+         
           }
-          cb(JSON.parse(fileContent));
+          try {
+               
+               cb(JSON.parse(fileContent));
+               cb(products)
+          } catch (error) {
+               console.log("error from fetch:",error);
+               cb([])
+          }
         });
       }
      }
