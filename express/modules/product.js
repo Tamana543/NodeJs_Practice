@@ -2,16 +2,31 @@ const { fileLoader } = require('ejs')
 const fs = require('fs')
 const path = require('path')
 
+ const p = path.join(
+          path.dirname(process.mainModule.filename),
+          'data',
+          'products.json'
+        )
+        const fetchDataFromFile = (cb,err)=>{
+           if (err) {
+               return cb([]);
+          }
+          try {
+               
+               cb(JSON.parse(fileContent));
+               cb(products)
+          } catch (error) {
+               console.log("error from fetch:",error);
+               cb([])
+          }
+        }
 module.exports = class Product{
      constructor(t){
           this.title = t
      }
+
      save(){
-          const p = path.join(
-          path.dirname(process.mainModule.filename) ,
-          'data',
-          'products.json'
-          );
+         
           fs.readFile( p, (err, fileContent)=>{
           let products = []
           if(!err){
@@ -29,24 +44,8 @@ module.exports = class Product{
           });
      }
      static fetchAll(cb) {
-        const p = path.join(
-          path.dirname(process.mainModule.filename),
-          'data',
-          'products.json'
-        );console.log(p);
-        fs.readFile(p, (err, fileContent) => {
-          if (err) {
-               return cb([]);
-         
-          }
-          try {
-               
-               cb(JSON.parse(fileContent));
-               cb(products)
-          } catch (error) {
-               console.log("error from fetch:",error);
-               cb([])
-          }
+       fs.readFile(p, (err, fileContent) => {
+         fetchDataFromFile(cb)
         });
       }
      }
