@@ -23,7 +23,7 @@ product.save()
 }
 
 exports.getShopPage = (req,res)=>{
-      Product.FetchAll((product)=>{
+      Product.fetchAll(product=>{
 
            // console.log(products);
            res.render('shop',{

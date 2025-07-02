@@ -15,26 +15,31 @@ module.exports = class Product{
           fs.readFile( p, (err, fileContent)=>{
           let products = []
           if(!err){
-               products = JSON.parse(fileContent)
+               try {
+                    
+                    products = JSON.parse(fileContent)
+               } catch (error) {
+                    console.log('Error ', error);
+               }
           }
           products.push(this)
           fs.writeFile(p, JSON.stringify(products), err => {
-                    console.log(err);
+                    console.log('Error writing files ',err);
                });
           });
      }
-     static FetchAll(cd){
-          const p = path.join(
-     path.dirname(process.mainModule.filename) ,
-     'data',
-     'products.json'
-     );
-          fs.readFile(p , (err,fileContent) =>{
-     if(err){
-     cd([])
-     }
-     cd(JSON.parse(fileContent))
-          });
+     static fetchAll(cb) {
+        const p = path.join(
+          path.dirname(process.mainModule.filename),
+          'data',
+          'products.json'
+        );console.log(p);
+        fs.readFile(p, (err, fileContent) => {
+          if (err) {
+            cb([]);
+          }
+          cb(JSON.parse(fileContent));
+        });
+      }
      }
 
-}
