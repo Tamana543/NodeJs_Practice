@@ -26,7 +26,7 @@ exports.getShopPage = (req,res)=>{
       Product.fetchAll(product=>{
 
            // console.log(products);
-           res.render('shop/shop',{
+           res.render('shop/card',{
                prods : product ,
                  pageTitle : 'Shop',
                 path: '/',
