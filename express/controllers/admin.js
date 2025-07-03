@@ -17,11 +17,16 @@ exports.getAddProduct = (req,res,next)=>{
 
 
 exports.showAdminProducts = (req,res)=>{
-res.render('../admin/products',{pageTitle : "Admin Products",
-          path:'/admin/products',
-          addProductPage:true,
-          productCss : true , 
-          formCss:true})
+Product.fetchAll(product=>{
+
+           // console.log(products);
+           res.render('admin/products',{
+               prods : product ,
+                 pageTitle : 'Admin Add products',
+                path: '/admin/products',
+               
+               })
+      })
 }
 exports.postAddProduct = (req,res)=>{
    const product = new Product(req.body.title);
