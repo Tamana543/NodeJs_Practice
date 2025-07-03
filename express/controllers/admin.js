@@ -14,6 +14,15 @@ exports.getAddProduct = (req,res,next)=>{
 // res.sendFile(path.join(rootDir,'Views','add-product.html')) // Use the rootDir utility to get the correct path to the Views directory
      // next()
 }
+
+
+exports.showAdminProducts = (req,res)=>{
+res.render('../admin/products',{pageTitle : "Admin Products",
+          path:'/admin/products',
+          addProductPage:true,
+          productCss : true , 
+          formCss:true})
+}
 exports.postAddProduct = (req,res)=>{
    const product = new Product(req.body.title);
    console.log(product);
