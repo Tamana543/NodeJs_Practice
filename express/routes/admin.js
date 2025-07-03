@@ -1,5 +1,5 @@
 const express = require('express')
-const productController = require('../controllers/products')
+const productController = require('../controllers/admin')
 
 const router = express.Router() // Create a new router 
 // Router is a mini express application that can be used to handle routes and middleware
