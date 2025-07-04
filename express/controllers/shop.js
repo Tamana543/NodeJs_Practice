@@ -41,6 +41,18 @@ exports.getCartShop = (req,res)=>{
                })
       })
      }
+exports.getOrderShop = (req,res)=>{
+    Product.fetchAll(product=>{
+
+           // console.log(products);
+           res.render('shop/order',{
+               prods : product ,
+                 pageTitle : 'Ordered Page',
+                path: '/order',
+               
+               })
+      })
+     }
 exports.getChickUpShop = (req,res)=>{
     Product.fetchAll(product=>{
 

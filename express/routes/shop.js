@@ -12,6 +12,8 @@ router.get('/products',productController.getProductsShop)
 
 router.get('/cart',productController.getCartShop)
 
+router.get('/order',productController.getOrderShop)
+
 router.get('/chickout',productController.getChickUpShop)
 
 module.exports = router;
