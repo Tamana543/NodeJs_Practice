@@ -79,6 +79,9 @@
 }
 
 .card__actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
     padding: 1rem;
     text-align: center;
 }
@@ -86,9 +89,12 @@
 .card__actions button,
 .card__actions a {
     margin: 0 0.25rem;
+    text-decoration: none;
 }
-
-button {
+.card__actions a {
+  padding: 0% 6%;
+}
+button, .btn {
   font: inherit;
   border: 1px solid #d468d4;
   color: #d468d4;
@@ -97,7 +103,8 @@ button {
   cursor: pointer;
 }
  button:hover,
-button:active {
+button:active,.btn:hover,
+.btn:active {
   background-color: #d468d4;
   color: white;
 }
