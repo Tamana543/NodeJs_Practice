@@ -18,7 +18,10 @@ exports.getShopPage = (req,res)=>{
       })
      }
      exports.getProductBId = (req,res,next)=>{
-      const productId = req.params.productId;
+      const productId = req.params.productId; // params object is given by express and Yiu can find the dinamic productId from it 
+    Product.findById(productId, product =>{
+      console.log(product);
+    })
       console.log(productId);
     
       res.redirect('/')
