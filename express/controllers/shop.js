@@ -23,8 +23,10 @@ exports.getShopPage = (req,res)=>{
       console.log(product);
     })
       console.log(productId);
-    
-      res.redirect('/')
+    res.render('shop/product_detail',{
+         pageTitle : 'Products_details',
+         path : '/Product_detail'
+    })
      }
 exports.getProductsShop = (req,res)=>{
     Product.fetchAll(product=>{
