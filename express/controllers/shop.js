@@ -17,6 +17,12 @@ exports.getShopPage = (req,res)=>{
            // res.sendFile(path.join(rootDir,'Views','shop.html'))// it will send this file as a respond so that it will bw shown in page. a : __dirname mean chick the folder that I write this code on its file  b : '../' as the dir point on main folder and we need to go up , c: Views the secpnd port in URL , d: the last port of the url and the file
       })
      }
+     exports.getProductBId = (req,res,next)=>{
+      const productId = req.params.productId;
+      console.log(productId);
+    
+      res.redirect('/')
+     }
 exports.getProductsShop = (req,res)=>{
     Product.fetchAll(product=>{
 

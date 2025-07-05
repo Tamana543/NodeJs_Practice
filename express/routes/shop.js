@@ -10,6 +10,8 @@ router.get('/',productController.getShopPage)
 
 router.get('/products',productController.getProductsShop)
 
+router.get('/products/:productId',productController.getProductBId)
+
 router.get('/cart',productController.getCartShop)
 
 router.get('/order',productController.getOrderShop)
