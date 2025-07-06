@@ -41,6 +41,7 @@ exports.getProductsShop = (req,res)=>{
                })
       })
      }
+     
 exports.getCartShop = (req,res)=>{
     Product.fetchAll(product=>{
 
@@ -53,6 +54,14 @@ exports.getCartShop = (req,res)=>{
                })
       })
      }
+exports.postCartShop = (req,res,next)=>{
+  const productId = req.body.productId;
+  console.log(productId);
+  res.render('shop/cart',{
+    pageTitle : 'Your products',
+    path : '/cart'
+  })
+}
 exports.getOrderShop = (req,res)=>{
     Product.fetchAll(product=>{
 

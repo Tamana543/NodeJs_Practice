@@ -14,6 +14,8 @@ router.get('/products/:productId',productController.getProductBId)// This way yo
 
 router.get('/cart',productController.getCartShop)
 
+router.post('/cart',productController.postCartShop)
+
 router.get('/order',productController.getOrderShop)
 
 router.get('/chickout',productController.getChickUpShop)
