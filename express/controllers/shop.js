@@ -24,7 +24,7 @@ exports.getShopPage = (req,res)=>{
       res.render('shop/product_detail',{
         product : product,
            pageTitle : product.title,
-           path : '/Product_detail'
+           path: '/products'
       })
     })
       console.log(productId);
