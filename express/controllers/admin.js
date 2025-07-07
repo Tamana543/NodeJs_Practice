@@ -4,7 +4,7 @@ const Product = require('../modules/product')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
-     res.render('admin/add-product',{pageTitle : "Add Product",
+     res.render('admin/edit-products',{pageTitle : "Add Product",
           path:'/admin/add-product',
           addProductPage:true,
           productCss : true , 
