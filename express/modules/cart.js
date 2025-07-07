@@ -19,10 +19,10 @@ if(!err) {
 }
 // Analyse the cart 
 const existantProductIndex = cart.product.findIndex(prod => prod.id === id) 
-const existantProduct = cart.product[existantProductIndex]
+let existantProduct = cart.product[existantProductIndex]
 let updatedProduct;
 if(existantProduct){
-updatedProduct = [...existantProduct]
+updatedProduct = {...existantProduct}
 updatedProduct.qty = updatedProduct.qty + 1
 cart.product= [...cart.product]
 cart.product[existantProductIndex] = updatedProduct
