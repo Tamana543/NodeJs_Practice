@@ -1,6 +1,6 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
-
+const Cart = require('../modules/cart')
 
 exports.getShopPage = (req,res)=>{
       Product.fetchAll(product=>{
@@ -56,7 +56,11 @@ exports.getCartShop = (req,res)=>{
      }
 exports.postCartShop = (req,res,next)=>{
   const productId = req.body.productId;
-  console.log(productId);
+  // console.log(productId);
+  Product.findById(productId , (product)=>{
+    console.log(product);
+    Cart.addProduct(productId, product.price)
+  })
   res.render('shop/cart',{
     pageTitle : 'Your products',
     path : '/cart'
