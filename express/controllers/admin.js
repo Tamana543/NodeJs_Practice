@@ -34,6 +34,8 @@ console.log(req.query);
 if(editMode  !== "true"){
      return res.redirect('/')
 }
+console.log("Received product ID:", req.params.productID);
+console.log("Edit mode:", req.query.edit);
 Product.findById(ProductId,(product)=>{
 if(!product){
      return res.redirect("/")
