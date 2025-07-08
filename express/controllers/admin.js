@@ -4,9 +4,12 @@ const Product = require('../modules/product')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
-     res.render('admin/edit-products',{pageTitle : "Add Product",
+     res.render('admin/edit-products',
+          {pageTitle : "Add Product",
           path:'/admin/add-product',
           addProductPage:true,
+          editing : "False",
+      product : Product
           
      })
      // res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title" placeholder="Enter product title" /><button type="submit">Add Product</button></form>')
@@ -34,8 +37,8 @@ console.log(req.query);
 if(editMode  !== "true"){
      return res.redirect('/')
 }
-console.log("Received product ID:", req.params.productID);
-console.log("Edit mode:", req.query.edit);
+// console.log("Received product ID:", req.params.productID);
+// console.log("Edit mode:", req.query.edit);
 Product.findById(ProductId,(product)=>{
 if(!product){
      return res.redirect("/")
@@ -44,7 +47,7 @@ if(!product){
 
           pageTitle : "Edit Product",
           path:'/admin/edit-product',
-          addProductPage:true,
+          addProductPage: true,
           editing : editMode,
           product : product
      })
