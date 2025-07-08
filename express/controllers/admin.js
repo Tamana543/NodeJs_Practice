@@ -28,18 +28,25 @@ Product.fetchAll(product=>{
 }
 
 exports.getEditProduct = (req,res,next)=>{
-const editMode = req.query.edit
-if(!editMode){
+ const editMode = req.query.edit;
+ const ProductId = req.params.productID;
+console.log(req.query);
+if(editMode  !== "true"){
      return res.redirect('/')
 }
-
+Product.findById(ProductId,(product)=>{
+if(!product){
+     return res.redirect("/")
+}
      res.render('admin/edit-products',{
 
           pageTitle : "Edit Product",
           path:'/admin/edit-product',
           addProductPage:true,
-          editing : editMode
+          editing : editMode,
+          product : product
      })
+})
     
 }
 

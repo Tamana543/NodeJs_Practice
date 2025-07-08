@@ -10,7 +10,7 @@ router.post('/add-product', productController.postAddProduct)
 
 router.get('/products', productController.showAdminProducts)
 
-router.get('/edit-products/:productID',productController.getEditProduct)
-
+router.get('/edit-product/:productID', productController.getEditProduct)
+// admin/edit-products
 module.exports = router ;// Export the router so it can be used in other files// it returns a function 
 
