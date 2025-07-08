@@ -55,6 +55,10 @@ if(!product){
     
 }
 
+exports.postEditedProduct = (req,res,next)=>{
+
+}
+
 exports.postAddProduct = (req,res)=>{
      const title =req.body.title ;
      const imageUrl =req.body.imageUrl;

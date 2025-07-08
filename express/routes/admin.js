@@ -11,6 +11,8 @@ router.post('/add-product', productController.postAddProduct)
 router.get('/products', productController.showAdminProducts)
 
 router.get('/edit-product/:productID', productController.getEditProduct)
+
+router.post('/edit-product', productController.postEditedProduct)
 // admin/edit-products
 module.exports = router ;// Export the router so it can be used in other files// it returns a function 
 
