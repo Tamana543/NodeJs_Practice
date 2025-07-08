@@ -16,7 +16,7 @@ exports.getAddProduct = (req,res,next)=>{
 }
 exports.showAdminProducts = (req,res)=>{
 Product.fetchAll(product=>{
-console.log(req);
+
            // console.log(products);
            res.render('admin/products',{
                prods : product ,
@@ -26,19 +26,23 @@ console.log(req);
                })
       })
 }
+
 exports.getEditProduct = (req,res,next)=>{
-const editMode = req.query
+const editMode = req.query.edit
 if(!editMode){
      return res.redirect('/')
 }
-console.log(editMode);
-     res.render('admin/edit-products',{pageTitle : "Edit Product",
+
+     res.render('admin/edit-products',{
+
+          pageTitle : "Edit Product",
           path:'/admin/edit-product',
           addProductPage:true,
           editing : editMode
      })
     
 }
+
 exports.postAddProduct = (req,res)=>{
      const title =req.body.title ;
      const imageUrl =req.body.imageUrl;
