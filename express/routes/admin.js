@@ -5,6 +5,7 @@ const router = express.Router() // Create a new router
 // Router is a mini express application that can be used to handle routes and middleware
 router.get('/add-product',productController.getAddProduct)
 
+router.get('/edit-products/:productID',productController.getEditProduct)
 
 router.post('/add-product', productController.postAddProduct)
 
