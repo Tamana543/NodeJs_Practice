@@ -31,8 +31,8 @@ module.exports = class Product{
          fetchDataFromFile(products=>{
            if(this.id){
                // to add the edititing feature, first find the product by its id 
-               const excistedProductIndex =Product.findIndex(prod => prod.id === this.id) 
-               const updatedProduct = [...Product]
+               const excistedProductIndex = products.findIndex(prod => prod.id === this.id) 
+               const updatedProduct = [...products]
                updatedProduct[excistedProductIndex] = this;
                fs.writeFile(p, JSON.stringify(updatedProduct),err=>{
                     console.log(err);
