@@ -62,7 +62,7 @@ const updatedImageUrl = req.body.imageUrl;
 const updatedPrice = req.body.price;
 const updatedDescription = req.body.description;
 console.log(updatedDescription);
-const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedDescription,updatedPrice)
+const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
 updatedProduct.save()
 res.redirect('/admin/products')
 
@@ -79,4 +79,7 @@ exports.postAddProduct = (req,res)=>{
 product.save()
 
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
+}
+exports.getDeleteProduct = (req,res,next)=>{
+     res.redirect('/')
 }
