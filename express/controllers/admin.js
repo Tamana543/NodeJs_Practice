@@ -80,6 +80,8 @@ product.save()
 
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 }
-exports.getDeleteProduct = (req,res,next)=>{
+exports.postDeleteProduct = (req,res,next)=>{
+     const prodId = req.budy.productId
+     console.log(prodId);
      res.redirect('/')
 }

@@ -1,4 +1,5 @@
 
+const { json } = require('body-parser')
 const fs = require('fs')
 const path = require('path')
 
@@ -47,6 +48,21 @@ module.exports = class Product{
           }
          })
          
+     }
+
+    static delete(){
+fetchDataFromFile(prods=>{
+if(this.id){
+const prodForDel = prods.filter(prod => prod.id !== this.id)
+fs.writeFile(p, JSON.stringify(prodForDel),err =>{
+     // if(!err){
+
+     // }
+     console.log("Error",err);
+})
+}
+
+})
      }
      static fetchAll(cb) {
           fetchDataFromFile(cb)
