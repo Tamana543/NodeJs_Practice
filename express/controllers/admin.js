@@ -56,6 +56,15 @@ if(!product){
 }
 
 exports.postEditedProduct = (req,res,next)=>{
+const prodID = req.body.prodId;
+const updateeTitle = req.body.title;
+const updatedImageUrl = req.body.imageUrl;
+const updatedPrice = req.body.price;
+const updatedDescription = req.body.description;
+const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedDescription,updatedPrice)
+updatedProduct.save()
+res.redirect('/admin/products')
+
 
 }
 
