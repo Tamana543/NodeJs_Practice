@@ -57,7 +57,7 @@ module.exports = class Product{
               
                const product = prods.find(prod => prod.id === cleanedId)
                
-               console.log( "See hereee " , product);
+               // console.log( "See hereee " , product);
           const prodForDel = prods.filter(prod => prod.id !== cleanedId)
           // console.log(prods.id, "and",id);
           // console.log(prodForDel);
