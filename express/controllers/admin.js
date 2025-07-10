@@ -82,6 +82,6 @@ product.save()
 }
 exports.postDeleteProduct = (req,res,next)=>{
      const prodId = req.budy.productId
-     console.log(prodId);
+     Product.deleteById(prodId)
      res.redirect('/')
 }

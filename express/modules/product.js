@@ -2,6 +2,7 @@
 const { json } = require('body-parser')
 const fs = require('fs')
 const path = require('path')
+const Cart = require('./cart')
 
 const p = path.join(
           path.dirname(process.mainModule.filename),
@@ -42,7 +43,7 @@ module.exports = class Product{
 
                this.id = Math.random().toString()
                products.push(this)
-                 fs.writeFile(p, JSON.stringify(Product),err=>{
+                 fs.writeFile(p, JSON.stringify(products),err=>{
                     console.log(err);
                })
           }
@@ -50,14 +51,15 @@ module.exports = class Product{
          
      }
 
-    static delete(){
+    static deleteById(id){
 fetchDataFromFile(prods=>{
+     const product = Product.find(prod => prod.id === id)
 if(this.id){
 const prodForDel = prods.filter(prod => prod.id !== this.id)
 fs.writeFile(p, JSON.stringify(prodForDel),err =>{
-     // if(!err){
-
-     // }
+     if(!err){
+Cart.deleteProd(id,product.price)
+     }
      console.log("Error",err);
 })
 }
