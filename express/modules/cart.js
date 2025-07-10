@@ -42,7 +42,8 @@ static deleteProd(id,delProdPrice){
      if(err){
           return;
      }
-     const updatedCart = {...JSON.stringify(fileContent)}
+     const updatedCart = {...JSON.parse(fileContent)}
+     // console.log(updatedCart);
      const prodForDel = updatedCart.find(prod => prod.id === id);
      const prodQty = prodForDel.qty;
      updatedCart.products = updatedCart.products.filter(prod => prod.id !== id)

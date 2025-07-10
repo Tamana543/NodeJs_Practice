@@ -59,7 +59,7 @@ module.exports = class Product{
                
                console.log( "See hereee " , product);
           const prodForDel = prods.filter(prod => prod.id !== cleanedId)
-          console.log(prods.id, "and",id);
+          // console.log(prods.id, "and",id);
           // console.log(prodForDel);
           fs.writeFile(p, JSON.stringify(prodForDel),err =>{
                if(!err){
