@@ -43,11 +43,13 @@ static deleteProd(id,delProdPrice){
           return;
      }
      const updatedCart = {...JSON.parse(fileContent)}
+     console.log(updatedCart);
+ const product = updatedCart.product.find(prod => prod.id === id);
+ const prodQty = product[0].qty;
      // console.log(updatedCart);
-     const prodForDel = updatedCart.find(prod => prod.id === id);
-     const prodQty = prodForDel.qty;
-     updatedCart.products = updatedCart.products.filter(prod => prod.id !== id)
-     updatedCart.totalPrice = updatedCart.totalPrice - delProdPrice * prodQty
+  updatedCart.product= updatedCart.find(prod => prod.id === id);
+  updatedCart.totalPrice = updatedCart.totalPrice - delProdPrice * prodQty
+  
 
      fs.writeFile(p, JSON.stringify(updatedCart),err =>{
           console.log(err);
