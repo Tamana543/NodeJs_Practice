@@ -75,7 +75,7 @@ exports.postAddProduct = (req,res)=>{
      const price  =req.body.price ;
      const description  =req.body.description ;
    const product = new Product(null,title,imageUrl,price,description);
-   console.log(product);
+   
 product.save()
 
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
@@ -83,6 +83,7 @@ product.save()
 exports.postDeleteProduct = (req,res,next)=>{
      console.log("Form Here ", req.body);
      const prodId = req.body.productId;
+     console.log("Hello",prodId);
      Product.deleteById(prodId)
      res.redirect('/products')
 }
