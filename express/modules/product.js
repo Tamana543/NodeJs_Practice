@@ -52,15 +52,15 @@ module.exports = class Product{
      }
 
     static deleteById(id){
-fetchDataFromFile(prods=>{
-     const product = Product.find(prod => prod.id === id)
-if(this.id){
-const prodForDel = prods.filter(prod => prod.id !== this.id)
-fs.writeFile(p, JSON.stringify(prodForDel),err =>{
-     if(!err){
-Cart.deleteProd(id,product.price)
-     }
-     console.log("Error",err);
+          fetchDataFromFile(prods=>{
+          const product = prods.find(prod => prod.id === id)
+          if(this.id){
+          const prodForDel = prods.filter(prod => prod.id !== this.id)
+          fs.writeFile(p, JSON.stringify(prodForDel),err =>{
+          if(!err){
+          Cart.deleteProd(id,product.price)
+          }
+          console.log("Error",err);
 })
 }
 
@@ -69,12 +69,12 @@ Cart.deleteProd(id,product.price)
      static fetchAll(cb) {
           fetchDataFromFile(cb)
  
-      }
-     static findById(id,cb){
-          fetchDataFromFile(products => {
-               const product = products.find(p => p.id === id)
-               cb(product)
-          })
-     }
+          }
+          static findById(id,cb){
+               fetchDataFromFile(products => {
+                    const product = products.find(p => p.id === id)
+                    cb(product)
+               })
+          }
 }
 

@@ -81,7 +81,8 @@ product.save()
      res.redirect('/') // Redirect the user to the  / route after processing the form submission
 }
 exports.postDeleteProduct = (req,res,next)=>{
-     const prodId = req.budy.productId
+     console.log("Form Here ", req.body);
+     const prodId = req.body.productId;
      Product.deleteById(prodId)
-     res.redirect('/')
+     res.redirect('/products')
 }
