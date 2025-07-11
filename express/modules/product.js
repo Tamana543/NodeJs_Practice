@@ -67,10 +67,7 @@ module.exports = class Product{
                }
                console.log("Error",err);
           })
-}
-
-)
-     }
+})}
      static fetchAll(cb) {
           fetchDataFromFile(cb)
  

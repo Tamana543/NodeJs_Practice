@@ -59,7 +59,7 @@ exports.getCartShop = (req,res)=>{
     res.render('shop/cart', {
       path: '/cart',
       pageTitle : 'Cart',
-      prods :cartProducts ,
+      prods : cartProducts ,
       })
     })
   })
@@ -78,11 +78,17 @@ exports.postCartShop = (req,res,next)=>{
   } catch (error) {
     console.log('Hereeeeeeee',error);
   }
-  res.render('shop/cart',{
-    pageTitle : 'Your products',
-    path : '/cart'
-  })
+  // res.render('shop/cart',{
+  //   pageTitle : 'Your products',
+  //   path : '/cart',
+  //    prods : '',
+  // })
+  res.redirect('/cart');  
+
+  
+  
 }
+
 
 
 exports.getOrderShop = (req,res)=>{

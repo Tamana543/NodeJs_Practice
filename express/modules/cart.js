@@ -63,12 +63,11 @@ static deleteProd(id,delProdPrice){
 static getCart(cb){
    fs.readFile(p,(err,fileContent)=>{
 
-        const cart  = JSON.parse(fileContent);
         if(err){
              return cb(null)
-        }else {
-             return cb(cart)
-        }
+          }
+          const cart  = JSON.parse(fileContent);
+          cb(cart)
    })
 
 }
