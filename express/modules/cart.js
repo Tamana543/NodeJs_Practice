@@ -60,13 +60,16 @@ static deleteProd(id,delProdPrice){
      })
 }
 
-static getCard(cb,fileContent){
-     console.log(fileContent);
-     const cart  = JSON.parse(fileContent);
-     if(err){
-          return cb(null)
-     }else {
-          return cb(cart)
-     }
+static getCart(cb){
+   fs.readFile(p,(err,fileContent)=>{
+
+        const cart  = JSON.parse(fileContent);
+        if(err){
+             return cb(null)
+        }else {
+             return cb(cart)
+        }
+   })
+
 }
 }

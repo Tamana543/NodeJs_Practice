@@ -47,24 +47,20 @@ exports.getProductsShop = (req,res)=>{
 }
      
 exports.getCartShop = (req,res)=>{
-  Cart.getCard(cart=>{
+  Cart.getCart(cart=>{
       Product.fetchAll(products=>{
-        const productExist = cart.products.find(prod => prod.id === product.id)
         const cartProducts = []
-        for (product of products){
+        for (prod of products){
+          const productExist = cart.product.find(p => p.id === prod.id)
             if(productExist) {
-              cartProducts.push({productData : product , qty : productExist.qty})
+              cartProducts.push({productData : prod , qty : productExist.qty})
             }
         }
-      // console.log(products);
-      res.render('shop/cart',{
-          prods :cartProducts ,
-            pageTitle : 'Cart',
-           path: '/cart',
-          
-          
-          })
-
+    res.render('shop/cart', {
+      path: '/cart',
+      pageTitle : 'Cart',
+      prods :cartProducts ,
+      })
     })
   })
 }
