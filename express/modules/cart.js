@@ -61,6 +61,7 @@ static deleteProd(id,delProdPrice){
 }
 
 static getCard(cb,fileContent){
+     console.log(fileContent);
      const cart  = JSON.parse(fileContent);
      if(err){
           return cb(null)
