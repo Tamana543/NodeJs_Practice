@@ -46,7 +46,7 @@ static deleteProd(id,delProdPrice){
      const cleanedId = id.toString().trim();
  const product = updatedCart.product.find(prod => prod.id === cleanedId);
  const prodQty = product.qty;
-     console.log(updatedCart);
+     // console.log(updatedCart);
  updatedCart.product = updatedCart.product.filter(
         prod => prod.id !== cleanedId
            );

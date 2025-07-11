@@ -15,7 +15,7 @@ const fetchDataFromFile = cb=>{
           if (err) {
               return cb([]);
           }
-          cb(JSON.parse(fileContent));
+           return cb(JSON.parse(fileContent));
     
      })
 }
@@ -40,7 +40,7 @@ module.exports = class Product{
                     console.log(err);
                })
           }else {
-
+               // console.log(products);
                this.id = Math.random().toString()
                products.push(this)
                  fs.writeFile(p, JSON.stringify(products),err=>{
