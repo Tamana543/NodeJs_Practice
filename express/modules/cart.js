@@ -37,6 +37,7 @@ fs.writeFile(p, JSON.stringify(cart) ,err => {
 })
 })
 }
+
 static deleteProd(id,delProdPrice){
      fs.readFile(p,(err,fileContent)=>{
      if(err){
@@ -57,5 +58,14 @@ static deleteProd(id,delProdPrice){
           console.log(err);
      })
      })
+}
+
+static getCard(cb,fileContent){
+     const cart  = JSON.parse(fileContent);
+     if(err){
+          return cb(null)
+     }else {
+          return cb(cart)
+     }
 }
 }

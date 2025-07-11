@@ -17,7 +17,9 @@ exports.getShopPage = (req,res)=>{
            // res.sendFile(path.join(rootDir,'Views','shop.html'))// it will send this file as a respond so that it will bw shown in page. a : __dirname mean chick the folder that I write this code on its file  b : '../' as the dir point on main folder and we need to go up , c: Views the secpnd port in URL , d: the last port of the url and the file
       })
      }
-     exports.getProductBId = (req,res,next)=>{
+
+
+exports.getProductBId = (req,res,next)=>{
       const productId = req.params.productId; // params object is given by express and Yiu can find the dinamic productId from it 
     Product.findById(productId, product =>{
      
@@ -29,6 +31,8 @@ exports.getShopPage = (req,res)=>{
     })
       console.log(productId);
      }
+
+
 exports.getProductsShop = (req,res)=>{
     Product.fetchAll(product=>{
 
@@ -40,20 +44,31 @@ exports.getProductsShop = (req,res)=>{
                
                })
       })
-     }
+}
      
 exports.getCartShop = (req,res)=>{
-    Product.fetchAll(product=>{
+  Cart.getCard(cart=>{
+      Product.fetchAll(products=>{
+        const productExist = cart.products.find(prod => prod.id === product.id)
+        const cartProducts = []
+        for (product of products){
+            if(productExist) {
+              cartProducts.push({productData : product , qty : productExist.qty})
+            }
+        }
+      // console.log(products);
+      res.render('shop/cart',{
+          prods :cartProducts ,
+            pageTitle : 'Cart',
+           path: '/cart',
+          
+          
+          })
 
-           // console.log(products);
-           res.render('shop/cart',{
-               prods : product ,
-                 pageTitle : 'Cart',
-                path: '/cart',
-               
-               })
-      })
-     }
+    })
+  })
+}
+    
 exports.postCartShop = (req,res,next)=>{
   console.log('req Budy ', req.body);
   const productId = req.body.productId;
@@ -72,6 +87,8 @@ exports.postCartShop = (req,res,next)=>{
     path : '/cart'
   })
 }
+
+
 exports.getOrderShop = (req,res)=>{
     Product.fetchAll(product=>{
 
@@ -84,6 +101,7 @@ exports.getOrderShop = (req,res)=>{
                })
       })
      }
+
 exports.getChickUpShop = (req,res)=>{
     Product.fetchAll(product=>{
 
