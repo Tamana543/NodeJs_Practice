@@ -15,9 +15,12 @@ router.get('/products/:productId',productController.getProductBId)// This way yo
 router.get('/cart',productController.getCartShop)
 
 router.post('/cart',productController.postCartShop)
+router.post('/cart-delete-item', productController.postDelCardView)
 
 router.get('/order',productController.getOrderShop)
 
 router.get('/chickout',productController.getChickUpShop)
+
+
 
 module.exports = router;

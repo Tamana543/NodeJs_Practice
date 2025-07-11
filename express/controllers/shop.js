@@ -90,7 +90,14 @@ exports.postCartShop = (req,res,next)=>{
 }
 
 
-
+exports.postDelCardView = (req,res)=>{
+  const productId = req.body.productId;
+  Product.findById(productId,product=>{
+    Cart.deleteProd(productId,product.price)
+    res.redirect('/cart')
+  })
+  // console.log(productId);
+}
 exports.getOrderShop = (req,res)=>{
     Product.fetchAll(product=>{
 
