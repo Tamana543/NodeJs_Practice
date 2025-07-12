@@ -71,19 +71,19 @@ exports.postCartShop = (req,res,next)=>{
   console.log(productId);
   try {
     
-    Product.findById(productId , product=>{
-      
-      Cart.addProduct(productId, product.price)
-    })
+      Product.findById(productId , product=>{
+        
+        Cart.addProduct(productId, product.price)
+  })
   } catch (error) {
-    console.log('Hereeeeeeee',error);
+      console.log('Hereeeeeeee',error);
   }
   // res.render('shop/cart',{
   //   pageTitle : 'Your products',
   //   path : '/cart',
   //    prods : '',
   // })
-  res.redirect('/cart');  
+    res.redirect('/cart');  
 
   
   
@@ -91,17 +91,16 @@ exports.postCartShop = (req,res,next)=>{
 
 
 exports.postDelCardView = (req,res)=>{
-  const productId = req.body.productId;
-  Product.findById(productId,product=>{
-    Cart.deleteProd(productId,product.price)
-    res.redirect('/cart')
-  })
-  // console.log(productId);
+    const productId = req.body.productId;
+    Product.findById(productId,product=>{
+        Cart.deleteProd(productId,product.price)
+        res.redirect('/cart')
+    })
+    // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
     Product.fetchAll(product=>{
-
-           // console.log(products);
+          // console.log(products);
            res.render('shop/order',{
                prods : product ,
                  pageTitle : 'Ordered Page',
