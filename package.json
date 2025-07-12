@@ -7,7 +7,6 @@
     "start": "nodemon ./express/ExpressApp.js",
     "start_sec": "nodemon ./3_0/firstApp.js",
     "start-server": "nodemon server.js"
-
   },
   "author": "Tamana Farzami ",
   "license": "ISC",
@@ -20,6 +19,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
+    "mysql2": "^3.14.2",
     "pug": "^3.0.3"
   }
 }
