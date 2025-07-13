@@ -100,9 +100,9 @@ module.exports = class Product{
     static deleteById(id){
 
 }
-     static fetchAll(cb) {
+     static fetchAll() {
           // bringing database 
-      db.execute('SELECT * FROM products').then().catch()   
+     return db.execute('SELECT * FROM products')  
           }
           static findById(id,cb){
                fetchDataFromFile(products => {

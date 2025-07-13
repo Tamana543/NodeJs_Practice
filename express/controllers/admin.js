@@ -18,16 +18,18 @@ exports.getAddProduct = (req,res,next)=>{
           // next()
 }
 exports.showAdminProducts = (req,res)=>{
-     Product.fetchAll(product=>{
+     Product.fetchAll().then(([row,fileContent])=>{
 
-               // console.log(products);
-               res.render('admin/products',{
-                    prods : product ,
-                    pageTitle : 'Admin Add products',
-                    path: '/admin/products',
-                    
-                    })
-          })
+          // console.log(products);
+          res.render('admin/products',{
+               prods : row ,
+               pageTitle : 'Admin Add products',
+               path: '/admin/products',
+               
+               })
+  
+     }).catch(err=> console.log(err))
+    
 }
 
 exports.getEditProduct = (req,res,next)=>{
