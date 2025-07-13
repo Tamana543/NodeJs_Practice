@@ -93,7 +93,9 @@ module.exports = class Product{
      }
 
      save(){
-       
+          return  db.execute('INSERT INTO products (title,description,price,imageURL) VALUES (?,?,?,?)',[
+               this.title,this.description, this.price, this.imageUrl
+          ])
     
      }
 
@@ -102,13 +104,12 @@ module.exports = class Product{
 }
      static fetchAll() {
           // bringing database 
-     return db.execute('SELECT * FROM products')  
-          }
-          static findById(id,cb){
-               fetchDataFromFile(products => {
-                    const product = products.find(p => p.id === id)
-                    cb(product)
-               })
-          }
+          return db.execute('SELECT * FROM products')  
+     }
+     static findById(id,cb){
+     
+          return db.execute('SELECT * FROM products WHERE products.id = ?',[id])     
+          
+     }
 }
 

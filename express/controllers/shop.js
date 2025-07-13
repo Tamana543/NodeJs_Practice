@@ -20,14 +20,16 @@ res.render('shop/index',{
 
 exports.getProductBId = (req,res,next)=>{
       const productId = req.params.productId; // params object is given by express and Yiu can find the dinamic productId from it 
-    Product.findById(productId, product =>{
-     
-      res.render('shop/product_detail',{
-        product : product,
-           pageTitle : product.title,
-           path: '/products'
-      })
-    })
+      Product.findById(productId).then(([product])=>{
+        console.log(product);
+        res.render('shop/product_detail',{
+          product : product[0],
+             pageTitle : product.title,
+             path: '/products'
+        })
+
+      }).catch(err => console.log(err))
+  
       console.log(productId);
      }
 
@@ -49,21 +51,23 @@ exports.getProductsShop = (req,res)=>{
      
 exports.getCartShop = (req,res)=>{
   Cart.getCart(cart=>{
-      Product.fetchAll(products=>{
-        const cartProducts = []
-        for (prod of products){
-          const productExist = cart.product.find(p => p.id === prod.id)
-            if(productExist) {
-              cartProducts.push({productData : prod , qty : productExist.qty})
-            }
-        }
-    res.render('shop/cart', {
-      path: '/cart',
-      pageTitle : 'Cart',
-      prods : cartProducts ,
-      })
+    Product.fetchAll().then((products)=>{
+
+      const cartProducts = []
+      for (prod of products){
+        const productExist = cart.product.find(p => p.id === prod.id)
+          if(productExist) {
+            cartProducts.push({productData : prod , qty : productExist.qty})
+          }
+      }
+  res.render('shop/cart', {
+    path: '/cart',
+    pageTitle : 'Cart',
+    prods : cartProducts ,
     })
   })
+    }).catch(err => console.log(err))
+     
 }
     
 exports.postCartShop = (req,res,next)=>{
@@ -72,10 +76,9 @@ exports.postCartShop = (req,res,next)=>{
   console.log(productId);
   try {
     
-      Product.findById(productId , product=>{
-        
-        Cart.addProduct(productId, product.price)
-  })
+      Product.findById(productId).then((product)=>{
+         Cart.addProduct(productId, product.price)
+      }).catch(err =>{console.log(err)})
   } catch (error) {
       console.log('Hereeeeeeee',error);
   }
