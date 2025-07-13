@@ -14,9 +14,8 @@ app.set('view engine','ejs')// setting the default templating enginge to the han
 // app.set('view engine','pug')// setting the default templating enginge to the pug file 
 app.set('views',path.join(__dirname,'views'))// In this line we are looking for the files that express should run the pug file
 
-// making the database connection 
 
-db.execute('SELECT * FROM products').then().catch()
+
 
 //Midlewares
 app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware to parse URL-encoded bodies (like form submissions) and make the data available in req.body

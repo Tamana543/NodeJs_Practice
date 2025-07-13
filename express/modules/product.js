@@ -1,9 +1,10 @@
-
+const Cart = require('./cart')
+const db =require('../util/database')
+/**
+ * If you prefer working with data inside file, not bringing it from main database : 
 const { json } = require('body-parser')
 const fs = require('fs')
 const path = require('path')
-const Cart = require('./cart')
-
 const p = path.join(
           path.dirname(process.mainModule.filename),
           'data',
@@ -19,7 +20,7 @@ const fetchDataFromFile = cb=>{
     
      })
 }
-module.exports = class Product{
+     module.exports = class Product{
      constructor(id,title,imageUrl,price,description){
           this.id = id
           this.title = title,
@@ -67,10 +68,41 @@ module.exports = class Product{
                }
                console.log("Error",err);
           })
-})}
+})
+}
      static fetchAll(cb) {
-          fetchDataFromFile(cb)
+          // fetchDataFromFile(cb)
  
+          }
+          static findById(id,cb){
+               fetchDataFromFile(products => {
+                    const product = products.find(p => p.id === id)
+                    cb(product)
+               })
+          }
+}
+ * 
+ */
+module.exports = class Product{
+     constructor(id,title,imageUrl,price,description){
+          this.id = id
+          this.title = title,
+          this.imageUrl =  imageUrl,
+          this.price = price,
+          this.description = description
+     }
+
+     save(){
+       
+    
+     }
+
+    static deleteById(id){
+
+}
+     static fetchAll(cb) {
+          // bringing database 
+      db.execute('SELECT * FROM products').then().catch()   
           }
           static findById(id,cb){
                fetchDataFromFile(products => {
