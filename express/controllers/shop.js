@@ -33,7 +33,7 @@ exports.getProductBId = (req,res,next)=>{
 
 
 exports.getProductsShop = (req,res)=>{
-  Product.fetchAll().then(([row,fileData])=>{
+  Product.fetchAll().then((row)=>{
   
            // console.log(products);
            res.render('shop/product-list',{
@@ -79,11 +79,6 @@ exports.postCartShop = (req,res,next)=>{
   } catch (error) {
       console.log('Hereeeeeeee',error);
   }
-  // res.render('shop/cart',{
-  //   pageTitle : 'Your products',
-  //   path : '/cart',
-  //    prods : '',
-  // })
     res.redirect('/cart');  
 
   
@@ -100,26 +95,27 @@ exports.postDelCardView = (req,res)=>{
     // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
-    Product.fetchAll(product=>{
-          // console.log(products);
-           res.render('shop/order',{
-               prods : product ,
-                 pageTitle : 'Ordered Page',
-                path: '/order',
-               
-               })
-      })
-     }
+  Product.fetchAll().then((row)=>{
+
+    // console.log(products);
+     res.render('shop/order',{
+         prods : row ,
+           pageTitle : 'Ordered Page',
+          path: '/order',
+         
+         })
+  }).catch(err => console.log(err))
+}
 
 exports.getChickUpShop = (req,res)=>{
-    Product.fetchAll(product=>{
+  Product.fetchAll().then((row)=>{
 
-           // console.log(products);
-           res.render('shop/checkout',{
-               prods : product ,
-                 pageTitle : 'Shop chickout',
-                path: '/chickout',
-               
-               })
-      })
+    // console.log(products);
+     res.render('shop/order',{
+         prods : row ,
+           pageTitle : 'Ordered Page',
+          path: '/order',
+         
+         })
+  }).catch(err => console.log(err))
      }
