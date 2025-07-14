@@ -59,7 +59,7 @@ exports.getCartShop = (req,res)=>{
       const cartProducts = []
       for (prod of products){
         const productExist = products.find(p => p.id === prod.id)
-          if(!productExist) {
+          if(productExist) {
            try {
              cartProducts.push({productData : prod , qty : productExist.qty})
            } catch (error) {
