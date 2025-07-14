@@ -2,8 +2,24 @@ const rootDir = require('../util/paths')
 const Product = require('../modules/product')
 const Cart = require('../modules/cart')
 
+
+exports.getProductsShop = (req,res)=>{
+  Product.fetchAll().then(([rows])=>{
+  
+ // res.sendFile(path.join
+           // console.log(products);
+           res.render('shop/product-list',{
+               prods : rows ,
+                 pageTitle : 'Products',
+                path: '/products',
+               
+               })
+  }).catch(err =>{
+    console.log(err);
+  })
+}
 exports.getShopPage = (req,res)=>{
-      Product.fetchAll().then(([row,dataFloaded])=>{
+      Product.fetchAll().then(([row])=>{
 //row is whatever your database returning, like product
 res.render('shop/index',{
     prods : row ,
@@ -34,20 +50,7 @@ exports.getProductBId = (req,res,next)=>{
      }
 
 
-exports.getProductsShop = (req,res)=>{
-  Product.fetchAll().then((row)=>{
-  
-           // console.log(products);
-           res.render('shop/product-list',{
-               prods : row ,
-                 pageTitle : 'Products',
-                path: '/products',
-               
-               })
-  }).catch(err =>{
-    console.log(err);
-  })
-}
+
      
 exports.getCartShop = (req,res)=>{
   Cart.getCart(cart=>{
@@ -98,7 +101,7 @@ exports.postDelCardView = (req,res)=>{
     // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
-  Product.fetchAll().then((row)=>{
+  Product.fetchAll().then(([row])=>{
 
     // console.log(products);
      res.render('shop/order',{
@@ -111,7 +114,7 @@ exports.getOrderShop = (req,res)=>{
 }
 
 exports.getChickUpShop = (req,res)=>{
-  Product.fetchAll().then((row)=>{
+  Product.fetchAll().then(([row])=>{
 
     // console.log(products);
      res.render('shop/order',{

@@ -94,8 +94,9 @@ module.exports = class Product{
 
      save(){
           return  db.execute('INSERT INTO products (title,description,price,imageURL) VALUES (?,?,?,?)',[
-               this.title,this.description, this.price, this.imageUrl
-          ])
+               this.title,this.description, this.price, this.imageUrl]
+          )
+
     
      }
 
