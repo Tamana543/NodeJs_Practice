@@ -15,3 +15,11 @@
 
 // with sequalizer 
 
+const Sequelize = require('sequelize')
+
+const sequelize = new Sequelize( 'node_sql','root','Tamanasql0782177966@',{
+     dialect: 'mysql',
+     host: 'localhost',
+      
+})
+module.exports = sequelize;
