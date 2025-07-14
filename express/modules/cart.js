@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const { json } = require('body-parser')
-
+const db = require('../util/database')
 
 
 
@@ -17,7 +17,7 @@ module.exports = class Cart {
           fs.readFile(p,(err,fileContent)=>{
                let cart = {product: [] , totalPrice : 0}
           if(!err) {
-               cart = JSON.parse(fileContent)
+              return cart = JSON.parse(fileContent)
           }
           // Analyse the cart 
           const existantProductIndex = cart.product.findIndex(prod => prod.id === id) 
@@ -64,15 +64,16 @@ static deleteProd(id,delProdPrice){
      })
 }
 
-static getCart(cb){
-   fs.readFile(p,(err,fileContent)=>{
+static getCart(){
+     return db.execute('SELECT * FROM products')
+//    fs.readFile(p,(err,fileContent)=>{
 
-        if(err){
-             return cb(null)
-          }
-          const cart  = JSON.parse(fileContent);
-          cb(cart)
-   })
+//         if(err){
+//              return cb(null)
+//           }
+//           const cart  = JSON.parse(fileContent);
+//           cb(cart)
+//    })
 
 }
 }

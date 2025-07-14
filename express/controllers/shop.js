@@ -53,14 +53,18 @@ exports.getProductBId = (req,res,next)=>{
 
      
 exports.getCartShop = (req,res)=>{
-  Cart.getCart(cart=>{
-    Product.fetchAll().then((products)=>{
+
+    Cart.getCart().then((products)=>{
 
       const cartProducts = []
       for (prod of products){
-        const productExist = cart.product.find(p => p.id === prod.id)
-          if(productExist) {
-            cartProducts.push({productData : prod , qty : productExist.qty})
+        const productExist = products.find(p => p.id === prod.id)
+          if(!productExist) {
+           try {
+             cartProducts.push({productData : prod , qty : productExist.qty})
+           } catch (error) {
+             console.log("Hereeeee",error);
+          }
           }
       }
   res.render('shop/cart', {
@@ -68,9 +72,7 @@ exports.getCartShop = (req,res)=>{
     pageTitle : 'Cart',
     prods : cartProducts ,
     })
-  })
-    }).catch(err => console.log(err))
-     
+  }).catch(err => console.log(err)) 
 }
     
 exports.postCartShop = (req,res,next)=>{
