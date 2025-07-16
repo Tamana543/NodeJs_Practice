@@ -126,7 +126,7 @@ const Sequalizer =require('sequelize') ;
  const sequalizer = require('../util/database');
 const { promiseImpl } = require('ejs');
 
- const Product = sequalizer.define('product',{
+ const Product = sequalizer.define('product',{// the first element is the table name you want that the sequalizer create for you, the 2nd is the object for columns
      id:{
           type:Sequalizer.INTEGER,
           autoIncrement : true,
