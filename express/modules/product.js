@@ -122,6 +122,32 @@ module.exports = class Product{
      }
 }
 **/
+const Sequalizer =require('sequelize') ;
+ const sequalizer = require('../util/database');
+const { promiseImpl } = require('ejs');
 
+ const Product = sequalizer.define('product',{
+     id:{
+          type:Sequalizer.INTEGER,
+          autoIncrement : true,
+          allowNull : false,
+          primaryKey : true,
+     },
+     title : Sequalizer.STRING,
+     description :{
+          type : Sequalizer.STRING,
+          allowNull : false,
+     },
+      prise: {
+          type: Sequalizer.DOUBLE,
+          allowNull :false
+     },
+     imageURL : {
+          type : Sequalizer.STRING,
+          allowNull: false
+     }
+ });
+
+ module.exports = Product
 
 
