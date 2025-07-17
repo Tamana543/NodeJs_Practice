@@ -76,7 +76,21 @@ exports.postAddProduct = (req,res)=>{
      const price  =req.body.price ;
      const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
-     console.log("Hereeeeee",imageUrl,price);
+     // updating product by using sequalizer 
+       Product.create({
+         title: title,
+         prise: price,
+         imageURL: imageUrl,
+         description: description
+       })
+         .then(result => {
+           // console.log(result);
+           console.log('Created Product');
+         })
+         .catch(err => {
+           console.log(err);
+         });
+
      
      // updating data table by using sql :
      // const product = new Product(null,title,imageUrl,price,description);
@@ -86,18 +100,6 @@ exports.postAddProduct = (req,res)=>{
      //      console.log(err);
      // })
      
-// updating product by using sequalizer 
-Product.create({
-     title : title,
-     price:price,
-     imageUrl:imageUrl,
-     description : description,
-
-}).then(result =>{
-     console.log(result);
-}).catch(err=>{
-     console.log('from here',  err);
-})
 }
 exports.postDeleteProduct = (req,res,next)=>{
    
