@@ -1,6 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Cart = require('../modules/cart')
+const { where } = require('sequelize')
 
 
 exports.getProductsShop = (req,res)=>{
@@ -60,17 +61,26 @@ res.render('shop/index',{
 
 exports.getProductBId = (req,res,next)=>{
       const productId = req.params.productId; // params object is given by express and Yiu can find the dinamic productId from it 
-      Product.findById(productId).then(([product])=>{
-        console.log(product);
-        res.render('shop/product_detail',{
-          product : product[0],
-             pageTitle : product.title,
+      // for working with sequalizer :
+Product.findAll({where: {id: productId}}).then(products =>{
+  res.render('shop/product_detail',{
+          product : products[0],
+             pageTitle : products.title,
              path: '/products'
         })
+}).catch(err=>console.log(err))
+      //while working with sql : 
+    //   Product.findById(productId).then((product)=>{
+    //     console.log(product);
+    //     res.render('shop/product_detail',{
+    //       product : product,
+    //          pageTitle : product.title,
+    //          path: '/products'
+    //     })
 
-      }).catch(err => console.log(err))
+    //   }).catch(err => console.log(err))
   
-      console.log(productId);
+    //   console.log(productId);
      }
 
 
