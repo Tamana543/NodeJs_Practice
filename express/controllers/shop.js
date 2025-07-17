@@ -4,19 +4,30 @@ const Cart = require('../modules/cart')
 
 
 exports.getProductsShop = (req,res)=>{
-  Product.fetchAll().then(([rows])=>{
+  // with sequalizer 
+
+  Product.findAll().then(products=>{
+    res.render('shop/product-list',{
+      prods : products,
+      pageTitle : 'Products',
+        path: '/products',
+    })
+  }).catch(err=>console.log(err))
+
+  // with sql 
+//   Product.fetchAll().then(([rows])=>{
   
- // res.sendFile(path.join
-           // console.log(products);
-           res.render('shop/product-list',{
-               prods : rows ,
-                 pageTitle : 'Products',
-                path: '/products',
+//  // res.sendFile(path.join
+//            // console.log(products);
+//            res.render('shop/product-list',{
+//                prods : rows ,
+//                  pageTitle : 'Products',
+//                 path: '/products',
                
-               })
-  }).catch(err =>{
-    console.log(err);
-  })
+//                })
+//   }).catch(err =>{
+//     console.log(err);
+//   })
 }
 exports.getShopPage = (req,res)=>{
 // by using sequalizer 
