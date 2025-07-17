@@ -1,6 +1,7 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
+const { timeLog } = require('console')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
@@ -63,7 +64,6 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedImageUrl = req.body.imageUrl;
      const updatedPrice = req.body.price;
      const updatedDescription = req.body.description;
-     console.log(updatedDescription);
      const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
      updatedProduct.save()
      res.redirect('/admin/products')
@@ -73,24 +73,36 @@ exports.postEditedProduct = (req,res,next)=>{
 
 exports.postAddProduct = (req,res)=>{
      const title =req.body.title ;
-     const imageUrl =req.body.imageUrl;
      const price  =req.body.price ;
+     const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
-     const product = new Product(null,title,imageUrl,price,description);
-   
-     product.save().then(()=>{
-
-          res.redirect('/') // Redirect the user to the  / route after processing the form submission
-     }).catch(err=>{
-          console.log(err);
-     })
+     console.log("Hereeeeee",imageUrl,price);
      
+     // updating data table by using sql :
+     // const product = new Product(null,title,imageUrl,price,description);
+     // product.save().then(()=>{
+     //      res.redirect('/') // Redirect the user to the  / route after processing the form submission
+     // }).catch(err=>{
+     //      console.log(err);
+     // })
+     
+// updating product by using sequalizer 
+Product.create({
+     title : title,
+     price:price,
+     imageUrl:imageUrl,
+     description : description,
 
+}).then(result =>{
+     console.log(result);
+}).catch(err=>{
+     console.log('from here',  err);
+})
 }
 exports.postDeleteProduct = (req,res,next)=>{
-     console.log("Form Here ", req.body);
+   
      const prodId = req.body.productId;
-     console.log("Hello",prodId);
+ 
      Product.deleteById(prodId)
      res.redirect('/products')
 }

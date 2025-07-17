@@ -34,7 +34,7 @@ app.use(errorController.get404)
 
 // lets work with sequalizer and let it to run  the server 
 sequalizer.sync().then(result=>{
-     console.log(result);
+     // console.log(result);
      app.listen(5430) 
 }).catch(err=>{
      console.log(err);
