@@ -138,7 +138,7 @@ const { promiseImpl } = require('ejs');
           type : Sequalizer.STRING,
           allowNull : false,
      },
-      prise: {
+      price: {
           type: Sequalizer.DOUBLE,
           allowNull :false
      },

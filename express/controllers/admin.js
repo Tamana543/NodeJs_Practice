@@ -56,36 +56,36 @@ exports.getEditProduct = (req,res,next)=>{
      // console.log("Edit mode:", req.query.edit);
      const ProductId = req.params.productID;
      // console.log(ProductId);
-     // Product.findByPK(ProductId)
-     //     .then(product => {
-     //       if (!product) {
-     //         return res.redirect('/');
-     //       }
-     //       res.render('admin/edit-product', {
-     //         pageTitle: 'Edit Product',
-     //         path: '/admin/edit-product',
-     //         editing: editMode,
-     //         product: product
-     //       });
-     //     })
-     //     .catch(err => console.log(err));
-    Product.findAll({where: {id : ProductId}}).then(product => {
+     Product.findByPk(ProductId)
+         .then(product => {
            if (!product) {
              return res.redirect('/');
            }
-           try {
-               
-                res.render('admin/edit-product', {
-                  pageTitle: 'Edit Product',
-                  path: '/admin/edit-products',
-                  editing: editMode,
-                  product: product
-                });
-           } catch (err) {
-               console.log("Look Here ", err);
-           }
+           res.render('admin/edit-products', {
+             pageTitle: 'Edit Product',
+             path: '/admin/edit-product',
+             editing: editMode,
+             product: product
+           });
          })
          .catch(err => console.log(err));
+//     Product.findAll({where: {id : ProductId}}).then(product => {
+//            if (!product) {
+//              return res.redirect('/');
+//            }
+//            try {
+               
+//                 res.render('admin/edit-product', {
+//                   pageTitle: 'Edit Product',
+//                   path: '/admin/edit-products',
+//                   editing: editMode,
+//                   product: product
+//                 });
+//            } catch (err) {
+//                console.log("Look Here ", err);
+//            }
+//          })
+//          .catch(err => console.log(err));
 }
 
 exports.postEditedProduct = (req,res,next)=>{
@@ -96,21 +96,21 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedDescription = req.body.description;
      //with sequalizer 
 
-     Product.findByPK(prodID).then(
-          Product.title = updateeTitle,
-          Product.prise = updatedPrice,
-          Product.description = updatedDescription,
-          Product.imageURL = updatedImageUrl ,
-          Product.save()
+     Product.findByPk(prodID).then((product)=>{
+          product.title = updateeTitle,
+          product.price = updatedPrice,
+          product.description = updatedDescription,
+          product.imageURL = updatedImageUrl 
+          return product.save()
 
-     ).then(
+}).then(
 
           res.redirect('/admin/products')
 
      ).catch(err=> console.log(err))
 //with SQL
      // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
-     // updatedProduct.save()
+     // updatedProduct.save() 
 
 
 }
@@ -123,7 +123,7 @@ exports.postAddProduct = (req,res)=>{
      // updating product by using sequalizer 
        Product.create({
          title: title,
-         prise: price,
+         price: price,
          imageURL: imageUrl,
          description: description
        })
