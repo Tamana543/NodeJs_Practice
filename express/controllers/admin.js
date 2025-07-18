@@ -128,8 +128,8 @@ exports.postAddProduct = (req,res)=>{
          description: description
        })
          .then(result => {
-           // console.log(result);
-           console.log('Created Product');
+           // console.log(result)
+         res.redirect('/admin/products')
          })
          .catch(err => {
            console.log(err);
@@ -148,7 +148,14 @@ exports.postAddProduct = (req,res)=>{
 exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId;
- 
-     Product.deleteById(prodId)
-     res.redirect('/products')
+     //using sequalizer
+     Product.findByPk(prodId).then(product=>{
+          product.destroy()
+     }).then(()=>{
+                console.log("Done")
+           res.redirect('/admin/products')
+
+     }).catch(err => console.log(err))
+ // using sql 
+     // Product.deleteById(prodId)
 }
