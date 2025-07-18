@@ -7,7 +7,10 @@ const errorController = require('./controllers/404')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const sequalizer = require('./util/database')
-
+const Product = require('./modules/product')
+const User = require('./modules/user')
+const { constants } = require('buffer')
+const { FORCE } = require('sequelize/lib/index-hints')
 // Wiew enjine hundlers 
 // app.engine('hbs', expressHbs({layoutsDir : 'views/layouts',defaultLayout : 'main-layout',extname : 'hbs'}))//it use with the templating language engines that are not inide express js itself and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above (there is a bugg with it)
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
@@ -33,7 +36,12 @@ app.use(errorController.get404)
 // server.listen(5430) or
 
 // lets work with sequalizer and let it to run  the server 
-sequalizer.sync().then(result=>{
+// Association ( search in sequalizer Doc)
+// I will keep the user s the connector between all moculews and tables: as the user is the one with many products one card and even order so 
+Product.belongsTo(User,{constraints : true, onDelete: 'CASCADE'})// onDelete CASCADE means if I deleted the user delete its products too
+User.hasMany(Product)
+
+sequalizer.sync({force : true}).then(result=>{// force is used here to make a database everytime we wont to overwrote (dependesy : delete at the end)
      // console.log(result);
      app.listen(5430) 
 }).catch(err=>{
