@@ -48,26 +48,26 @@ exports.showAdminProducts = (req,res)=>{
 
 exports.getEditProduct = (req,res,next)=>{
      const editMode = req.query.edit;
-     const ProductId = req.params.productID;
-     console.log(req.query);
      if(editMode  !== "true"){
           return res.redirect('/')
      }
      // console.log("Received product ID:", req.params.productID);
      // console.log("Edit mode:", req.query.edit);
-     Product.findById(ProductId,(product)=>{
-     if(!product){
-          return res.redirect("/")
-     }
-          res.render('admin/edit-products',{
-
-               pageTitle : "Edit Product",
-               path:'/admin/edit-product',
-               addProductPage: true,
-               editing : editMode,
-               product : product
-          })
-     })
+     const ProductId = req.params.productID;
+     // console.log(ProductId);
+     Product.findById(ProductId)
+         .then(product => {
+           if (!product) {
+             return res.redirect('/');
+           }
+           res.render('admin/edit-product', {
+             pageTitle: 'Edit Product',
+             path: '/admin/edit-product',
+             editing: editMode,
+             product: product
+           });
+         })
+         .catch(err => console.log(err));
     
 }
 
@@ -77,9 +77,23 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedImageUrl = req.body.imageUrl;
      const updatedPrice = req.body.price;
      const updatedDescription = req.body.description;
-     const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
-     updatedProduct.save()
-     res.redirect('/admin/products')
+     //with sequalizer 
+
+     Product.findById(prodID).then(
+          Product.title = updateeTitle,
+          Product.prise = updatedPrice,
+          Product.description = updatedDescription,
+          Product.imageURL = updatedImageUrl ,
+          Product.save()
+
+     ).then(
+
+          res.redirect('/admin/products')
+
+     ).catch(err=> console.log(err))
+//with SQL
+     // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
+     // updatedProduct.save()
 
 
 }
