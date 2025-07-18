@@ -2,6 +2,7 @@ const path = require('path') // Import the path module to work with file and dir
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const { timeLog } = require('console')
+const { where } = require('sequelize')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
@@ -55,20 +56,36 @@ exports.getEditProduct = (req,res,next)=>{
      // console.log("Edit mode:", req.query.edit);
      const ProductId = req.params.productID;
      // console.log(ProductId);
-     Product.findById(ProductId)
-         .then(product => {
+     // Product.findByPK(ProductId)
+     //     .then(product => {
+     //       if (!product) {
+     //         return res.redirect('/');
+     //       }
+     //       res.render('admin/edit-product', {
+     //         pageTitle: 'Edit Product',
+     //         path: '/admin/edit-product',
+     //         editing: editMode,
+     //         product: product
+     //       });
+     //     })
+     //     .catch(err => console.log(err));
+    Product.findAll({where: {id : ProductId}}).then(product => {
            if (!product) {
              return res.redirect('/');
            }
-           res.render('admin/edit-product', {
-             pageTitle: 'Edit Product',
-             path: '/admin/edit-product',
-             editing: editMode,
-             product: product
-           });
+           try {
+               
+                res.render('admin/edit-product', {
+                  pageTitle: 'Edit Product',
+                  path: '/admin/edit-products',
+                  editing: editMode,
+                  product: product
+                });
+           } catch (err) {
+               console.log("Look Here ", err);
+           }
          })
          .catch(err => console.log(err));
-    
 }
 
 exports.postEditedProduct = (req,res,next)=>{
@@ -79,7 +96,7 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedDescription = req.body.description;
      //with sequalizer 
 
-     Product.findById(prodID).then(
+     Product.findByPK(prodID).then(
           Product.title = updateeTitle,
           Product.prise = updatedPrice,
           Product.description = updatedDescription,
