@@ -19,17 +19,30 @@ exports.getAddProduct = (req,res,next)=>{
           // next()
 }
 exports.showAdminProducts = (req,res)=>{
-     Product.fetchAll().then(([row,fileContent])=>{
+     // using SQL (and from file)
+     // Product.fetchAll().then(([row,fileContent])=>{
 
-          // console.log(products);
+     //      // console.log(products);
+     //      res.render('admin/products',{
+     //           prods : row ,
+     //           pageTitle : 'Admin Add products',
+     //           path: '/admin/products',
+               
+     //           })
+  
+     // }).catch(err=> console.log(err))
+
+     Product.findAll().then(products =>{
           res.render('admin/products',{
-               prods : row ,
+               prods : products,
                pageTitle : 'Admin Add products',
                path: '/admin/products',
                
                })
   
-     }).catch(err=> console.log(err))
+     }).catch(err=>{
+          console.log(err);
+     })
     
 }
 
