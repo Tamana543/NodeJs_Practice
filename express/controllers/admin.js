@@ -140,7 +140,8 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedDescription = req.body.description;
      //with sequalizer 
 
-     Product.findByPk(prodID).then((product)=>{
+     req.user.getProducts({where: {id:prodID}}).then((products)=>{
+          const product = products[0]
           product.title = updateeTitle,
           product.price = updatedPrice,
           product.description = updatedDescription,
