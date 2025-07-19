@@ -19,6 +19,48 @@ exports.getAddProduct = (req,res,next)=>{
           // res.sendFile(path.join(rootDir,'Views','add-product.html')) // Use the rootDir utility to get the correct path to the Views directory
           // next()
 }
+
+exports.postAddProduct = (req,res)=>{
+     const title =req.body.title ;
+     const price  =req.body.price ;
+     const imageUrl =req.body.imageUrl;
+     const description  =req.body.description ;
+     // updating product by using sequalizer (User)
+     console.log(req.user);
+     req.user.createProduct({
+          title: title,
+         price: price,
+         imageURL: imageUrl,
+         description: description }
+     ).then((result)=>{
+          res.redirect('/admin/products')
+     }).catch(err=>console.log("THen HEREEE",err))
+     // updating product by using sequalizer 
+     //   Product.create({
+     //     title: title,
+     //     price: price,
+     //     imageURL: imageUrl,
+     //     description: description,
+     //     userId:req.user.id
+     //   })
+     //     .then(result => {
+     //       // console.log(result)
+     //     res.redirect('/admin/products')
+     //     })
+     //     .catch(err => {
+     //       console.log(err);
+     //     });
+
+     
+     // updating data table by using sql :
+     // const product = new Product(null,title,imageUrl,price,description);
+     // product.save().then(()=>{
+     //      res.redirect('/') // Redirect the user to the  / route after processing the form submission
+     // }).catch(err=>{
+     //      console.log(err);
+     // })
+     
+}
 exports.showAdminProducts = (req,res)=>{
      // using SQL (and from file)
      // Product.fetchAll().then(([row,fileContent])=>{
@@ -56,8 +98,10 @@ exports.getEditProduct = (req,res,next)=>{
      // console.log("Edit mode:", req.query.edit);
      const ProductId = req.params.productID;
      // console.log(ProductId);
-     Product.findByPk(ProductId)
-         .then(product => {
+     // req.user.createProduct({where : {id :ProductId}}) 
+     
+    req.user.getProducts({where : {id : ProductId}}).then(products => {
+          const product = products[0]
            if (!product) {
              return res.redirect('/');
            }
@@ -68,7 +112,7 @@ exports.getEditProduct = (req,res,next)=>{
              product: product
            });
          })
-         .catch(err => console.log(err));
+         .catch(err => console.log("hereeee",err));
 //     Product.findAll({where: {id : ProductId}}).then(product => {
 //            if (!product) {
 //              return res.redirect('/');
@@ -115,47 +159,6 @@ exports.postEditedProduct = (req,res,next)=>{
 
 }
 
-exports.postAddProduct = (req,res)=>{
-     const title =req.body.title ;
-     const price  =req.body.price ;
-     const imageUrl =req.body.imageUrl;
-     const description  =req.body.description ;
-     // updating product by using sequalizer (User)
-     // console.log(req.user);
-     req.user.createProduct({
-          title: title,
-         price: price,
-         imageURL: imageUrl,
-         description: description }
-     ).then((result)=>{
-          res.redirect('/admin/products')
-     }).catch(err=>console.log(err))
-     // updating product by using sequalizer 
-     //   Product.create({
-     //     title: title,
-     //     price: price,
-     //     imageURL: imageUrl,
-     //     description: description,
-     //     userId:req.user.id
-     //   })
-     //     .then(result => {
-     //       // console.log(result)
-     //     res.redirect('/admin/products')
-     //     })
-     //     .catch(err => {
-     //       console.log(err);
-     //     });
-
-     
-     // updating data table by using sql :
-     // const product = new Product(null,title,imageUrl,price,description);
-     // product.save().then(()=>{
-     //      res.redirect('/') // Redirect the user to the  / route after processing the form submission
-     // }).catch(err=>{
-     //      console.log(err);
-     // })
-     
-}
 exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId;
