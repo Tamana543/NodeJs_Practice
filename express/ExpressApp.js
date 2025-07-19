@@ -29,6 +29,15 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 app.use(express.static(path.join(__dirname,'public')))// use thi line so that you would e able to connect the public css to your file and the css will be availabel and the html file will have access to it 
 app.use('/admin',adminRoutes)
 
+// sequalizer userTable middleware
+
+app.use((req,res,next) =>{
+User.findByPk(1).then(user=>{
+     req.user = user;
+     next()
+}).catch(err=>console.log(err))
+})
+
 app.use(shopRoutes)
 
 app.use(errorController.get404)
