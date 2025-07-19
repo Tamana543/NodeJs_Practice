@@ -120,20 +120,31 @@ exports.postAddProduct = (req,res)=>{
      const price  =req.body.price ;
      const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
-     // updating product by using sequalizer 
-       Product.create({
-         title: title,
+     // updating product by using sequalizer (User)
+     // console.log(req.user);
+     req.user.createProduct({
+          title: title,
          price: price,
          imageURL: imageUrl,
-         description: description
-       })
-         .then(result => {
-           // console.log(result)
-         res.redirect('/admin/products')
-         })
-         .catch(err => {
-           console.log(err);
-         });
+         description: description }
+     ).then((result)=>{
+          res.redirect('/admin/products')
+     }).catch(err=>console.log(err))
+     // updating product by using sequalizer 
+     //   Product.create({
+     //     title: title,
+     //     price: price,
+     //     imageURL: imageUrl,
+     //     description: description,
+     //     userId:req.user.id
+     //   })
+     //     .then(result => {
+     //       // console.log(result)
+     //     res.redirect('/admin/products')
+     //     })
+     //     .catch(err => {
+     //       console.log(err);
+     //     });
 
      
      // updating data table by using sql :
