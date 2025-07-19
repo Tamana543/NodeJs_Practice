@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 
 //keep in mind that the order of the middleware is important, the first one will run first and then the next one, so if you want to run a middleware after another one, you have to put it after the first one
 app.use(express.static(path.join(__dirname,'public')))// use thi line so that you would e able to connect the public css to your file and the css will be availabel and the html file will have access to it 
-app.use('/admin',adminRoutes)
 
 // sequalizer userTable middleware
 
@@ -38,6 +37,7 @@ User.findByPk(1).then(user=>{
      next()
 }).catch(err=>console.log(err))
 })
+app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
 
