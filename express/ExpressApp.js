@@ -51,7 +51,7 @@ app.use(errorController.get404)
 Product.belongsTo(User,{constraints : true, onDelete: 'CASCADE'})// onDelete CASCADE means if I deleted the user delete its products too
 User.hasMany(Product)
 
-sequalizer.sync().then(result=>{
+sequalizer.sync({force : true}).then(result=>{
      // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)
      return User.findByPk(1)
      // console.log(result);
