@@ -1,5 +1,5 @@
-
-
+const Sequalize = require('sequelize')
+const sequalize = require('../util/database')
 
 // while using file and SQL uncomment this 
 // const path = require('path')
@@ -81,3 +81,13 @@
 
 // }
 // }
+
+const Cart =sequalize.define('cart',{
+id : {
+     type: Sequalize.INTEGER,
+     allowNull : false,
+     autoIncrement : true,
+     primaryKey : true
+}
+})
+module.exports = Cart;
