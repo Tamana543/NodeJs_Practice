@@ -88,8 +88,16 @@ Product.findAll({where: {id: productId}}).then(products =>{
      
 exports.getCartShop = (req,res)=>{
 
+
 req.user.getCartShop().then(cart =>{
-console.log(cart);
+// console.log(cart);
+return cart.getProductsShop().then(product =>{
+res.render('shop/cart', {
+    path: '/cart',
+    pageTitle : 'Cart', 
+    prods : cartProducts ,
+    })
+}).catch(err=>console.log(err))
 }).catch(err=>{
   console.log(err);
 })

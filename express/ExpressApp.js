@@ -56,7 +56,7 @@ User.hasOne(cartItems)
 Cart.belongsToMany(Product , {through : cartItems})
 Product.belongsToMany(Cart , {through : cartItems})
 
-sequalizer.sync({force : true}).then(result=>{
+sequalizer.sync().then(result=>{
      // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)
      return User.findByPk(1)
      // console.log(result);
