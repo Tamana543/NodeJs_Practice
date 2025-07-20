@@ -61,9 +61,12 @@ sequalizer.sync().then(result=>{
      }
      return user;
 }).then((user)=>{
+     console.log(user);
+   return  user.createCart()
      // console.log(user);
-     app.listen(5430) 
-     
+  
+}).then(user=>{
+app.listen(5430)
 }).catch(err=>{
      console.log(err);
 })
