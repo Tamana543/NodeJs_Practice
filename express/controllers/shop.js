@@ -87,17 +87,17 @@ Product.findAll({where: {id: productId}}).then(products =>{
 
      
 exports.getCartShop = (req,res)=>{
+console.log(req.user.getCart());
 
-
-req.user.getCartShop().then(cart =>{
+req.user.getCart().then(cart =>{
 // console.log(cart);
-return cart.getProductsShop().then(product =>{
+return cart.getProducts().then(product =>{
 res.render('shop/cart', {
     path: '/cart',
     pageTitle : 'Cart', 
-    prods : cartProducts ,
+    prods : product ,
     })
-}).catch(err=>console.log(err))
+}).catch(err=>console.log("Hereee Meee" ,err))
 }).catch(err=>{
   console.log(err);
 })
