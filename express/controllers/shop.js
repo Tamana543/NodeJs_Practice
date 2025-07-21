@@ -142,7 +142,7 @@ return cart.getProducts({where: {id : productId}})
     if(product){
 // increasing quantity here 
     }
-     return Product.findById(productId).then(product =>{
+     return Product.findByPk(productId).then(product =>{
 return fetchCart.addProduct(product,{through : {quantity : newQuantity}})
      }).catch(err =>console.log(err))
   }).then(()=>{
