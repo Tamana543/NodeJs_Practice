@@ -140,7 +140,11 @@ return cart.getProducts({where: {id : productId}})
     }
     let newQuantity = 1
     if(product){
-// increasing quantity here 
+// increasing quantity here
+      const oldQuantity= product.cartItem.quantity ;
+      newQuantity = oldQuantity + 1
+      return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
+
     }
      return Product.findByPk(productId).then(product =>{
 return fetchCart.addProduct(product,{through : {quantity : newQuantity}})
