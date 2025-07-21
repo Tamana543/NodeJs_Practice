@@ -87,7 +87,7 @@ Product.findAll({where: {id: productId}}).then(products =>{
 
      
 exports.getCartShop = (req,res)=>{
-console.log(req.user.getCart());
+// console.log(req.user.getCart());
 
 req.user.getCart().then(cart =>{
 // console.log(cart);
@@ -97,7 +97,7 @@ res.render('shop/cart', {
     pageTitle : 'Cart', 
     prods : product ,
     })
-}).catch(err=>console.log("Hereee Meee" ,err))
+}).catch(err=>console.log(err))
 }).catch(err=>{
   console.log(err);
 })
@@ -124,18 +124,43 @@ res.render('shop/cart', {
 }
     
 exports.postCartShop = (req,res,next)=>{
-  console.log('req Budy ', req.body);
+  // console.log('req Budy ', req.body);
   const productId = req.body.productId;
-  console.log(productId);
-  try {
+
+  // with sequlizer
+  let fetchCart ; 
+  req.user.getCart().then(cart=>{
+    fetchCart = cart
+return cart.getProducts({where: {id : productId}})
+  }).then(products=>{
+    let product;
+    if(products.length > 0){
+
+      product = products[0]
+    }
+    let newQuantity = 1
+    if(product){
+// increasing quantity here 
+    }
+     return Product.findById(productId).then(product =>{
+return fetchCart.addProduct(product,{through : {quantity : newQuantity}})
+     }).catch(err =>console.log(err))
+  }).then(()=>{
+    res.redirect('/cart')
+  }).catch(err=>{
+    console.log(err);
+  })
+
+  //with SQL 
+  // try {
     
-      Product.findById(productId).then((product)=>{
-         Cart.addProduct(productId, product.price)
-      }).catch(err =>{console.log(err)})
-  } catch (error) {
-      console.log('Hereeeeeeee',error);
-  }
-    res.redirect('/cart');  
+  //     Product.findById(productId).then((product)=>{
+  //        Cart.addProduct(productId, product.price)
+  //     }).catch(err =>{console.log(err)})
+  // } catch (error) {
+  //     console.log(error);
+  // }
+  //   res.redirect('/cart');  
 
   
   
