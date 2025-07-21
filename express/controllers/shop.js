@@ -129,6 +129,7 @@ exports.postCartShop = (req,res,next)=>{
 
   // with sequlizer
   let fetchCart ; 
+      let newQuantity = 1
   req.user.getCart().then(cart=>{
     fetchCart = cart
 return cart.getProducts({where: {id : productId}})
@@ -138,17 +139,16 @@ return cart.getProducts({where: {id : productId}})
 
       product = products[0]
     }
-    let newQuantity = 1
+
     if(product){
 // increasing quantity here
       const oldQuantity= product.cartItem.quantity ;
       newQuantity = oldQuantity + 1
-      return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
+      return product;
 
     }
-     return Product.findByPk(productId).then(product =>{
-return fetchCart.addProduct(product,{through : {quantity : newQuantity}})
-     }).catch(err =>console.log(err))
+  }).then(product=>{
+     return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
   }).then(()=>{
     res.redirect('/cart')
   }).catch(err=>{
@@ -165,9 +165,6 @@ return fetchCart.addProduct(product,{through : {quantity : newQuantity}})
   //     console.log(error);
   // }
   //   res.redirect('/cart');  
-
-  
-  
 }
 
 
