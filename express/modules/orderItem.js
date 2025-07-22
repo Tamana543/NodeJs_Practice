@@ -4,7 +4,7 @@ const sequalize = require('../util/database')
 
 const OrderItem = sequalize.define('order_item',{
      id : {
-             type: Sequalize.INTEGER,
+             type: Sequalizer.INTEGER,
                allowNull : false,
                autoIncrement : true,
                primaryKey : true
