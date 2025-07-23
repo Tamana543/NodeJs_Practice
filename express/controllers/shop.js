@@ -189,16 +189,18 @@ exports.postDelCardView = (req,res)=>{
     // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
-  Product.fetchAll().then(([row])=>{
+  // With SQL 
+    // Product.fetchAll().then(([row])=>{
 
-    // console.log(products);
-     res.render('shop/order',{
-         prods : row ,
-           pageTitle : 'Ordered Page',
-          path: '/order',
-         
-         })
-  }).catch(err => console.log(err))
+    //   // console.log(products);
+    //   res.render('shop/order',{
+    //       prods : row ,
+    //         pageTitle : 'Ordered Page',
+    //         path: '/order',
+          
+    //       })
+    // }).catch(err => console.log(err))
+  req.user.getCart()
 }
 
 exports.getChickUpShop = (req,res)=>{
