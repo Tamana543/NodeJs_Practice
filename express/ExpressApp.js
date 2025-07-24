@@ -14,6 +14,7 @@ const cartItems = require('./modules/cartItem')
 const Order = require('./modules/order') ;
 const orderItems = require('./modules/orderItem') ;
 const OrderItem = require('./modules/orderItem')
+const { FORCE } = require('sequelize/lib/index-hints')
 // Wiew enjine hundlers 
 // app.engine('hbs', expressHbs({layoutsDir : 'views/layouts',defaultLayout : 'main-layout',extname : 'hbs'}))//it use with the templating language engines that are not inide express js itself and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above (there is a bugg with it)
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
@@ -62,7 +63,7 @@ Order.belongsTo(User)
 User.hasMany(Order)
 Order.belongsToMany(Product,{through : OrderItem})
 
-sequalizer.sync().then(result=>{
+sequalizer.sync({FORCE : true}).then(result=>{
      // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)
      return User.findByPk(1)
      // console.log(result);
