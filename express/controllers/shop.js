@@ -170,7 +170,9 @@ return cart.getProducts({where: {id : productId}})
 }
 
 exports.postOrderShop = (req,res,next)=>{
+  let fetchedCart;
 req.user.getCart().then(cart=>{
+  fetchedCart = cart
   return cart.getProducts()
 }
 ).then(product=>{
@@ -184,7 +186,10 @@ order.addProduct(
  }).catch(err=>console.log(err))
   // console.log(prodeuct);
 }).then(result=>{
+  return fetchedCart.setProducts(null)
+}).then(()=>{
   res.redirect('/order')
+
 }).catch(err=>console.log(err))
 }
 
@@ -216,9 +221,3 @@ exports.getOrderShop = (req,res)=>{
  
 }
 
-exports.getChickUpShop = (req,res)=>{
- res.render('shop/checkout',{
-  path:'/checkout',
-  pageTitle : 'Checkout'
- })
-     }
