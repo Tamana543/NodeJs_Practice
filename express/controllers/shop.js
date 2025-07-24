@@ -129,9 +129,10 @@ exports.postCartShop = (req,res,next)=>{
 
   // with sequlizer
   let fetchCart ; 
-      let newQuantity = 1
+  let newQuantity = 1
   req.user.getCart().then(cart=>{
     fetchCart = cart
+    // console.log(id,productId);
 return cart.getProducts({where: {id : productId}})
   }).then(products=>{
     let product;
@@ -147,6 +148,7 @@ return cart.getProducts({where: {id : productId}})
       return product;
 
     }
+      return Product.findByPk(productId);
   }).then(product=>{
      return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
   }).then(()=>{
@@ -197,14 +199,8 @@ exports.getOrderShop = (req,res)=>{
 }
 
 exports.getChickUpShop = (req,res)=>{
-  Product.fetchAll().then(([row])=>{
-
-    // console.log(products);
-     res.render('shop/order',{
-         prods : row ,
-           pageTitle : 'Ordered Page',
-          path: '/order',
-         
-         })
-  }).catch(err => console.log(err))
+ res.render('shop/checkout',{
+  path:'/checkout',
+  pageTitle : 'Checkout'
+ })
      }
