@@ -214,10 +214,14 @@ exports.postDelCardView = (req,res)=>{
     // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
-  res.render('shop/order',{
-    pageTitle : 'Ordered Page',
-            path: '/order',
-  })
- 
+  req.user.getOrders().then(order=>{
+
+    res.render('shop/order',{
+      pageTitle : 'Ordered Page',
+              path: '/order',
+              order : order
+    })
+  }).catch(err =>console.log(err))
+  
 }
 
