@@ -7,13 +7,14 @@
           <ul>
                <% order.forEach(item =>{ %>
                <li>
+                    <!-- <% console.log('This is logged to the server console.', item.id); %> -->
 
-                    <h2> <% order.id %></h2>
+                    <h2> # <%= item.id %></h2>
                     <ul>
-                         <% order.orderItem.forEach(item => { %>
+                         <% item.products.forEach(product => { %>
 
                          <li>
-                              <%= item.title %> ( <%= item.quntity %>)
+                              <%= product.title %> ( <%= product.quntity %>)
                          </li>
                          <% }); %>
                     </ul>

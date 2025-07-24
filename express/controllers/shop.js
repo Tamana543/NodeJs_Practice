@@ -214,8 +214,8 @@ exports.postDelCardView = (req,res)=>{
     // console.log(productId);
 }
 exports.getOrderShop = (req,res)=>{
-  req.user.getOrders().then(order=>{
-
+  req.user.getOrders({include : ['products']}).then(order=>{
+console.log(order);
     res.render('shop/order',{
       pageTitle : 'Ordered Page',
               path: '/order',
