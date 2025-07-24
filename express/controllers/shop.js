@@ -169,6 +169,19 @@ return cart.getProducts({where: {id : productId}})
   //   res.redirect('/cart');  
 }
 
+exports.postOrderShop = (req,res,next)=>{
+req.user.getCart().then(cart=>{
+  return cart.getProducts()
+}
+).then(product=>{
+ req.user.createOrder().then(()=>{
+  
+ }).catch(err=>console.log(err))
+  // console.log(prodeuct);
+}).then(result=>{
+  res.redirect('/order')
+}).catch(err=>console.log(err))
+}
 
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId;
