@@ -174,8 +174,13 @@ req.user.getCart().then(cart=>{
   return cart.getProducts()
 }
 ).then(product=>{
- req.user.createOrder().then(()=>{
-  
+ return req.user.createOrder().then((order)=>{
+order.addProduct(
+  product.map(product=>{
+    product.order_item = {quantity : product.cartItem.quantity}
+    return product
+  })
+)
  }).catch(err=>console.log(err))
   // console.log(prodeuct);
 }).then(result=>{
