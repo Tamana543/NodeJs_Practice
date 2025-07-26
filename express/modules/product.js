@@ -156,6 +156,7 @@ module.exports = class Product{
  */
 
 // with mangoDb
+const getDb = require('../util/database').getDb;
 class Product {
      constructor(id,title,imageUrl,price,description){
           this.id = id

@@ -33,20 +33,32 @@ module.exports = sequelize;
 
 const mongodb = require('mongodb')
 const mongoClient = mongodb.MongoClient;
-
+let _db; 
 const mangoCreateDb = (cb)=>{
 try {
-     mongoClient.connect(`mongodb+srv://Tamana_Farzami:siD1r51eESGme4qQ@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(result=>{
+     mongoClient.connect(`mongodb+srv://Tamana_Farzami:siD1r51eESGme4qQ@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(client=>{
           console.log("Created");
-          cb(result)
+          _db = client.db // it is a connection to the databsae stored in a variable 
+          cb()
      }).catch(err=>{
           console.log(err);
+          throw err
      })
 } catch (error) {
      console.log("Mangobd creation error",error);
 }
 
 }
-module.exports = mangoCreateDb;
+const getDb = ()=>{
+     if(_db){
+
+          return _db;
+     }
+     throw "database not foune "
+} ;
+
+exports.mangoCreateDb = mangoCreateDb
+exports.mangoCreateDb = getDb
+
 
 // mongodb+srv://<db_username>:<db_password>@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

@@ -91,7 +91,6 @@ const { FORCE } = require('sequelize/lib/index-hints')
 */
 
 // MANGO DB
-mangoCreateDb(client=>{
-     console.log(client);
+mangoCreateDb(()=>{
      app.listen(54300)
 })
