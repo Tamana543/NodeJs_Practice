@@ -8,11 +8,15 @@ const errorController = require('./controllers/404')
 // const shopRoutes = require('./routes/shop')
 
 // Wiew enjine hundlers 
+/**
+ 
 // app.engine('hbs', expressHbs({layoutsDir : 'views/layouts',defaultLayout : 'main-layout',extname : 'hbs'}))//it use with the templating language engines that are not inide express js itself and you need to tell it to run the file base the givin engine, the first para is the name(as your wish), the second one is the variable you had exported above (there is a bugg with it)
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
 // app.set('view engine','pug')// setting the default templating enginge to the pug file 
 app.set('views',path.join(__dirname,'views'))// In this line we are looking for the files that express should run the pug file
+*/
 
+const mangoCreateDb = require('./util/database')
 
 
 
@@ -33,9 +37,9 @@ app.use((req,res,next) =>{
 //      next()
 // }).catch(err=>console.log(err))
 })
-app.use('/admin',adminRoutes)
+// app.use('/admin',adminRoutes)
 
-app.use(shopRoutes)
+// app.use(shopRoutes)
 
 app.use(errorController.get404)
 // const server = http.createServer(app)// Create an HTTP server using the Express application
@@ -87,3 +91,7 @@ const { FORCE } = require('sequelize/lib/index-hints')
 */
 
 // MANGO DB
+mangoCreateDb(client=>{
+     console.log(client);
+     app.listen(54300)
+})
