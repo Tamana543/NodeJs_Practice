@@ -34,7 +34,7 @@ module.exports = sequelize;
 const mongodb = require('mongodb')
 const mongoClient = mongodb.MongoClient;
 
-const mangoDatabase = (cb)=>{
+const mangoCreateDb = (cb)=>{
 try {
      mongoClient.connect(`mongodb+srv://Tamana_Farzami:siD1r51eESGme4qQ@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(result=>{
           console.log("Created");
@@ -47,6 +47,6 @@ try {
 }
 
 }
-module.exports = mangoDatabase;
+module.exports = mangoCreateDb;
 
 // mongodb+srv://<db_username>:<db_password>@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

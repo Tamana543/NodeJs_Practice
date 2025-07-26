@@ -4,7 +4,7 @@ const bodyParser = require('body-parser') // Import body-parser to parse incomin
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 // const expressHbs = require('express-handlebars');
 const errorController = require('./controllers/404')
-// const adminRoutes = require('./routes/admin')
+const adminRoutes = require('./routes/admin')
 // const shopRoutes = require('./routes/shop')
 
 // Wiew enjine hundlers 
@@ -37,7 +37,7 @@ app.use((req,res,next) =>{
 //      next()
 // }).catch(err=>console.log(err))
 })
-// app.use('/admin',adminRoutes)
+app.use('/admin',adminRoutes)
 
 // app.use(shopRoutes)
 

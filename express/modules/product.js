@@ -90,6 +90,8 @@ function sqlDatba(){
 }
 **/
 /*
+
+
 If you are using sql database : 
 module.exports = class Product{
      constructor(id,title,imageUrl,price,description){
@@ -122,32 +124,50 @@ module.exports = class Product{
      }
 }
 **/
-const Sequalizer =require('sequelize') ;
- const sequalizer = require('../util/database');
-const { promiseImpl } = require('ejs');
 
- const Product = sequalizer.define('product',{// the first element is the table name you want that the sequalizer create for you, the 2nd is the object for columns
-     id:{
-          type:Sequalizer.INTEGER,
-          autoIncrement : true,
-          allowNull : false,
-          primaryKey : true,
-     },
-     title : Sequalizer.STRING,
-     description :{
-          type : Sequalizer.STRING,
-          allowNull : false,
-     },
-      price: {
-          type: Sequalizer.DOUBLE,
-          allowNull :false
-     },
-     imageURL : {
-          type : Sequalizer.STRING,
-          allowNull: false
+// for sequalizer 
+/**
+ *
+      const Sequalizer =require('sequelize') ;
+     const sequalizer = require('../util/database');
+     const { promiseImpl } = require('ejs');
+
+     const Product = sequalizer.define('product',{// the first element is the table name you want that the sequalizer create for you, the 2nd is the object for columns
+          id:{
+               type:Sequalizer.INTEGER,
+               autoIncrement : true,
+               allowNull : false,
+               primaryKey : true,
+          },
+          title : Sequalizer.STRING,
+          description :{
+               type : Sequalizer.STRING,
+               allowNull : false,
+          },
+          price: {
+               type: Sequalizer.DOUBLE,
+               allowNull :false
+          },
+          imageURL : {
+               type : Sequalizer.STRING,
+               allowNull: false
+          }
+     });
+ */
+
+// with mangoDb
+class Product {
+     constructor(id,title,imageUrl,price,description){
+          this.id = id
+          this.title = title,
+          this.imageUrl =  imageUrl,
+          this.price = price,
+          this.description = description
      }
- });
+save(){
 
+}
+}
  module.exports = Product
 
 
