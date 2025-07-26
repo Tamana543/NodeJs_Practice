@@ -38,7 +38,7 @@ const mangoDatabase = (cb)=>{
 try {
      const user = 'Tamana_Farzami'
      const password = '2HNVfy7wsQCiqUWT'
-     mongoClient.create(`mongodb+srv://${user}:${password}@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(client=>{
+     mongoClient.connect(`mongodb+srv://${user}:${password}@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`).then(client=>{
           console.log("Created");
      }).catch(err=>{
           console.log(err);
