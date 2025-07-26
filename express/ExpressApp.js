@@ -16,7 +16,7 @@ app.set('view engine','ejs')// setting the default templating enginge to the han
 app.set('views',path.join(__dirname,'views'))// In this line we are looking for the files that express should run the pug file
 */
 
-const mangoCreateDb = require('./util/database')
+const mangoCreateDb = require('./util/database').mangoCreateDb
 
 
 
@@ -36,6 +36,7 @@ app.use((req,res,next) =>{
 //      req.user = user;
 //      next()
 // }).catch(err=>console.log(err))
+next()
 })
 app.use('/admin',adminRoutes)
 

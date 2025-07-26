@@ -1,4 +1,4 @@
-const Cart = require('./cart')
+// const Cart = require('./cart')
 const db =require('../util/database')
 
 /*
@@ -166,7 +166,10 @@ class Product {
           this.description = description
      }
 save(){
-
+const db =getDb() ;
+db.collection('product').insertOne().this(result =>{
+     console.log(result);
+}).catch(err => console.log(err))
 }
 }
  module.exports = Product
