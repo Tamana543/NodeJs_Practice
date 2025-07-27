@@ -26,15 +26,25 @@ exports.postAddProduct = (req,res)=>{
      const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
      // updating product by using sequalizer (User)
-     console.log(req.user);
-     req.user.createProduct({
-          title: title,
-         price: price,
-         imageURL: imageUrl,
-         description: description }
-     ).then((result)=>{
-          res.redirect('/admin/products')
-     }).catch(err=>console.log("THen HEREEE",err))
+     // console.log(req.user);
+
+
+     // using MangoDb
+     const productData = new Product(title, imageUrl, price, description)
+
+     productData.save().then(result => {
+          //  console.log(result)
+         res.redirect('/admin/products')})
+         .catch(err=> console.log(err)) 
+
+     // req.user.createProduct({
+     //      title: title,
+     //     price: price,
+     //     imageURL: imageUrl,
+     //     description: description }
+     // ).then((result)=>{
+     //      res.redirect('/admin/products')
+     // }).catch(err=>console.log("THen HEREEE",err))
      // updating product by using sequalizer 
      //   Product.create({
      //     title: title,

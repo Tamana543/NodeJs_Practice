@@ -158,8 +158,7 @@ module.exports = class Product{
 // with mangoDb
 const getDb = require('../util/database').getDb;
 class Product {
-     constructor(id,title,imageUrl,price,description){
-          this.id = id
+     constructor(title,imageUrl,price,description){
           this.title = title,
           this.imageUrl =  imageUrl,
           this.price = price,
@@ -167,7 +166,7 @@ class Product {
      }
 save(){
 const db =getDb() ;
-db.collection('product').insertOne().this(result =>{
+ return db.collection('products').insertOne(this).then(result =>{
      console.log(result);
 }).catch(err => console.log(err))
 }
