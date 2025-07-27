@@ -7,7 +7,7 @@ const { where } = require('sequelize')
 exports.getProductsShop = (req,res)=>{
   // with sequalizer 
 
-  Product.findAll().then(products=>{
+  Product.fetchALL().then(products=>{
     res.render('shop/product-list',{
       prods : products,
       pageTitle : 'Products',
@@ -32,7 +32,7 @@ exports.getProductsShop = (req,res)=>{
 }
 exports.getShopPage = (req,res)=>{
 // by using sequalizer 
-Product.findAll().then(products=>{
+Product.fetchALL().then(products=>{
 res.render('shop/index',{
     prods : products ,
       pageTitle : 'All products',

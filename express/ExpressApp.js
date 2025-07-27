@@ -6,7 +6,7 @@ const app = express() // Create an Express application (it is a function call as
 const errorController = require('./controllers/404')
 
 const adminRoutes = require('./routes/admin')
-// const shopRoutes = require('./routes/shop')
+const shopRoutes = require('./routes/shop')
 
 // Wiew enjine hundlers 
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname,'public')))// use thi line so that yo
 // })
 app.use('/admin',adminRoutes)
 
-// app.use(shopRoutes)
+app.use(shopRoutes)
 
 app.use(errorController.get404)
 // const server = http.createServer(app)// Create an HTTP server using the Express application
