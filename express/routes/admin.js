@@ -10,9 +10,9 @@ router.post('/add-product', productController.postAddProduct)
 
 router.get('/products', productController.showAdminProducts)
 
-// router.get('/edit-product/:productID', productController.getEditProduct)
+router.get('/edit-product/:productID', productController.getEditProduct)
 
-// router.post('/edit-product', productController.postEditedProduct)
+router.post('/edit-product', productController.postEditedProduct)
 
 router.post('/delete-product',productController.postDeleteProduct)
 // admin/edit-products

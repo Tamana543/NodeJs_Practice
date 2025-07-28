@@ -110,76 +110,79 @@ exports.showAdminProducts = (req,res)=>{
     
 // }
 
-// exports.getEditProduct = (req,res,next)=>{
-//      const editMode = req.query.edit;
-//      if(editMode  !== "true"){
-//           return res.redirect('/')
-//      }
-//      // console.log("Received product ID:", req.params.productID);
-//      // console.log("Edit mode:", req.query.edit);
-//      const ProductId = req.params.productID;
-//      // console.log(ProductId);
-//      // req.user.createProduct({where : {id :ProductId}}) 
-     
-//     req.user.getProducts({where : {id : ProductId}}).then(products => {
-//           const product = products[0]
+exports.getEditProduct = (req,res,next)=>{
+     const editMode = req.query.edit;
+     if(editMode  !== "true"){
+          return res.redirect('/')
+     }
+     // console.log("Received product ID:", req.params.productID);
+     // console.log("Edit mode:", req.query.edit);
+     const ProductId = req.params.productID;
+     // console.log(ProductId);
+     // req.user.createProduct({where : {id :ProductId}}) 
+     // with sql : 
+//     req.user.getProducts({where : {id : ProductId}})
+// for mongodb
+   Product.findById(ProductId).then(product => {
+          
+           if (!product) {
+             return res.redirect('/');
+           }
+           res.render('admin/edit-products', {
+             pageTitle: 'Edit Product',
+             path: '/admin/edit-product',
+             editing: editMode,
+             product: product
+           });
+         })
+         .catch(err => console.log("hereeee",err));
+//     Product.findAll({where: {id : ProductId}}).then(product => {
 //            if (!product) {
 //              return res.redirect('/');
 //            }
-//            res.render('admin/edit-products', {
-//              pageTitle: 'Edit Product',
-//              path: '/admin/edit-product',
-//              editing: editMode,
-//              product: product
-//            });
-//          })
-//          .catch(err => console.log("hereeee",err));
-// //     Product.findAll({where: {id : ProductId}}).then(product => {
-// //            if (!product) {
-// //              return res.redirect('/');
-// //            }
-// //            try {
+//            try {
                
-// //                 res.render('admin/edit-product', {
-// //                   pageTitle: 'Edit Product',
-// //                   path: '/admin/edit-products',
-// //                   editing: editMode,
-// //                   product: product
-// //                 });
-// //            } catch (err) {
-// //                console.log("Look Here ", err);
-// //            }
-// //          })
-// //          .catch(err => console.log(err));
-// }
+//                 res.render('admin/edit-product', {
+//                   pageTitle: 'Edit Product',
+//                   path: '/admin/edit-products',
+//                   editing: editMode,
+//                   product: product
+//                 });
+//            } catch (err) {
+//                console.log("Look Here ", err);
+//            }
+//          })
+//          .catch(err => console.log(err));
+}
 
-// exports.postEditedProduct = (req,res,next)=>{
-//      const prodID = req.body.prodId;
-//      const updateeTitle = req.body.title;
-//      const updatedImageUrl = req.body.imageUrl;
-//      const updatedPrice = req.body.price;
-//      const updatedDescription = req.body.description;
-//      //with sequalizer 
+exports.postEditedProduct = (req,res,next)=>{
+     const prodID = req.body.prodId;
+     const updateeTitle = req.body.title;
+     const updatedImageUrl = req.body.imageUrl;
+     const updatedPrice = req.body.price;
+     const updatedDescription = req.body.description;
+     //with sequalizer 
 
-//      req.user.getProducts({where: {id:prodID}}).then((products)=>{
-//           const product = products[0]
-//           product.title = updateeTitle,
-//           product.price = updatedPrice,
-//           product.description = updatedDescription,
-//           product.imageURL = updatedImageUrl 
-//           return product.save()
+     // req.user.getProducts({where: {id:prodID}}) for sql 
+     // for mongo db
+     Product.findById(prodID).then((product)=>{
+          product.title = updateeTitle,
+          product.price = updatedPrice,
+          product.description = updatedDescription,
+          product.imageURL = updatedImageUrl 
+          return product.save()
 
-// }).then(
+}).then(
 
-//           res.redirect('/admin/products')
+          res.redirect('/admin/products')
 
-//      ).catch(err=> console.log(err))
-// //with SQL
-//      // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
-//      // updatedProduct.save() 
+     ).catch(err=> console.log(err))
+//with SQL
+     // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
+     // updatedProduct.save() 
 
 
-// }
+}
 
 exports.postDeleteProduct = (req,res,next)=>{
    
