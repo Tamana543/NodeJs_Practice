@@ -180,7 +180,8 @@ class Product {
      }
      static findById(prodID){
           const db = getDb()
-          return db.collection('products').find({_id : prodID}).next().then(product=>{
+          const productId = new mongoDb.ObjectId(prodID)
+          return db.collection('products').find({_id : productId}).next().then(product=>{// in here the mangodb have stored the id in an other formate, to get the id or others you need to use mangodb's functionaions{_id : prodID} => ..
                console.log(product);
                return product
           }).catch(err=>console.log(err))
