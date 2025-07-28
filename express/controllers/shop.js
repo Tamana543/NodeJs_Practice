@@ -87,10 +87,13 @@ exports.getProductBId = (req,res,next)=>{
 
 
           // working with MangoBd
+            
           Product.findById(productId).then(product=>{
-              product : product
-              pageTitle:product.title
-              path:"/products"
+            res.render('shop/product_detail',{
+              product : product,
+                pageTitle : product.title,
+                path: '/products'
+            })
           }).catch(err=>console.log(err))
 }
     

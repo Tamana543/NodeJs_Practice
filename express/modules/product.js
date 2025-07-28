@@ -180,7 +180,7 @@ class Product {
      }
      static findById(prodID){
           const db = getDb()
-          return db.collection('products').find({_id : prodID}).then(product=>{
+          return db.collection('products').find({_id : prodID}).next().then(product=>{
                console.log(product);
                return product
           }).catch(err=>console.log(err))
