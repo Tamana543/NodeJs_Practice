@@ -186,6 +186,10 @@ class Product {
                return product
           }).catch(err=>console.log(err))
      }
+     static deleteProd(prodId){
+         
+
+     }
 }
  module.exports = Product
 

@@ -181,17 +181,27 @@ exports.showAdminProducts = (req,res)=>{
 
 // }
 
-// exports.postDeleteProduct = (req,res,next)=>{
+exports.postDeleteProduct = (req,res,next)=>{
    
-//      const prodId = req.body.productId;
-//      //using sequalizer
-//      Product.findByPk(prodId).then(product=>{
-//           product.destroy()
-//      }).then(()=>{
-//                 console.log("Done")
-//            res.redirect('/admin/products')
+     const prodId = req.body.productId;
+     // using mangodb : 
 
-//      }).catch(err => console.log(err))
-//  // using sql 
-//      // Product.deleteById(prodId)
-// }
+       Product.findById(prodId).then(product=>{
+          console.log(product);
+            res.render('shop/product_detail',{
+              product : product,
+                pageTitle : product.title,
+                path: '/admin/products'
+            })
+          }).catch(err=>console.log(err))
+     //using sequalizer
+     // Product.findByPk(prodId).then(product=>{
+     //      product.destroy()
+     // }).then(()=>{
+     //            console.log("Done")
+     //       res.redirect('/admin/products')
+
+     // }).catch(err => console.log(err))
+ // using sql 
+     // Product.deleteById(prodId)
+}
