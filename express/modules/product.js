@@ -1,5 +1,6 @@
 // const Cart = require('./cart')
 const db =require('../util/database')
+const mongoDb = require('mongodb')
 
 /*
 
@@ -175,6 +176,13 @@ class Product {
           return db.collection('products').find().toArray().then(result=>{
                console.log(result);
                return result
+          }).catch(err=>console.log(err))
+     }
+     static findById(prodID){
+          const db = getDb()
+          return db.collection('products').find({_id : prodID}).then(product=>{
+               console.log(product);
+               return product
           }).catch(err=>console.log(err))
      }
 }
