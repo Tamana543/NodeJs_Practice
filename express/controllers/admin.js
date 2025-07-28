@@ -71,19 +71,30 @@ exports.postAddProduct = (req,res)=>{
      // })
      
 }
-// exports.showAdminProducts = (req,res)=>{
-//      // using SQL (and from file)
-//      // Product.fetchAll().then(([row,fileContent])=>{
+exports.showAdminProducts = (req,res)=>{
+     // using SQL (and from file)
+     // Product.fetchAll().then(([row,fileContent])=>{
 
-//      //      // console.log(products);
-//      //      res.render('admin/products',{
-//      //           prods : row ,
-//      //           pageTitle : 'Admin Add products',
-//      //           path: '/admin/products',
+     //      // console.log(products);
+     //      res.render('admin/products',{
+     //           prods : row ,
+     //           pageTitle : 'Admin Add products',
+     //           path: '/admin/products',
                
-//      //           })
+     //           })
   
-//      // }).catch(err=> console.log(err))
+     // }).catch(err=> console.log(err))
+
+     //using Mangodb
+     Product.fetchALL().then(product=>{
+           res.render('admin/products',{
+               prods : product ,
+               pageTitle : 'Admin Add products',
+               path: '/admin/products',
+               
+               })
+     }).catch(err=>console.log(err))
+}
 
 //      Product.findAll().then(products =>{
 //           res.render('admin/products',{
