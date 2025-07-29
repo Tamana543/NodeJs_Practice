@@ -170,12 +170,12 @@ class Product {
           const db =getDb() ;
           let dbObs;
           if(id){
-               dbObs = db.collection('products').updateOne({_id : new mongoDb.ObjectId(this._id)},{})
+               dbObs = db.collection('products').updateOne({_id : new mongoDb.ObjectId(this._id)},{$set:this})
           }else {
                dbObs = db.collection('products').insertOne(this)
                
           }
-          .then(result =>{
+          dbObs.then(result =>{
                // console.log(result);
           }).catch(err => console.log(err))
      }

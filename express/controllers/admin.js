@@ -165,18 +165,23 @@ exports.postEditedProduct = (req,res,next)=>{
 
      // req.user.getProducts({where: {id:prodID}}) for sql 
      // for mongo db
-     Product.findById(prodID).then((product)=>{
-          product.title = updateeTitle,
-          product.price = updatedPrice,
-          product.description = updatedDescription,
-          product.imageURL = updatedImageUrl 
-          return product.save()
+     const product = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
+     product.save().then(result=>{
+          console.log("Product Updated");
+           res.redirect('/admin/products')
+     }).catch(err=>console.log(err))
+//      product.save(prodID).then((product)=>{
+//           product.title = updateeTitle,
+//           product.price = updatedPrice,
+//           product.description = updatedDescription,
+//           product.imageURL = updatedImageUrl 
+//           return product.save()
 
-}).then(
+// }).then(
 
-          res.redirect('/admin/products')
+//           res.redirect('/admin/products')
 
-     ).catch(err=> console.log(err))
+//      ).catch(err=> console.log(err))
 //with SQL
      // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
      // updatedProduct.save() 
