@@ -3,6 +3,7 @@ const rootDir = require('../util/paths')
 const Product = require('../modules/product')
 const { timeLog } = require('console')
 const { where } = require('sequelize')
+const { ObjectId } = require('mongodb')
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
@@ -165,7 +166,7 @@ exports.postEditedProduct = (req,res,next)=>{
 
      // req.user.getProducts({where: {id:prodID}}) for sql 
      // for mongo db
-     const product = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
+     const product = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, new ObjectId(prodID))
      product.save().then(result=>{
           console.log("Product Updated");
            res.redirect('/admin/products')

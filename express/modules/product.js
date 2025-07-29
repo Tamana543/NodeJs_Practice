@@ -166,7 +166,7 @@ class Product {
           this.description = description,
           this._id = id
      }
-     save(){
+     save(id){
           const db =getDb() ;
           let dbObs;
           if(id){
