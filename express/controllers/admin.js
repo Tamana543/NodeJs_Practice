@@ -90,7 +90,7 @@ exports.showAdminProducts = (req,res)=>{
      Product.fetchALL().then(product=>{
            res.render('admin/products',{
                prods : product ,
-               pageTitle : 'Admin Add products',
+               pageTitle : 'Admin products',
                path: '/admin/products',
                
                })
@@ -197,9 +197,7 @@ exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId.trim();
      // using mangodb : 
-     console.log(' Raw productId:', prodId);
-console.log('Length:', prodId?.length);
-console.log('Matches Hex:', /^[a-fA-F0-9]{24}$/.test(prodId));
+
 
        Product.deleteProd(prodId).then(()=>{
           // console.log(product);
