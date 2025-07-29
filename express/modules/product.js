@@ -195,8 +195,12 @@ class Product {
           }).catch(err=>console.log(err))
      }
      static deleteProd(prodId){
+          const prodForDel =new mongoDb.ObjectId(prodId) ;
+//              if (!prodForDel.isValid(prodId)) {
+//       console.log(' Invalid ObjectId:', prodId);
+//       return Promise.resolve()
+//     }
      const db = getDb()
-     const prodForDel =new mongoDb.ObjectId(prodId) ;
 try {
      return db
      .collection('products')

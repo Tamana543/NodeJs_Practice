@@ -195,7 +195,7 @@ exports.postEditedProduct = (req,res,next)=>{
 
 exports.postDeleteProduct = (req,res,next)=>{
    
-     const prodId = req.body.productId;
+     const prodId = req.body.productId.trim();
      // using mangodb : 
      console.log(' Raw productId:', prodId);
 console.log('Length:', prodId?.length);
