@@ -1,9 +1,9 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
-const { timeLog } = require('console')
-const { where } = require('sequelize')
-const { ObjectId } = require('mongodb')
+// const { ObjectId } = require('mongodb')
+const mongoDb = require('mongodb')
+const ObjectId = new mongoDb.ObjectId;
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
@@ -166,8 +166,9 @@ exports.postEditedProduct = (req,res,next)=>{
 
      // req.user.getProducts({where: {id:prodID}}) for sql 
      // for mongo db
-     const product = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, new ObjectId(prodID))
-     product.save().then(result=>{
+     const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, new mongoDb.ObjectId(prodID))
+     
+     productUpDet.save().then(result=>{
           console.log("Product Updated");
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))

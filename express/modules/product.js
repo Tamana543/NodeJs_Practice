@@ -166,16 +166,16 @@ class Product {
           this.description = description,
           this._id = id
      }
-     save(id){
+     save(){
           const db =getDb() ;
           let dbObs;
-          if(id){
+          if(this._id){
                dbObs = db.collection('products').updateOne({_id : new mongoDb.ObjectId(this._id)},{$set:this})
           }else {
                dbObs = db.collection('products').insertOne(this)
                
           }
-          dbObs.then(result =>{
+          return dbObs.then(result =>{
                // console.log(result);
           }).catch(err => console.log(err))
      }
