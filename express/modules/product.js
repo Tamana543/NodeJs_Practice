@@ -195,8 +195,19 @@ class Product {
           }).catch(err=>console.log(err))
      }
      static deleteProd(prodId){
-         
-
+     const db = getDb()
+     const prodForDel =new mongoDb.ObjectId(prodId) ;
+try {
+     return db
+     .collection('products')
+     .deleteOne({_id: prodForDel })
+     .then(result=>{
+          console.log("Deleted");
+     }).catch(err=>console.log(err))
+     
+} catch (error) {
+     console.log("Hereeee",error);
+}
      }
 }
  module.exports = Product

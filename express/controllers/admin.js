@@ -197,15 +197,18 @@ exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId;
      // using mangodb : 
+     console.log(' Raw productId:', prodId);
+console.log('Length:', prodId?.length);
+console.log('Matches Hex:', /^[a-fA-F0-9]{24}$/.test(prodId));
 
-       Product.findById(prodId).then(product=>{
+       Product.deleteProd(prodId).then(()=>{
           // console.log(product);
-            res.render('shop/product_detail',{
-              product : product,
-                pageTitle : product.title,
-                path: '/admin/products'
-            })
+          console.log("Deleted");
+            res.redirect('/admin/products')
+
           }).catch(err=>console.log(err))
+
+
      //using sequalizer
      // Product.findByPk(prodId).then(product=>{
      //      product.destroy()
