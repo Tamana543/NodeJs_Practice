@@ -172,6 +172,8 @@ exports.postEditedProduct = (req,res,next)=>{
           console.log("Product Updated");
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))
+
+
 //      product.save(prodID).then((product)=>{
 //           product.title = updateeTitle,
 //           product.price = updatedPrice,
@@ -197,7 +199,7 @@ exports.postDeleteProduct = (req,res,next)=>{
      // using mangodb : 
 
        Product.findById(prodId).then(product=>{
-          console.log(product);
+          // console.log(product);
             res.render('shop/product_detail',{
               product : product,
                 pageTitle : product.title,

@@ -230,7 +230,7 @@ exports.postDelCardView = (req,res)=>{
 }
 exports.getOrderShop = (req,res)=>{
   req.user.getOrders({include : ['products']}).then(order=>{
-console.log(order);
+// console.log(order);
     res.render('shop/order',{
       pageTitle : 'Ordered Page',
               path: '/order',
