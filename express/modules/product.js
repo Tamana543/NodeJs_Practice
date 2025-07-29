@@ -164,13 +164,13 @@ class Product {
           this.imageUrl =  imageUrl,
           this.price = price,
           this.description = description,
-          this._id = id
+          this._id = new mongoDb.ObjectId(id)
      }
      save(){
           const db =getDb() ;
           let dbObs;
           if(this._id){
-               dbObs = db.collection('products').updateOne({_id : new mongoDb.ObjectId(this._id)},{$set:this})
+               dbObs = db.collection('products').updateOne({_id : this._id},{$set:this})
           }else {
                dbObs = db.collection('products').insertOne(this)
                

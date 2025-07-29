@@ -1,9 +1,9 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
-// const { ObjectId } = require('mongodb')
-const mongoDb = require('mongodb')
-const ObjectId = new mongoDb.ObjectId;
+
+
+
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
 
@@ -166,7 +166,7 @@ exports.postEditedProduct = (req,res,next)=>{
 
      // req.user.getProducts({where: {id:prodID}}) for sql 
      // for mongo db
-     const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, new mongoDb.ObjectId(prodID))
+     const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, prodID)
      
      productUpDet.save().then(result=>{
           console.log("Product Updated");
