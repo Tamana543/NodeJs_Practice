@@ -32,14 +32,14 @@ app.use(express.static(path.join(__dirname,'public')))// use thi line so that yo
 
 // sequalizer userTable middleware
 
-// app.use((req,res,next) =>{
-// // User.findByPk(1).then(user=>{
-// //      console.log(user);
-// //      req.user = user;
-// //      next()
-// // }).catch(err=>console.log(err))
-// next()
-// })
+app.use((req,res,next) =>{
+User.findByPk('688c973b2b5f08ec4274da32').then(user=>{
+     // console.log(user);
+     req.user = user;
+     next()
+}).catch(err=>console.log(err))
+next()
+})
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
