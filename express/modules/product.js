@@ -159,12 +159,14 @@ module.exports = class Product{
 // with mangoDb
 const getDb = require('../util/database').getDb;
 class Product {
-     constructor(title,imageUrl,price,description,id){
+     constructor(title,imageUrl,price,description,id,userId){
           this.title = title,
           this.imageUrl =  imageUrl,
           this.price = price,
           this.description = description,
-          this._id = id ? new mongoDb.ObjectId(id) : null
+          this._id = id ? new mongoDb.ObjectId(id) : null,
+          this.userId = userId
+
      }
      save(){
           const db =getDb() ;

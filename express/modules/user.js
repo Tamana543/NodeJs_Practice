@@ -16,7 +16,7 @@ return db.collection('users').insertOne(this)
 static findById(id){
 const db = getDb()
 const objectId = mongoDB.ObjectId;
-return db.collection('users').findOne({_id:new objectId(id)} )
+return db.collection('users').findOne({_id:new objectId(id)} ).then(result=>console.log(result)).catch(err=>console.log(err))
 }
 }
 //with Sequalizeer

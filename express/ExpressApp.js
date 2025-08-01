@@ -7,7 +7,7 @@ const errorController = require('./controllers/404')
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
-
+const User = require('./modules/user')
 // Wiew enjine hundlers 
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
 
@@ -33,12 +33,12 @@ app.use(express.static(path.join(__dirname,'public')))// use thi line so that yo
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{
-User.findByPk('688c973b2b5f08ec4274da32').then(user=>{
-     // console.log(user);
+User.findById('688c973b2b5f08ec4274da32').then(user=>{
      req.user = user;
+     console.log(user);
      next()
 }).catch(err=>console.log(err))
-next()
+
 })
 app.use('/admin',adminRoutes)
 
