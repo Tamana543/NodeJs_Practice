@@ -1,3 +1,5 @@
+// Rememeber while using the mongodb you do not need to add the card form ambeded item, you can add it directly from the products (the same with card items )
+
 // const Sequalize = require('sequelize')
 // const sequalize = require('../util/database')
 
