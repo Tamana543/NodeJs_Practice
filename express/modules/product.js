@@ -167,6 +167,7 @@ class Product {
           this._id = id ? new mongoDb.ObjectId(id) : null,
           this.userId = userId
 
+
      }
      save(){
           const db =getDb() ;
@@ -181,6 +182,7 @@ class Product {
                // console.log(result);
           }).catch(err => console.log(err))
      }
+
      static fetchALL(){
           const db =getDb()
           return db.collection('products').find().toArray().then(result=>{

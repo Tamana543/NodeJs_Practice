@@ -5,22 +5,35 @@ const mongoDB = require("mongodb")
 const getDb = require('../util/database').getDb;
 
 class User {
-     constructor(username, email){
-this.username= name,
-this.email=email
+     constructor(username, email,cart,id){
+this.name= username,
+this.email=email,
+this.cart = cart,
+this._id = id
      }
      save(){
+          const db = getDb()
+          return db.collection('users').insertOne(this)
+     }
+
+     addToCart(product){
+          // const cartProduct = this.cart.item.findIndex(cp =>{
+          //      return cp._id === product._id
+          // })
+     const updatedCart = {items : [{...product,quantity : 1}]}   
 const db = getDb()
-return db.collection('users').insertOne(this)
+db.collection('users').updateOne({_id : new objectId(id)},{$set : {
+     cart:updatedCart
+}})
      }
 static findById(id){
-const db = getDb()
-const objectId = mongoDB.ObjectId;
-return db.collection('users').findOne({_id:new objectId(id)} ).then(user=>{
-     console.log(user)
-     return user 
-}).catch(err=>console.log(err))
-}
+          const db = getDb()
+          const objectId = mongoDB.ObjectId;
+          return db.collection('users').findOne({_id:new objectId(id)} ).then(user=>{
+               console.log(user)
+               return user 
+          }).catch(err=>console.log(err))
+     }
 }
 //with Sequalizeer
 /**
