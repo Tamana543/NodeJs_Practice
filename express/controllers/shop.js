@@ -108,18 +108,18 @@ exports.getCartShop = (req,res)=>{
 // console.log(req.user.getCart());
 
 // by using MongoDB
+req.user.getCart().then(cart =>{
+ // console.log(cart);
 
-req.user.getCart().then(cart=>{
+ res.render('shop/cart', {
+     path: '/cart',
+     pageTitle : 'Cart', 
+     prods : cart ,
+     })
 
-  Product.fetchALL().then(product=>{
-    // console.log("Here",cart.quantity);
-    res.render('shop/cart.ejs',{
-       path: '/cart',
-       pageTitle : 'Cart', 
-       prods : product ,
-    })
-  }).catch(err=>console.log(err))
-}).catch(err=>console.log("From user Card",err))
+ }).catch(err=>{
+   console.log(err);
+ })
 
 // sith Sequalizer
 /**
