@@ -109,7 +109,7 @@ exports.getCartShop = (req,res)=>{
 
 // by using MongoDB
 req.user.getCart().then(cart =>{
- // console.log(cart);
+ console.log(cart);
 
  res.render('shop/cart', {
      path: '/cart',

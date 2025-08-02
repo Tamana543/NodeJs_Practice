@@ -1,5 +1,6 @@
 // mongoDB
-const mongoDB = require("mongodb")
+const mongoDB = require("mongodb");
+const { get } = require("../routes/shop");
 const getDb = require('../util/database').getDb;
 const objectId = mongoDB.ObjectId;
 class User {
@@ -37,7 +38,21 @@ this._id = id
           }})
      }
      getCart(){
-          return this.cart
+         const db = getDb()
+         const productIds = this.cart.items.map(item=>{
+          return item.productID
+         });
+         return db.collection('products')
+         .find({_id:{$in:productIds}})
+         .toArray()
+         .then(products=>{
+          return products.map(prod=>{
+               return {...prod,quantity : this.cart.items.find(item=>{
+                    return item.productID.toString() === prod._id.toString()
+               }).quantity}
+          })
+         })
+         .catch(err=>console.log(err))
      }
 
      static findById(id){
