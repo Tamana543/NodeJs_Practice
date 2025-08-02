@@ -1,7 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Cart = require('../modules/cart')
-const { where } = require('sequelize')
+
 
 
 exports.getProductsShop = (req,res)=>{
@@ -32,6 +32,9 @@ exports.getProductsShop = (req,res)=>{
 }
 exports.getShopPage = (req,res)=>{
 // by using sequalizer 
+/**
+ * 
+ */
 Product.fetchALL().then(products=>{
 res.render('shop/index',{
     prods : products ,
@@ -104,18 +107,32 @@ exports.getProductBId = (req,res,next)=>{
 exports.getCartShop = (req,res)=>{
 // console.log(req.user.getCart());
 
-req.user.getCart().then(cart =>{
-// console.log(cart);
-return cart.getProducts().then(product =>{
-res.render('shop/cart', {
-    path: '/cart',
-    pageTitle : 'Cart', 
-    prods : product ,
-    })
+// by using MongoDB
+
+Product.fetchALL().then(cart=>{
+  res.render('shop/index',{
+     path: '/cart',
+     pageTitle : 'Cart', 
+     prods : cart ,
+  })
 }).catch(err=>console.log(err))
-}).catch(err=>{
-  console.log(err);
-})
+
+// sith Sequalizer
+/**
+ req.user.getCart().then(cart =>{
+ // console.log(cart);
+ return cart.getProducts().then(product =>{
+ res.render('shop/cart', {
+     path: '/cart',
+     pageTitle : 'Cart', 
+     prods : product ,
+     })
+ }).catch(err=>console.log(err))
+ }).catch(err=>{
+   console.log(err);
+ })
+ 
+ */
 
   //   Cart.getCart().then((products)=>{
 
@@ -145,7 +162,12 @@ exports.postCartShop = (req,res,next)=>{
 // with node.js
 Product.findById(productId).then((product)=>{
 return req.user.addToCart(product)
-}).then((result)=>console.log(result))
+}).then(
+  (result)=>{
+    console.log(result)
+   res.redirect('/cart')
+  }
+).catch(err=>console.log(err))
 
   // with sequlizer
   /**
