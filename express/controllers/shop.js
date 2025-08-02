@@ -142,7 +142,14 @@ exports.postCartShop = (req,res,next)=>{
   // console.log('req Budy ', req.body);
   const productId = req.body.productId;
 
+// with node.js
+Product.findById(productId).then((product)=>{
+return req.user.addToCart(product)
+}).then((result)=>console.log(result))
+
   // with sequlizer
+  /**
+   
   let fetchCart ; 
   let newQuantity = 1
   req.user.getCart().then(cart=>{
@@ -171,6 +178,7 @@ return cart.getProducts({where: {id : productId}})
   }).catch(err=>{
     console.log(err);
   })
+   */
 
   //with SQL 
   // try {
