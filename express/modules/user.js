@@ -15,25 +15,26 @@ this._id = id
      }
 
      addToCart(product){
-          const cartProductIndex = this.cart.item.findIndex(cp =>{
-               return productID.toString() === product._id.toString()
+          const cartProductIndex = this.cart.items.findIndex(cp =>{
+               return cp.productID.toString() === product._id.toString()
           })
-          const db = getDb()
-          const newQuantity = 1; 
+          
+          let newQuantity = 1; 
           const updatedCartItem = [...this.cart.items]
 
-if(cartProductIndex >= 0 ){
-newQuantity = this.cart.item[cartProductIndex].quantity + 1 ;
-updatedCartItem[cartProductIndex].quantity = newQuantity
+          if(cartProductIndex >= 0 ){
+          newQuantity = this.cart.items[cartProductIndex].quantity + 1 ;
+          updatedCartItem[cartProductIndex].quantity = newQuantity
 
-}else {
-updatedCartItem.push({items : [{productID : product._id,quantity : newQuantity}]})
-}
-          
-     const updatedCart = {items : updatedCartItem}   
-db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {
-     cart:updatedCart
-}})
+          }else {
+          updatedCartItem.push({productID : new objectId(product._id),quantity : newQuantity})
+          }
+                    
+               const updatedCart = {items : updatedCartItem}   
+               const db = getDb()
+          return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {
+               cart:updatedCart
+          }})
      }
 static findById(id){
           const db = getDb()
