@@ -109,13 +109,17 @@ exports.getCartShop = (req,res)=>{
 
 // by using MongoDB
 
-Product.fetchALL().then(cart=>{
-  res.render('shop/index',{
-     path: '/cart',
-     pageTitle : 'Cart', 
-     prods : cart ,
-  })
-}).catch(err=>console.log(err))
+req.user.getCart().then(cart=>{
+
+  Product.fetchALL().then(product=>{
+    // console.log("Here",cart.quantity);
+    res.render('shop/cart.ejs',{
+       path: '/cart',
+       pageTitle : 'Cart', 
+       prods : product ,
+    })
+  }).catch(err=>console.log(err))
+}).catch(err=>console.log("From user Card",err))
 
 // sith Sequalizer
 /**
@@ -159,13 +163,13 @@ exports.postCartShop = (req,res,next)=>{
   // console.log('req Budy ', req.body);
   const productId = req.body.productId;
 
-// with node.js
+// with NoSQL
 Product.findById(productId).then((product)=>{
 return req.user.addToCart(product)
 }).then(
   (result)=>{
     console.log(result)
-  //  res.redirect('/cart')
+   res.redirect('/cart')
   }
 ).catch(err=>console.log(err))
 

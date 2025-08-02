@@ -36,14 +36,18 @@ this._id = id
                cart:updatedCart
           }})
      }
-static findById(id){
-          const db = getDb()
-          
-          return db.collection('users').findOne({_id:new objectId(id)} ).then(user=>{
-               console.log(user)
-               return user 
-          }).catch(err=>console.log(err))
+     getCart(){
+          return this.cart
      }
+
+     static findById(id){
+               const db = getDb()
+               
+               return db.collection('users').findOne({_id:new objectId(id)} ).then(user=>{
+                    console.log(user)
+                    return user 
+               }).catch(err=>console.log(err))
+          }
 }
 //with Sequalizeer
 /**
