@@ -244,23 +244,34 @@ order.addProduct(
 
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId;
+//By mongoDb
+req.user.getCart().then(cart=>{
+  // return cart.findById()
+}).catch(err=>console.log(err))
 
     // By sequalier 
-    req.user.getCart().then(cart=>{
-      return cart.getProducts({where : {id : productId}})
-    }).then(products=>{
-      const product = products[0]
-      // console.log(product);
-      return product.cartItem.destroy()
-    }).then(()=>{
-      res.redirect('/cart')
-    }).catch(err => console.log(err))
-    // By SQL
-    // Product.findById(productId,product=>{
-    //     Cart.deleteProd(productId,product.price)
-    //     res.redirect('/cart')
-    // })
-    // console.log(productId);
+    /**
+     req.user.getCart().then(cart=>{
+       return cart.getProducts({where : {id : productId}})
+     }).then(products=>{
+       const product = products[0]
+       // console.log(product);
+       return product.cartItem.destroy()
+     }).then(()=>{
+       res.redirect('/cart')
+     }).catch(err => console.log(err))
+     
+     */
+    
+     // By SQL
+     /**
+      // Product.findById(productId,product=>{
+      //     Cart.deleteProd(productId,product.price)
+      //     res.redirect('/cart')
+      // })
+      // console.log(productId);
+      
+      */
 }
 exports.getOrderShop = (req,res)=>{
   req.user.getOrders({include : ['products']}).then(order=>{
