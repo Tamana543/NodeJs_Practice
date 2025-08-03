@@ -62,7 +62,16 @@ this._id = id
                     console.log(user)
                     return user 
                }).catch(err=>console.log(err))
-          }
+     }
+
+     static deleteCartItem(prod_id){
+          const updatedItem = this.cart.items.filter(prod_id =>{
+               return id.productID.toString() !== prod_id.toString()
+          })
+          const db = getDb;
+          return db.collection('products').updateOne({_id : new mongoDB.ObjectId(this._id)},{$set : {cart : {items : updatedItem}}})
+
+     }
 }
 //with Sequalizeer
 /**

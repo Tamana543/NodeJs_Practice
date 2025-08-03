@@ -240,13 +240,10 @@ order.addProduct(
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId.trim();
 //By mongoDb
-Product.deleteProd(productId).then(()=>{
-          // console.log(product);
-          console.log("Deleted");
-             res.redirect('/cart')
-
-          }).catch(err=>console.log(err))
-
+req.user.deleteCartItem(productId).then(cart=>{
+  // return cart.findById()
+   res.redirect('/cart')
+}).catch(err=>console.log(err))
 
     // By sequalier 
     /**
