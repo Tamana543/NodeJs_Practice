@@ -216,7 +216,7 @@ return cart.getProducts({where: {id : productId}})
 exports.postOrderShop = (req,res,next)=>{
   let fetchedCart;
 req.user.getCart().then(cart=>{
-  fetchedCart = cart
+  fetchedCart = cart 
   return cart.getProducts()
 }
 ).then(product=>{
@@ -239,6 +239,7 @@ order.addProduct(
 
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId.trim();
+    // console.log("Here",req.user);
 //By mongoDb
 req.user.deleteCartItem(productId).then(cart=>{
   // return cart.findById()

@@ -64,12 +64,13 @@ this._id = id
                }).catch(err=>console.log(err))
      }
 
-     static deleteCartItem(prod_id){
-          const updatedItem = this.cart.items.filter(prod_id =>{
+     deleteCartItem(prod_id){
+          const updatedItem = this.cart.items.filter(id =>{
                return id.productID.toString() !== prod_id.toString()
           })
-          const db = getDb;
-          return db.collection('products').updateOne({_id : new mongoDB.ObjectId(this._id)},{$set : {cart : {items : updatedItem}}})
+          console.log(updatedItem);
+          const db = getDb();
+          return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {cart : {items : updatedItem}}})
 
      }
 }
