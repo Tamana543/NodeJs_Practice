@@ -199,23 +199,23 @@ class Product {
           }).catch(err=>console.log(err))
      }
      static deleteProd(prodId){
-          const prodForDel =new mongoDb.ObjectId(prodId) ;
-//              if (!prodForDel.isValid(prodId)) {
-//       console.log(' Invalid ObjectId:', prodId);
-//       return Promise.resolve()
-//     }
-     const db = getDb()
-try {
-     return db
-     .collection('products')
-     .deleteOne({_id: prodForDel })
-     .then(result=>{
-          console.log("Deleted");
-     }).catch(err=>console.log(err))
-     
-} catch (error) {
-     console.log("Hereeee",error);
-}
+                    const prodForDel =new mongoDb.ObjectId(prodId) ;
+          //              if (!prodForDel.isValid(prodId)) {
+          //       console.log(' Invalid ObjectId:', prodId);
+          //       return Promise.resolve()
+          //     }
+               const db = getDb()
+               try {
+               return db
+               .collection('products')
+               .deleteOne({_id: prodForDel })
+               .then(result=>{
+                    console.log("Deleted");
+               }).catch(err=>console.log(err))
+               
+          } catch (error) {
+               console.log("Hereeee",error);
+          }
      }
 }
  module.exports = Product

@@ -99,11 +99,6 @@ exports.getProductBId = (req,res,next)=>{
             })
           }).catch(err=>console.log(err))
 }
-    
-
-
-
-     
 exports.getCartShop = (req,res)=>{
 // console.log(req.user.getCart());
 
@@ -243,11 +238,15 @@ order.addProduct(
 }
 
 exports.postDelCardView = (req,res)=>{
-    const productId = req.body.productId;
+    const productId = req.body.productId.trim();
 //By mongoDb
-req.user.getCart().then(cart=>{
-  // return cart.findById()
-}).catch(err=>console.log(err))
+Product.deleteProd(productId).then(()=>{
+          // console.log(product);
+          console.log("Deleted");
+             res.redirect('/cart')
+
+          }).catch(err=>console.log(err))
+
 
     // By sequalier 
     /**
