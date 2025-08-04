@@ -8,6 +8,7 @@ const errorController = require('./controllers/404')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const User = require('./modules/user')
+
 // Wiew enjine hundlers 
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
 
@@ -72,6 +73,7 @@ const { FORCE } = require('sequelize/lib/index-hints')
      Order.belongsTo(User)
      User.hasMany(Order)
      Order.belongsToMany(Product,{through : OrderItem})
+
 
      sequalizer.sync({FORCE : true}).then(result=>{
           // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)

@@ -271,14 +271,21 @@ req.user.deleteCartItem(productId).then(cart=>{
       */
 }
 exports.getOrderShop = (req,res)=>{
-  req.user.getOrders({include : ['products']}).then(order=>{
-// console.log(order);
-    res.render('shop/order',{
-      pageTitle : 'Ordered Page',
-              path: '/order',
-              order : order
-    })
-  }).catch(err =>console.log(err))
+// with Mongodb
+
+
+  // with sequalizer
+  /**
+   req.user.getOrders({include : ['products']}).then(order=>{
+ // console.log(order);
+     res.render('shop/order',{
+       pageTitle : 'Ordered Page',
+               path: '/order',
+               order : order
+     })
+   }).catch(err =>console.log(err))
+   
+   */
   
 }
 

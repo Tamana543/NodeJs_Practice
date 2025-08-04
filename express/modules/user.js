@@ -63,7 +63,10 @@ this._id = id
                     return user 
                }).catch(err=>console.log(err))
      }
-
+     getOrder(){
+          const db = getDb();
+          return db.collection('users').insertOne(this.cart)
+     }
      deleteCartItem(prod_id){
           const updatedItem = this.cart.items.filter(id =>{
                return id.productID.toString() !== prod_id.toString()
