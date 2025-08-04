@@ -250,12 +250,13 @@ req.user.deleteCartItem(productId).then(cart=>{
 exports.postOrderShop = (req,res,next)=>{
 // with Mongodb
 req.user.addOrder().then((result)=>{
-  res.redirect('/order')
-}).catch(err=>console.log(err))
 
+  res.redirect('/orders')
+}).catch(err=>console.log(err))
+ let fetchedCart;
   // with sequalizer
   /**
-   let fetchedCart;
+  
  req.user.getCart().then(cart=>{
    fetchedCart = cart 
    return cart.getProducts()
