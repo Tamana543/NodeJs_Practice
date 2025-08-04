@@ -65,7 +65,10 @@ this._id = id
      }
      getOrder(){
           const db = getDb();
-          return db.collection('users').insertOne(this.cart)
+          return db.collection('users').insertOne(this.cart).then(result=>{
+               this.cart = {items : []}// it clean the card not data base 
+               return db.collection('users').updateOne({_id : new objectId(this._id) },{$set : {cart : {items : []}}})//it clear entire database 
+          }).catch()
      }
      deleteCartItem(prod_id){
           const updatedItem = this.cart.items.filter(id =>{

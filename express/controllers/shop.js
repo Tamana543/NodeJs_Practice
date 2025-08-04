@@ -213,30 +213,6 @@ return cart.getProducts({where: {id : productId}})
   //   res.redirect('/cart');  
 }
 
-exports.postOrderShop = (req,res,next)=>{
-  let fetchedCart;
-req.user.getCart().then(cart=>{
-  fetchedCart = cart 
-  return cart.getProducts()
-}
-).then(product=>{
- return req.user.createOrder().then((order)=>{
-order.addProduct(
-  product.map(product=>{
-    product.order_item = {quantity : product.cartItem.quantity}
-    return product
-  })
-)
- }).catch(err=>console.log(err))
-  // console.log(prodeuct);
-}).then(result=>{
-  return fetchedCart.setProducts(null)
-}).then(()=>{
-  res.redirect('/order')
-
-}).catch(err=>console.log(err))
-}
-
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId.trim();
     // console.log("Here",req.user);
@@ -270,6 +246,40 @@ req.user.deleteCartItem(productId).then(cart=>{
       
       */
 }
+
+exports.postOrderShop = (req,res,next)=>{
+// with Mongodb
+
+
+  // with sequalizer
+  /**
+   let fetchedCart;
+ req.user.getCart().then(cart=>{
+   fetchedCart = cart 
+   return cart.getProducts()
+ }
+ ).then(product=>{
+  return req.user.createOrder().then((order)=>{
+ order.addProduct(
+   product.map(product=>{
+     product.order_item = {quantity : product.cartItem.quantity}
+     return product
+   })
+ )
+  }).catch(err=>console.log(err))
+   // console.log(prodeuct);
+ }).then(result=>{
+   return fetchedCart.setProducts(null)
+ }).then(()=>{
+   res.redirect('/order')
+ 
+ }).catch(err=>console.log(err))
+   */
+
+
+}
+
+
 exports.getOrderShop = (req,res)=>{
 // with Mongodb
 
