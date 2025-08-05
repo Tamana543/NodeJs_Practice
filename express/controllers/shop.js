@@ -251,7 +251,7 @@ exports.postOrderShop = (req,res,next)=>{
 // with Mongodb
 req.user.addOrder().then((result)=>{
 
-  res.redirect('/orders')
+  res.redirect('shop/order')
 }).catch(err=>console.log(err))
  let fetchedCart;
   // with sequalizer
@@ -286,7 +286,13 @@ req.user.addOrder().then((result)=>{
 exports.getOrderShop = (req,res)=>{
 // with Mongodb
 
-
+req.user.getOrder().then(result=>{
+  res.render('shop/order',{
+    pageTitle : 'Ordered Page',
+    path : '/order',
+    order : result
+  })
+})
   // with sequalizer
   /**
    

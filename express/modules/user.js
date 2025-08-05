@@ -83,6 +83,9 @@ this._id = id
      }
      getOrder(){
           const db = getDb();
+          // const order =  db.collection('orders').find({'user._id' : new objectId(this._id)});
+          // console.log(order.toArray());
+          return db.collection('orders').find({'user._id' : new objectId(this._id)}).toArray()
      }
      deleteCartItem(prod_id){
           const updatedItem = this.cart.items.filter(id =>{
