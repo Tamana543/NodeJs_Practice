@@ -121,32 +121,7 @@ req.user.addOrder().then((result)=>{
   res.redirect('shop/order')
 }).catch(err=>console.log(err))
  let fetchedCart;
-  // with sequalizer
-  /**
-  
- req.user.getCart().then(cart=>{
-   fetchedCart = cart 
-   return cart.getProducts()
- }
- ).then(product=>{
-  return req.user.createOrder().then((order)=>{
- order.addProduct(
-   product.map(product=>{
-     product.order_item = {quantity : product.cartItem.quantity}
-     return product
-   })
- )
-  }).catch(err=>console.log(err))
-   // console.log(prodeuct);
- }).then(result=>{
-   return fetchedCart.setProducts(null)
- }).then(()=>{
-   res.redirect('/order')
  
- }).catch(err=>console.log(err))
-   */
-
-
 }
 
 
@@ -160,18 +135,6 @@ req.user.getOrder().then(result=>{
     order : result
   })
 })
-  // with sequalizer
-  /**
-   
-  req.user.getOrders({include : ['products']}).then(order=>{
-// console.log(order);
-    res.render('shop/order',{
-      pageTitle : 'Ordered Page',
-              path: '/order',
-              order : order
-    })
-  }).catch(err =>console.log(err))
-  */
-  
+
 }
 
