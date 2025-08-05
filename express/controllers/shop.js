@@ -15,26 +15,10 @@ exports.getProductsShop = (req,res)=>{
     })
   }).catch(err=>console.log(err))
 
-  // with sql 
-//   Product.fetchAll().then(([rows])=>{
-  
-//  // res.sendFile(path.join
-//            // console.log(products);
-//            res.render('shop/product-list',{
-//                prods : rows ,
-//                  pageTitle : 'Products',
-//                 path: '/products',
-               
-//                })
-//   }).catch(err =>{
-//     console.log(err);
-//   })
+
 }
 exports.getShopPage = (req,res)=>{
-// by using sequalizer 
-/**
- * 
- */
+
 Product.fetchALL().then(products=>{
 res.render('shop/index',{
     prods : products ,
@@ -46,50 +30,12 @@ res.render('shop/index',{
      })
 }).catch(err=>console.log(err))
 
-  // by using sql 
-//       Product.fetchAll().then(([row])=>{
-// //row is whatever your database returning, like product
-// res.render('shop/index',{
-//     prods : row ,
-//       pageTitle : 'All products',
-//      path: '/',
-//      prodsExist : row.length > 0,
-//       activeShop: true,
-//      productCss : true
-//  // res.sendFile(path.join(rootDir,'Views','shop.html'))// it will send this file as a respond so that it will bw shown in page. a : __dirname mean chick the folder that I write this code on its file  b : '../' as the dir point on main folder and we need to go up , c: Views the secpnd port in URL , d: the last port of the url and the file
-// })
-//       }).catch(err=> console.log(err))// to render the default templates of shop.pug based the default tecmplate, and sinding the dynamic data (I had store and make it map through the js object ) to the pug file 
      }
 
 
 exports.getProductBId = (req,res,next)=>{
       const productId = req.params.productId; // params object is given by express and Yiu can find the dinamic productId from it 
-      // for working with sequalizer :
-    /**
-     
-            Product.findAll({where: {id: productId}}).then(products =>{
-      res.render('shop/product_detail',{
-              product : products[0],
-                pageTitle : products.title,
-                path: '/products'
-            })
-    }).catch(err=>console.log(err))
-          while working with sql : 
-          Product.findById(productId).then((product)=>{
-            console.log(product);
-            res.render('shop/product_detail',{
-              product : product,
-                 pageTitle : product.title,
-                 path: '/products'
-            })
-
-          }).catch(err => console.log(err))
-      
-          console.log(productId);
-     */
-
-
-          // working with MangoBd
+     // working with MangoBd
             
           Product.findById(productId).then(product=>{
             res.render('shop/product_detail',{
@@ -116,22 +62,7 @@ req.user.getCart().then(cart =>{
    console.log(err);
  })
 
-// sith Sequalizer
-/**
- req.user.getCart().then(cart =>{
- // console.log(cart);
- return cart.getProducts().then(product =>{
- res.render('shop/cart', {
-     path: '/cart',
-     pageTitle : 'Cart', 
-     prods : product ,
-     })
- }).catch(err=>console.log(err))
- }).catch(err=>{
-   console.log(err);
- })
- 
- */
+
 
   //   Cart.getCart().then((products)=>{
 
