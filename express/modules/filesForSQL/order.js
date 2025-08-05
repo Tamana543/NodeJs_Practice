@@ -1,6 +1,6 @@
 const Sequalizer = require('sequelize');
 
-const sequalize = require('../util/database')
+const sequalize = require('../../util/database')
 
 const Order = sequalize.define('order',{
      id : {

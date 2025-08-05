@@ -1,0 +1,1 @@
+Use this folder if you want to work with sequalizer, put the codes in place, delete this note and take the files out of the folder. 
