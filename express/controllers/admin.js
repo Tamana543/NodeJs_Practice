@@ -15,10 +15,7 @@ exports.getAddProduct = (req,res,next)=>{
           product : Product
           
      })
-          // res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title" placeholder="Enter product title" /><button type="submit">Add Product</button></form>')
-          // res.sendFile(path.join(__dirname,'../','Views','add-product.html'))// there is a probem with it, it do not work for Linux or ther Os , as they start with \ not / so
-          // res.sendFile(path.join(rootDir,'Views','add-product.html')) // Use the rootDir utility to get the correct path to the Views directory
-          // next()
+      
 }
 
 exports.postAddProduct = (req,res)=>{
@@ -26,8 +23,7 @@ exports.postAddProduct = (req,res)=>{
      const price  =req.body.price ;
      const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
-     // updating product by using sequalizer (User)
-     // console.log(req.user);
+    
 
 
      // using MangoDb
@@ -38,53 +34,10 @@ exports.postAddProduct = (req,res)=>{
          res.redirect('/admin/products')})
          .catch(err=> console.log(err)) 
 
-     // req.user.createProduct({
-     //      title: title,
-     //     price: price,
-     //     imageURL: imageUrl,
-     //     description: description }
-     // ).then((result)=>{
-     //      res.redirect('/admin/products')
-     // }).catch(err=>console.log("THen HEREEE",err))
-     // updating product by using sequalizer 
-     //   Product.create({
-     //     title: title,
-     //     price: price,
-     //     imageURL: imageUrl,
-     //     description: description,
-     //     userId:req.user.id
-     //   })
-     //     .then(result => {
-     //       // console.log(result)
-     //     res.redirect('/admin/products')
-     //     })
-     //     .catch(err => {
-     //       console.log(err);
-     //     });
-
-     
-     // updating data table by using sql :
-     // const product = new Product(null,title,imageUrl,price,description);
-     // product.save().then(()=>{
-     //      res.redirect('/') // Redirect the user to the  / route after processing the form submission
-     // }).catch(err=>{
-     //      console.log(err);
-     // })
-     
+    
 }
 exports.showAdminProducts = (req,res)=>{
-     // using SQL (and from file)
-     // Product.fetchAll().then(([row,fileContent])=>{
-
-     //      // console.log(products);
-     //      res.render('admin/products',{
-     //           prods : row ,
-     //           pageTitle : 'Admin Add products',
-     //           path: '/admin/products',
-               
-     //           })
-  
-     // }).catch(err=> console.log(err))
+   
 
      //using Mangodb
      Product.fetchALL().then(product=>{
@@ -97,19 +50,7 @@ exports.showAdminProducts = (req,res)=>{
      }).catch(err=>console.log(err))
 }
 
-//      Product.findAll().then(products =>{
-//           res.render('admin/products',{
-//                prods : products,
-//                pageTitle : 'Admin Add products',
-//                path: '/admin/products',
-               
-//                })
-  
-//      }).catch(err=>{
-//           console.log(err);
-//      })
-    
-// }
+
 
 exports.getEditProduct = (req,res,next)=>{
      const editMode = req.query.edit;
@@ -119,10 +60,7 @@ exports.getEditProduct = (req,res,next)=>{
      // console.log("Received product ID:", req.params.productID);
      // console.log("Edit mode:", req.query.edit);
      const ProductId = req.params.productID;
-     // console.log(ProductId);
-     // req.user.createProduct({where : {id :ProductId}}) 
-     // with sql : 
-//     req.user.getProducts({where : {id : ProductId}})
+  
 // for mongodb
    Product.findById(ProductId).then(product => {
           
@@ -137,23 +75,7 @@ exports.getEditProduct = (req,res,next)=>{
            });
          })
          .catch(err => console.log("hereeee",err));
-//     Product.findAll({where: {id : ProductId}}).then(product => {
-//            if (!product) {
-//              return res.redirect('/');
-//            }
-//            try {
-               
-//                 res.render('admin/edit-product', {
-//                   pageTitle: 'Edit Product',
-//                   path: '/admin/edit-products',
-//                   editing: editMode,
-//                   product: product
-//                 });
-//            } catch (err) {
-//                console.log("Look Here ", err);
-//            }
-//          })
-//          .catch(err => console.log(err));
+
 }
 
 exports.postEditedProduct = (req,res,next)=>{
@@ -162,9 +84,7 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedImageUrl = req.body.imageUrl;
      const updatedPrice = req.body.price;
      const updatedDescription = req.body.description;
-     //with sequalizer 
-
-     // req.user.getProducts({where: {id:prodID}}) for sql 
+    
      // for mongo db
      const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, prodID)
      
@@ -173,22 +93,6 @@ exports.postEditedProduct = (req,res,next)=>{
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))
 
-
-//      product.save(prodID).then((product)=>{
-//           product.title = updateeTitle,
-//           product.price = updatedPrice,
-//           product.description = updatedDescription,
-//           product.imageURL = updatedImageUrl 
-//           return product.save()
-
-// }).then(
-
-//           res.redirect('/admin/products')
-
-//      ).catch(err=> console.log(err))
-//with SQL
-     // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
-     // updatedProduct.save() 
 
 
 }
@@ -207,14 +111,5 @@ exports.postDeleteProduct = (req,res,next)=>{
           }).catch(err=>console.log(err))
 
 
-     //using sequalizer
-     // Product.findByPk(prodId).then(product=>{
-     //      product.destroy()
-     // }).then(()=>{
-     //            console.log("Done")
-     //       res.redirect('/admin/products')
 
-     // }).catch(err => console.log(err))
- // using sql 
-     // Product.deleteById(prodId)
 }
