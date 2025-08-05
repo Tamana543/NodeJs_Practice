@@ -99,49 +99,8 @@ return req.user.addToCart(product)
   }
 ).catch(err=>console.log(err))
 
-  // with sequlizer
-  /**
-   
-  let fetchCart ; 
-  let newQuantity = 1
-  req.user.getCart().then(cart=>{
-    fetchCart = cart
-    // console.log(id,productId);
-return cart.getProducts({where: {id : productId}})
-  }).then(products=>{
-    let product;
-    if(products.length > 0){
+ 
 
-      product = products[0]
-    }
-
-    if(product){
-// increasing quantity here
-      const oldQuantity= product.cartItem.quantity ;
-      newQuantity = oldQuantity + 1
-      return product;
-
-    }
-      return Product.findByPk(productId);
-  }).then(product=>{
-     return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
-  }).then(()=>{
-    res.redirect('/cart')
-  }).catch(err=>{
-    console.log(err);
-  })
-   */
-
-  //with SQL 
-  // try {
-    
-  //     Product.findById(productId).then((product)=>{
-  //        Cart.addProduct(productId, product.price)
-  //     }).catch(err =>{console.log(err)})
-  // } catch (error) {
-  //     console.log(error);
-  // }
-  //   res.redirect('/cart');  
 }
 
 exports.postDelCardView = (req,res)=>{
@@ -153,29 +112,6 @@ req.user.deleteCartItem(productId).then(cart=>{
    res.redirect('/cart')
 }).catch(err=>console.log(err))
 
-    // By sequalier 
-    /**
-     req.user.getCart().then(cart=>{
-       return cart.getProducts({where : {id : productId}})
-     }).then(products=>{
-       const product = products[0]
-       // console.log(product);
-       return product.cartItem.destroy()
-     }).then(()=>{
-       res.redirect('/cart')
-     }).catch(err => console.log(err))
-     
-     */
-    
-     // By SQL
-     /**
-      // Product.findById(productId,product=>{
-      //     Cart.deleteProd(productId,product.price)
-      //     res.redirect('/cart')
-      // })
-      // console.log(productId);
-      
-      */
 }
 
 exports.postOrderShop = (req,res,next)=>{
