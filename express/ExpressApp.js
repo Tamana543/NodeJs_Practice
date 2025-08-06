@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
+const mongoose = require('mongoose')
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 // const expressHbs = require('express-handlebars');
 const errorController = require('./controllers/404')
@@ -97,6 +98,8 @@ const { FORCE } = require('sequelize/lib/index-hints')
 */
 
 // MANGO DB
-mangoCreateDb(()=>{
-     app.listen(5430)
-})
+// mangoCreateDb(()=>{
+//      app.listen(5430)
+// })
+// with mongoose 
+mongoose.connect('mongodb+srv://Tamana_Farzami:MangoAppDataTamana@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{}).catch(err=>console.log(err))
