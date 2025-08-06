@@ -102,4 +102,6 @@ const { FORCE } = require('sequelize/lib/index-hints')
 //      app.listen(5430)
 // })
 // with mongoose 
-mongoose.connect('mongodb+srv://Tamana_Farzami:MangoAppDataTamana@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{}).catch(err=>console.log(err))
+mongoose.connect('mongodb+srv://Tamana_Farzami:MangoAppDataTamana@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{
+     app.listen(5430)
+}).catch(err=>console.log(err))
