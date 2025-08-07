@@ -50,52 +50,6 @@ app.use(shopRoutes)
 app.use(errorController.get404)
 // const server = http.createServer(app)// Create an HTTP server using the Express application
 // server.listen(5430) or
-//Sequalizer
-/** 
- const sequalizer = require('./util/database')
-const Product = require('./modules/product')
-const User = require('./modules/user')
-const Cart = require('./modules/cart')
-const cartItems = require('./modules/cartItem')
-const Order = require('./modules/order') ;
-const orderItems = require('./modules/orderItem') ;
-const OrderItem = require('./modules/orderItem')
-const { FORCE } = require('sequelize/lib/index-hints')
-// lets work with sequalizer and let it to run  the server 
-     // Association ( search in sequalizer Doc)
-     // I will keep the user s the connector between all moculews and tables: as the user is the one with many products one card and even order so 
-     Product.belongsTo(User,{constraints : true, onDelete: 'CASCADE'})// onDelete CASCADE means if I deleted the user delete its products too
-     User.hasMany(Product)
-     User.hasOne(Cart)
-     Cart.belongsTo(User)
-     User.hasOne(cartItems)
-     Cart.belongsToMany(Product , {through : cartItems})
-     Product.belongsToMany(Cart , {through : cartItems})
-     Order.belongsTo(User)
-     User.hasMany(Order)
-     Order.belongsToMany(Product,{through : OrderItem})
-
-
-     sequalizer.sync({FORCE : true}).then(result=>{
-          // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)
-          return User.findByPk(1)
-          // console.log(result);
-     }).then(user=>{
-          if(!user){
-               return User.create({name : 'Tamana',email : 'tamana.farzami33@gmail.com'})
-          }
-          return user;
-     }).then((user)=>{
-          
-          return user.createCart();
-          // console.log(user);
-     
-     }).then(user=>{
-     app.listen(5430)
-     }).catch(err=>{
-          console.log(err);
-     })
-*/
 
 // MANGO DB
 // mangoCreateDb(()=>{
