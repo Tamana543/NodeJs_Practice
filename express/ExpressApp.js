@@ -58,6 +58,7 @@ app.use(errorController.get404)
 //
 //Gt6yKZ,%x_PG*Vs
 // with mongoose 
-mongoose.connect('mongodb+srv://Tamana_Farzami:7DQjC4MXLCFexnCw@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{
+mongoose.connect('mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+.then(result=>{
      app.listen(5430)
 }).catch(err=>console.log(err))

@@ -27,9 +27,9 @@ exports.postAddProduct = (req,res)=>{
 
 
      // using MangoDb
-     const productData = new Product(title, imageUrl, price, description, null , req.user._id)
+     const productData = new Product({title : title,price:price, description:description,imageUrl : imageUrl})
 
-     productData.save().then(result => {
+     productData.save().then(result => {// remember while using mangoose you do not need to add the save methood on your product module, mangoos contain it itself 
           //  console.log(result)
          res.redirect('/admin/products')})
          .catch(err=> console.log(err)) 

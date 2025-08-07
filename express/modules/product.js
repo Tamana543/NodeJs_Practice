@@ -23,7 +23,7 @@ const schemaFirstProduct =new Scheme({
 
 }) ;
 
-
+module.exports = mongoose.model('Product',schemaFirstProduct)
 // with mangoDb
 /**
  
