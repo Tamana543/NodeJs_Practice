@@ -55,7 +55,9 @@ app.use(errorController.get404)
 // mangoCreateDb(()=>{
 //      app.listen(5430)
 // })
+//
+//Gt6yKZ,%x_PG*Vs
 // with mongoose 
-mongoose.connect('mongodb+srv://Tamana_Farzami:MangoAppDataTamana@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{
+mongoose.connect('mongodb+srv://Tamana_Farzami:7DQjC4MXLCFexnCw@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(result=>{
      app.listen(5430)
 }).catch(err=>console.log(err))

@@ -1,10 +1,37 @@
+// with mangoose 
+const mongoose = require('mongoose');
+const Scheme = mongoose.Schema;
+
+const schemaFirstProduct =new Scheme({
+     title : {
+          type : String,
+          require:true
+     },
+     price :{
+          type : Number,
+          require :true
+     },
+     discription :{
+          type : String,
+          require : true
+     },
+     imageUrl : {
+          type : String,
+          require : true
+     },
+
+
+}) ;
+
+
+// with mangoDb
+/**
+ 
 // const Cart = require('./cart')
 const db =require('../util/database')
 const mongoDb = require('mongodb')
 
 
-
-// with mangoDb
 const getDb = require('../util/database').getDb;
 class Product {
      constructor(title,imageUrl,price,description,id,userId){
@@ -64,6 +91,7 @@ class Product {
           }
      }
 }
- module.exports = Product
+module.exports = Product
+ **/     
 
 
