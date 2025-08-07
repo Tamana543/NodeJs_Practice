@@ -7,7 +7,10 @@ const Cart = require('../modules/filesForSQL/cart')
 exports.getProductsShop = (req,res)=>{
   // with sequalizer 
 
-  Product.fetchALL().then(products=>{
+  // Product.fetchALL() // with simple sequalizer 
+  // with mongoose : 
+  Product.find()
+  .then(products=>{
     res.render('shop/product-list',{
       prods : products,
       pageTitle : 'Products',
@@ -19,7 +22,9 @@ exports.getProductsShop = (req,res)=>{
 }
 exports.getShopPage = (req,res)=>{
 
-Product.fetchALL().then(products=>{
+// Product.fetchALL() with vanila mongodb
+Product.find()// with mongoose 
+.then(products=>{
 res.render('shop/index',{
     prods : products ,
       pageTitle : 'All products',
