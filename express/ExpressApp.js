@@ -69,7 +69,7 @@ mongoose
 name:'Tamana',
 email : 'tamana.farzami33@gmail.com',
 cart : []
-               })
+})
 
 return user
 }

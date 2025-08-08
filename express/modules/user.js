@@ -13,7 +13,7 @@ email : {
      require:true
 },
 cart :{
-items : [{productId : {type : schema.Types.ObjectId, require : true}, quantity :{type : Number , require : true}}]
+items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,quantity :{type : Number , require : true}}]
 }
 })
 module.exports = mongoose.model('User',UserSchema)

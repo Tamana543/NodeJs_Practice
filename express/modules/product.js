@@ -19,7 +19,11 @@ const schemaFirstProduct =new Scheme({
           type : String,
           require : true
      },
-
+productId : {
+     type : Scheme.Types.ObjectId,
+     ref : 'User',
+     require : true
+}
 
 }) ;
 
