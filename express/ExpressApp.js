@@ -8,7 +8,7 @@ const errorController = require('./controllers/404')
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
-// const User = require('./modules/user')
+const User = require('./modules/user')
 
 // Wiew enjine hundlers 
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
@@ -34,15 +34,15 @@ app.use(express.static(path.join(__dirname,'public')))// use thi line so that yo
 
 // sequalizer userTable middleware
 
-// app.use((req,res,next) =>{
-// User.findById('688c973b2b5f08ec4274da32').then(user=>{
-//      req.user = new User(user.name,user.email,user.cart,user._id);
+app.use((req,res,next) =>{
+User.findById('6895e8d67385b08058c6a1f4').then(user=>{
+     req.user = new User(user.name,user.email,user.cart,user._id);
      
-//      // console.log(user);
-//      next()
-// }).catch(err=>console.log(err))
+     // console.log(user);
+     next()
+}).catch(err=>console.log(err))
 
-// })
+})
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
@@ -63,6 +63,17 @@ mongoose
      'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 )
 .then(result=>{
+     User.findOne().then(user =>{
+          if(!user){
+               const user = new User({
+name:'Tamana',
+email : 'tamana.farzami33@gmail.com',
+cart : []
+               })
+
+return user
+}
+})
      app.listen(5430)
 })
 .catch(err=>console.log(err))
