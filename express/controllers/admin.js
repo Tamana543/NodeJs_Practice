@@ -24,23 +24,16 @@ exports.postAddProduct = (req,res)=>{
      const price  =req.body.price ;
      const imageUrl =req.body.imageUrl;
      const description  =req.body.description ;
-    
-
-
-     // using MangoDb
+    // using MangoDb
      const productData = new Product({title : title,price:price, description:description,imageUrl : imageUrl})
 
      productData.save().then(result => {// remember while using mangoose you do not need to add the save methood on your product module, mangoos contain it itself 
           //  console.log(result)
          res.redirect('/admin/products')})
          .catch(err=> console.log(err)) 
-
-    
 }
 exports.showAdminProducts = (req,res)=>{
-   
-
-     //using Mangodb
+   //using Mangodb
      // Product.fetchALL()
      // using mongoose 
      product.find()
@@ -66,7 +59,7 @@ exports.getEditProduct = (req,res,next)=>{
      const ProductId = req.params.productID;
   
 // for mongodb && mongoose
-   Product.findById(ProductId).then(product => {
+Product.findById(ProductId).then(product => {
           
            if (!product) {
              return res.redirect('/');
@@ -102,24 +95,29 @@ exports.postEditedProduct = (req,res,next)=>{
           console.log("Product Updated");
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))
-
-
-
 }
 
 exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId.trim();
-     // using mangodb : 
 
+     // using m0ongoose 
+     product.findById(prodId).then(product=>{
+    return  product.deleteOne()
 
-       Product.deleteProd(prodId).then(()=>{
+     }).then(()=>{
           // console.log(product);
           console.log("Deleted");
             res.redirect('/admin/products')
 
           }).catch(err=>console.log(err))
+     // using mangodb : 
 
 
+     //   Product.deleteProd(prodId).then(()=>{
+     //      // console.log(product);
+     //      console.log("Deleted");
+     //        res.redirect('/admin/products')
 
+     //      }).catch(err=>console.log(err))
 }
