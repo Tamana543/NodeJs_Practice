@@ -1,6 +1,7 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
+const product = require('../modules/product')
 
 
 
@@ -40,7 +41,10 @@ exports.showAdminProducts = (req,res)=>{
    
 
      //using Mangodb
-     Product.fetchALL().then(product=>{
+     // Product.fetchALL()
+     // using mongoose 
+     product.find()
+     .then(product=>{
            res.render('admin/products',{
                prods : product ,
                pageTitle : 'Admin products',
@@ -61,7 +65,7 @@ exports.getEditProduct = (req,res,next)=>{
      // console.log("Edit mode:", req.query.edit);
      const ProductId = req.params.productID;
   
-// for mongodb
+// for mongodb && mongoose
    Product.findById(ProductId).then(product => {
           
            if (!product) {
