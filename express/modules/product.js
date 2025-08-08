@@ -11,7 +11,7 @@ const schemaFirstProduct =new Scheme({
           type : Number,
           require :true
      },
-     discription :{
+     description :{
           type : String,
           require : true
      },

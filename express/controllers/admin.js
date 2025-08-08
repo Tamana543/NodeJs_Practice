@@ -90,9 +90,15 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedDescription = req.body.description;
     
      // for mongo db
-     const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, prodID)
-     
-     productUpDet.save().then(result=>{
+     // const productUpDet = new Product(updateeTitle,updatedImageUrl,updatedPrice,updatedDescription, prodID)
+     // with mongoose 
+     product.findById(prodID).then(product=>{
+     product.title = updateeTitle;
+     product.imageUrl = updatedImageUrl;
+     product.price = updatedPrice;
+     product.description = updatedDescription
+    return product.save()
+     }).then(result=>{
           console.log("Product Updated");
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))
