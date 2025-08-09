@@ -54,8 +54,23 @@ exports.getProductBId = (req,res,next)=>{
 }
 exports.getCartShop = (req,res)=>{
 // console.log(req.user.getCart());
+// by Mongoose
+req.user.populate('cart.items.productId').then(user =>{
+//  console.log(cart);
+const carts = user.cart.items;
+ res.render('shop/cart', {
+     path: '/cart',
+     pageTitle : 'Cart', 
+     prods : carts ,
+     })
+
+ }).catch(err=>{
+   console.log(err);
+ })
 
 // by using MongoDB
+/**
+ 
 req.user.getCart().then(cart =>{
  console.log(cart);
 
@@ -68,6 +83,7 @@ req.user.getCart().then(cart =>{
  }).catch(err=>{
    console.log(err);
  })
+ */
 
 
 
