@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname,'public')))// use thi line so that yo
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{
-User.findById('6895e8d67385b08058c6a1f4').then(user=>{
+User.findById('68973df898beb0212720833f').then(user=>{
      req.user =user
      
      
@@ -72,7 +72,7 @@ email : 'tamana.farzami33@gmail.com',
 cart : []
 })
 
-return user
+return user.save()
 }
 })
      app.listen(5430)
