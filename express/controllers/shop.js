@@ -96,17 +96,22 @@ exports.postCartShop = (req,res,next)=>{
   // console.log('req Budy ', req.body);
   const productId = req.body.productId;
 
-// with NoSQL
-Product.findById(productId).then((product)=>{
-return req.user.addToCart(product)
-}).then(
-  (result)=>{
-    console.log(result)
-   res.redirect('/cart')
-  }
-).catch(err=>console.log(err))
-
- 
+try {
+  
+  Product.findById(productId).then((product)=>{
+    console.log(req.user);
+  return req.user.addToCart(product)
+  }).then(
+    (result)=>{
+      console.log(result)
+     res.redirect('/cart')
+    }
+  ).catch(err=>console.log(err))
+  
+  
+} catch (error) {
+console.log(error);
+}
 
 }
 

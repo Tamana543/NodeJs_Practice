@@ -16,10 +16,10 @@ cart :{
 items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,quantity :{type : Number , require : true}}]
 }
 })
-UserSchema.methods.addToCart = function(){
+UserSchema.methods.addToCart = function(product){
 
           const cartProductIndex = this.cart.items.findIndex(cp =>{
-               return cp.productID.toString() === product._id.toString()
+               return cp.productId.toString() === product._id.toString()
           })
           
           let newQuantity = 1; 
@@ -30,14 +30,16 @@ UserSchema.methods.addToCart = function(){
           updatedCartItem[cartProductIndex].quantity = newQuantity
 
           }else {
-          updatedCartItem.push({productID : new objectId(product._id),quantity : newQuantity})
+          updatedCartItem.push(
+               {productId : product._id,
+               quantity : newQuantity})
           }
                     
-               const updatedCart = {items : updatedCartItem}   
-               const db = getDb()
-          return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {
-               cart:updatedCart
-          }})
+          const updatedCart = {items : updatedCartItem} 
+               // console.log("here",updatedCart);  
+          this.cart = updatedCart
+          console.log(this.cart);
+          return  this.save()
      }
 
 module.exports = mongoose.model('User',UserSchema)
