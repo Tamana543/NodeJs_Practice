@@ -10,6 +10,8 @@ exports.getProductsShop = (req,res)=>{
   // Product.fetchALL() // with simple sequalizer 
   // with mongoose : 
   Product.find()
+  // .select('price title')// populate method wil give you exactly the whole user obj without it you have access only on name and some information (name) .
+  // .populate('user','name') 
   .then(products=>{
     res.render('shop/product-list',{
       prods : products,
