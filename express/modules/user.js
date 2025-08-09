@@ -16,6 +16,30 @@ cart :{
 items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,quantity :{type : Number , require : true}}]
 }
 })
+UserSchema.methods.addToCart = function(){
+
+          const cartProductIndex = this.cart.items.findIndex(cp =>{
+               return cp.productID.toString() === product._id.toString()
+          })
+          
+          let newQuantity = 1; 
+          const updatedCartItem = [...this.cart.items]
+
+          if(cartProductIndex >= 0 ){
+          newQuantity = this.cart.items[cartProductIndex].quantity + 1 ;
+          updatedCartItem[cartProductIndex].quantity = newQuantity
+
+          }else {
+          updatedCartItem.push({productID : new objectId(product._id),quantity : newQuantity})
+          }
+                    
+               const updatedCart = {items : updatedCartItem}   
+               const db = getDb()
+          return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {
+               cart:updatedCart
+          }})
+     }
+
 module.exports = mongoose.model('User',UserSchema)
 //with mongoDB
 /**
