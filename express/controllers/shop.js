@@ -1,6 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
-const Cart = require('../modules/filesForSQL/cart')
+const Order = require('../modules/order')
+const product = require('../modules/product')
 
 
 
@@ -144,12 +145,32 @@ req.user.deleteCartItem(productId).then(cart=>{
 }
 
 exports.postOrderShop = (req,res,next)=>{
-// with Mongodb
-req.user.addOrder().then((result)=>{
+req.user.populate('cart.items.productId').then(user =>{
+//  console.log(cart);
+const product = user.cart.items.map(i =>{
+  return {quantity : i.quantity, product : i.productId}
+});
+const order = new Order({
+user : {
+    name : req.user.name,
+    userId : req.user
+},
+products : product
+ 
+});   
+return order.save
+ }).then((result)=>{
 
   res.redirect('shop/order')
 }).catch(err=>console.log(err))
- let fetchedCart;
+
+// with mongoose 
+// with Mongodb
+// req.user.addOrder().then((result)=>{
+
+//   res.redirect('shop/order')
+// }).catch(err=>console.log(err))
+
  
 }
 

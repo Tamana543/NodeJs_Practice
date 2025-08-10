@@ -4,26 +4,26 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
 products:[{
- product : {
-type : Object,
-     require : true
- } 
- ,
- quantity : {
-     type : NUMBER,
-     require:true
- }  
+     product : {
+          type : Object,
+          require : true
+     } 
+     ,
+     quantity : {
+          type : Number,
+          require:true
+     }  
 }],
 user :{
-name : {
-     type : String,
-     require : true
-},
-userId :{
-     type : Schema.Types.ObjectId,
-     require :true,
-     ref : 'User'
-}
+     name : {
+          type : String,
+          require : true
+     },
+     userId :{
+          type : Schema.Types.ObjectId,
+          require :true,
+          ref : 'User'
+     }
 }
 })
 module.exports = mongoose.model('Order',OrderSchema)
