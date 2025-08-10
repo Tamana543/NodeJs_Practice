@@ -134,6 +134,7 @@ console.log(error);
 exports.postDelCardView = (req,res)=>{
     const productId = req.body.productId.trim();
     // console.log("Here",req.user);
+    
 //By mongoDb
 req.user.deleteCartItem(productId).then(cart=>{
   // return cart.findById()
