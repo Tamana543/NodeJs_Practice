@@ -1,7 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Order = require('../modules/order')
-const product = require('../modules/product')
+
 
 
 
@@ -145,7 +145,8 @@ req.user.deleteCartItem(productId).then(cart=>{
 }
 
 exports.postOrderShop = (req,res,next)=>{
-req.user.populate('cart.items.productId').then(user =>{
+  console.log("Iam working")
+req.user.populate('cart.items.productId').execPopulate().then(user =>{
 //  console.log(cart);
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : i.productId}
@@ -157,7 +158,8 @@ user : {
 },
 products : product
  
-});   
+}); 
+console.log(order);  
 return order.save
  }).then((result)=>{
 
