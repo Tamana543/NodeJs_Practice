@@ -1,3 +1,14 @@
+const mongoose = require('mongoose');
+const { INTEGER } = require('sequelize');
+const Schema = mongoose.Schema;
+
+const OrderSchema = new Schema({
+id:{
+     type : INTEGER,
+     require : true
+}
+})
+module.exports = mongoose.model('Order',OrderSchema)
 // const Sequalizer = require('sequelize');
 
 // const sequalize = require('../util/database')
