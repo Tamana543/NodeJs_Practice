@@ -1,6 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Order = require('../modules/order')
+const order = require('../modules/order')
 
 
 
@@ -178,15 +179,23 @@ return req.user.clearCart()
 
 
 exports.getOrderShop = (req,res)=>{
+// with mongoose 
+Order.find({'user.userId': req.user._id}).then(result=>{
+  res.render('shop/order',{
+    pageTitle : "Ordered Page",
+      path : '/order',
+    order: result
+  })
+}).catch(err=>console.log(err))
 // with Mongodb
 
-req.user.find().then(result=>{
-  res.render('shop/order',{
-    pageTitle : 'Ordered Page',
-    path : '/order',
-    order : result
-  })
-})
+// req.user.getOrder().then(result=>{
+//   res.render('shop/order',{
+//     pageTitle : 'Ordered Page',
+//     path : '/order',
+//     order : result
+//   })
+// })
 
 }
 
