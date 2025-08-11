@@ -181,6 +181,7 @@ return req.user.clearCart()
 exports.getOrderShop = (req,res)=>{
 // with mongoose 
 Order.find({'user.userId': req.user._id}).then(result=>{
+
   res.render('shop/order',{
     pageTitle : "Ordered Page",
       path : '/order',
