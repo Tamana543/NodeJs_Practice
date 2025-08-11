@@ -149,7 +149,7 @@ exports.postOrderShop = (req,res,next)=>{
 req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const product = user.cart.items.map(i =>{
-  return {quantity : i.quantity, product : i.productId}
+  return {quantity : i.quantity, product : {...i.productId._doc}}
 });
 const order = new Order({
 user : {
@@ -162,9 +162,9 @@ products : product
 console.log(order);  
 return order.save()
  }).then((result)=>{
-console.log(result);
-  res.redirect('shop/order')
-}).catch(err=>console.log(err))
+return req.user.clearCart()
+ 
+}).then(()=> res.redirect('/order')).catch(err=>console.log(err))
 
 // with mongoose 
 // with Mongodb
@@ -180,7 +180,7 @@ console.log(result);
 exports.getOrderShop = (req,res)=>{
 // with Mongodb
 
-req.user.getOrder().then(result=>{
+req.user.find().then(result=>{
   res.render('shop/order',{
     pageTitle : 'Ordered Page',
     path : '/order',
