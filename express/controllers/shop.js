@@ -146,7 +146,7 @@ req.user.deleteCartItem(productId).then(cart=>{
 
 exports.postOrderShop = (req,res,next)=>{
   console.log("Iam working")
-req.user.populate('cart.items.productId').execPopulate().then(user =>{
+req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : i.productId}
@@ -160,9 +160,9 @@ products : product
  
 }); 
 console.log(order);  
-return order.save
+return order.save()
  }).then((result)=>{
-
+console.log(result);
   res.redirect('shop/order')
 }).catch(err=>console.log(err))
 

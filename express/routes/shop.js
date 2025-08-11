@@ -19,7 +19,7 @@ router.post('/cart-delete-item', productController.postDelCardView)
 
 router.get('/order',productController.getOrderShop)
 
-// router.post('/order_items',productController.postOrderShop)
+router.post('/order_items',productController.postOrderShop)
 
 
 
