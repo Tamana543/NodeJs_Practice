@@ -71,28 +71,6 @@ const carts = user.cart.items;
  })
 
 
-
-
-
-  //   Cart.getCart().then((products)=>{
-
-  //     const cartProducts = []
-  //     for (prod of products){
-  //       const productExist = products.find(p => p.id === prod.id)
-  //         if(productExist) {
-  //          try {
-  //            cartProducts.push({productData : prod , qty : productExist.qty})
-  //          } catch (error) {
-  //            console.log("Hereeeee",error);
-  //         }
-  //         }
-  //     }
-  // res.render('shop/cart', {
-  //   path: '/cart',
-  //   pageTitle : 'Cart', 
-  //   prods : cartProducts ,
-  //   })
-  // }).catch(err => console.log(err)) 
 }
     
 exports.postCartShop = (req,res,next)=>{
