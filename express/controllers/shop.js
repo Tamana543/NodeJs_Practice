@@ -70,22 +70,7 @@ const carts = user.cart.items;
    console.log(err);
  })
 
-// by using MongoDB
-/**
- 
-req.user.getCart().then(cart =>{
- console.log(cart);
 
- res.render('shop/cart', {
-     path: '/cart',
-     pageTitle : 'Cart', 
-     prods : cart ,
-     })
-
- }).catch(err=>{
-   console.log(err);
- })
- */
 
 
 
