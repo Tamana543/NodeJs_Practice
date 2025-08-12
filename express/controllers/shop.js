@@ -130,12 +130,14 @@ return req.user.clearCart()
  
 }).then(()=> res.redirect('/order')).catch(err=>console.log(err))
 
-// with mongoose 
 // with Mongodb
-// req.user.addOrder().then((result)=>{
+/**
 
-//   res.redirect('shop/order')
-// }).catch(err=>console.log(err))
+  // req.user.addOrder().then((result)=>{
+
+  //   res.redirect('shop/order')
+  // }).catch(err=>console.log(err))
+ */
 
  
 }
@@ -152,14 +154,16 @@ Order.find({'user.userId': req.user._id}).then(result=>{
   })
 }).catch(err=>console.log(err))
 // with Mongodb
-
-// req.user.getOrder().then(result=>{
-//   res.render('shop/order',{
-//     pageTitle : 'Ordered Page',
-//     path : '/order',
-//     order : result
-//   })
-// })
+/**
+ 
+  // req.user.getOrder().then(result=>{
+  //   res.render('shop/order',{
+  //     pageTitle : 'Ordered Page',
+  //     path : '/order',
+  //     order : result
+  //   })
+  // })
+ */
 
 }
 
