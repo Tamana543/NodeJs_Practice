@@ -46,9 +46,9 @@ User.findById('68973df898beb0212720833f').then(user=>{
 
 })
 app.use('/admin',adminRoutes)
-app.use('/login',authRoutes)
 
 app.use(shopRoutes)
+app.use(authRoutes)
 
 app.use(errorController.get404)
 // const server = http.createServer(app)// Create an HTTP server using the Express application
