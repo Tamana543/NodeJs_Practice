@@ -1,0 +1,55 @@
+
+form {
+     display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5%;
+  gap: 10px;
+  
+}
+label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 3%;
+  width: 50%;
+}
+#Name,
+#lastName,
+#password {
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #df29f0;
+}
+.submit {
+  margin-top: 10%;
+}
+
+.log_in {
+  background: none;
+  /* border: 1px solid #df29f0; */
+  box-shadow: inset 0px 0px 0px 1px #df29f0;
+
+  color: #000;
+}
+.window {
+     display: block;
+     margin: 5% auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 39%;
+  height: 22rem;
+  position: relative;
+}
+button {
+  padding: 10px 20px;
+  background-color: #d468d4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #df29f04f;
+  color: #000;
+}
