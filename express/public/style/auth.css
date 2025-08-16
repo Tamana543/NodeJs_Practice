@@ -1,9 +1,13 @@
-
+.flex {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
 form {
      display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5%;
+     padding: 15% 5%;
   gap: 10px;
   
 }
