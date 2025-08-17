@@ -7,3 +7,7 @@ res.render('auth/login',{
 
 
 }
+exports.postLogin = (req,res)=>{
+res.redirect('/')
+}
+
