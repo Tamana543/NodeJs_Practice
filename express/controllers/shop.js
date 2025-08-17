@@ -19,6 +19,7 @@ exports.getProductsShop = (req,res)=>{
       prods : products,
       pageTitle : 'Products',
         path: '/products',
+        isAuthCorect : false
     })
   }).catch(err=>console.log(err))
 
@@ -35,7 +36,8 @@ res.render('shop/index',{
      path: '/',
      prodsExist : products.length > 0,
       activeShop: true,
-     productCss : true
+     productCss : true,
+        isAuthCorect : false
      })
 }).catch(err=>console.log(err))
 
@@ -50,7 +52,8 @@ exports.getProductBId = (req,res,next)=>{
             res.render('shop/product_detail',{
               product : product,
                 pageTitle : product.title,
-                path: '/products'
+                path: '/products',
+        isAuthCorect : false
             })
           }).catch(err=>console.log(err))
 }
@@ -64,6 +67,7 @@ const carts = user.cart.items;
      path: '/cart',
      pageTitle : 'Cart', 
      prods : carts ,
+        isAuthCorect : false
      })
 
  }).catch(err=>{
@@ -150,7 +154,8 @@ Order.find({'user.userId': req.user._id}).then(result=>{
   res.render('shop/order',{
     pageTitle : "Ordered Page",
       path : '/order',
-    order: result
+    order: result,
+        isAuthCorect : false
   })
 }).catch(err=>console.log(err))
 // with Mongodb

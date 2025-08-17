@@ -13,7 +13,8 @@ exports.getAddProduct = (req,res,next)=>{
           path:'/admin/add-product',
           addProductPage:true,
           editing : "False",
-          product : Product
+          product : Product,
+          isAuthCorect : false
           
      })
       
@@ -42,7 +43,7 @@ exports.showAdminProducts = (req,res)=>{
                prods : product ,
                pageTitle : 'Admin products',
                path: '/admin/products',
-               
+               isAuthCorect : false
                })
      }).catch(err=>console.log(err))
 }
@@ -68,7 +69,8 @@ Product.findById(ProductId).then(product => {
              pageTitle: 'Edit Product',
              path: '/admin/edit-product',
              editing: editMode,
-             product: product
+             product: product,
+             isAuthCorect : false
            });
          })
          .catch(err => console.log("hereeee",err));
