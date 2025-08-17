@@ -5,6 +5,6 @@ exports.get404 = (req,res)=>{
           {pageTitle : 'Page Not Found',
            path : ''
           ,
-          isAuthCorect : false},
+            isAuthCorrect : req.isLoggedIn},
            )
 }
