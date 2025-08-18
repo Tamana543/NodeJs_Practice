@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 const expressHbs = require('express-handlebars');
 const errorController = require('./controllers/404')
+const session = require('express-session')
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
@@ -47,6 +48,14 @@ User.findById('68973df898beb0212720833f').then(user=>{
 })
 app.use('/admin',adminRoutes)
 
+app.use(session({
+     'secret':'Tamana Loves Cats and JS',
+     resave : false,
+     saveUninitialized : false,
+     cookie : {
+
+     }
+}))
 app.use(shopRoutes)
 app.use(authRoutes)
 
