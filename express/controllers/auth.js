@@ -14,7 +14,7 @@ res.render('auth/login',{
 }
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
- res.setHeader('Set-Cookie',"isLoggedIn=true; secure")
+req.session.logedIn =true
 res.redirect('/')
 }
 
