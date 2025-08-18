@@ -6,6 +6,7 @@ const app = express() // Create an Express application (it is a function call as
 const expressHbs = require('express-handlebars');
 const errorController = require('./controllers/404')
 const session = require('express-session')
+const mongostoreSession = require('connect-mongodb-session')(session)
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
@@ -24,6 +25,8 @@ app.set('views',path.join(__dirname,'views'))// In this line we are looking for 
 
 const mangoCreateDb = require('./util/database').mangoCreateDb
 
+const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
 
 
 //Midlewares
@@ -33,6 +36,20 @@ app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware 
 
 //keep in mind that the order of the middleware is important, the first one will run first and then the next one, so if you want to run a middleware after another one, you have to put it after the first one
 app.use(express.static(path.join(__dirname,'public')))// use thi line so that you would e able to connect the public css to your file and the css will be availabel and the html file will have access to it 
+
+
+// session 
+const store = new mongostoreSession({
+     uri : MONGODB_URI,
+     collection : 'sessions'
+})
+app.use(session({
+     'secret':'Tamana Loves Cats and JS',
+     resave : false,
+     saveUninitialized : false,
+     store : store
+      
+}))
 
 // sequalizer userTable middleware
 
@@ -48,14 +65,6 @@ User.findById('68973df898beb0212720833f').then(user=>{
 })
 app.use('/admin',adminRoutes)
 
-app.use(session({
-     'secret':'Tamana Loves Cats and JS',
-     resave : false,
-     saveUninitialized : false,
-     cookie : {
-
-     }
-}))
 app.use(shopRoutes)
 app.use(authRoutes)
 
@@ -72,7 +81,7 @@ app.use(errorController.get404)
 // with mongoose 
 mongoose
 .connect(
-     'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    MONGODB_URI 
 )
 .then(result=>{
      User.findOne().then(user =>{
