@@ -1,3 +1,5 @@
+const user = require("../modules/user")
+
 exports.getLogin = (req,res)=>{
  
   // const isLoggedIn =req.get('Cookie').trim().split('=')[1]==='true' ;
@@ -14,8 +16,12 @@ res.render('auth/login',{
 }
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
-req.session.logedIn =true
-res.redirect('/')
+  user.findById('68973df898beb0212720833f').then((user)=>{
+
+    req.session.logedIn =true
+    res.session.user = user
+    res.redirect('/')
+  }).catch(err=>console.log(err))
 }
 exports.postLogout = (req,res)=>{
 req.session.destroy((err)=>{
