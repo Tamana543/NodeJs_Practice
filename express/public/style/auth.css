@@ -47,7 +47,10 @@ label {
 #logout_btn {
   padding:0% 1%;
 }
-button {
+ #logout_btn:hover {
+border-bottom: 1px solid white ;
+ }
+.submit {
   padding: 10px 20px;
   background-color: #d468d4;
   color: #fff;
@@ -56,7 +59,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.submit:hover {
   background-color: #df29f04f;
   color: #000;
 }

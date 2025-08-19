@@ -17,4 +17,12 @@ exports.postLogin = (req,res)=>{
 req.session.logedIn =true
 res.redirect('/')
 }
+exports.postLogout = (req,res)=>{
+req.session.destroy((err)=>{
+  console.log(err);
+  // to delete a session 
+  res.redirect('/')
+
+})
+}
 
