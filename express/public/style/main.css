@@ -59,14 +59,19 @@ width: 20%;
   padding: 0;
 }
 
-.main-header__item a {
+.main-header__item a{
   text-decoration: none;
   color: white;
+}
+#logout_btn {
+  background-color: #d468d4;
+  color: #f9f6fd;
 }
 
 .main-header__item a:hover,
 .main-header__item a:active,
-.main-header__item a.active {
+.main-header__item a.active,
+ #logout_btn:hover {
 border-bottom: 1px solid white ;
 }
 

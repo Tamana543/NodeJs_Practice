@@ -44,6 +44,9 @@ label {
   height: 22rem;
   position: relative;
 }
+#logout_btn {
+  padding:0% 1%;
+}
 button {
   padding: 10px 20px;
   background-color: #d468d4;
