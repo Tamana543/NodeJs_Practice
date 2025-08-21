@@ -2,11 +2,11 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const mongoose = require('mongoose')
-const app = express() // Create an Express application (it is a function call as the express module exports a function)
-const expressHbs = require('express-handlebars');
-const errorController = require('./controllers/404')
 const session = require('express-session')
+const app = express() // Create an Express application (it is a function call as the express module exports a function)
+
 const mongostoreSession = require('connect-mongodb-session')(session)
+const errorController = require('./controllers/404')
 
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
@@ -54,6 +54,9 @@ app.use(session({
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{
+     if (!req.session.user) {
+       return next();
+     }
 User.findById('68973df898beb0212720833f').then(user=>{
      req.user =user
      
@@ -62,7 +65,7 @@ User.findById('68973df898beb0212720833f').then(user=>{
      next()
 }).catch(err=>console.log(err))
 
-})
+});
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
@@ -89,10 +92,11 @@ mongoose
                const user = new User({
 name:'Tamana',
 email : 'tamana.farzami33@gmail.com',
-cart : []
+cart: {
+            items: []
+          }
 })
-
-return user.save()
+ user.save()
 }
 })
      app.listen(5430)
