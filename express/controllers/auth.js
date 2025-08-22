@@ -8,7 +8,7 @@ res.render('auth/login',{
     pageTitle : "Login Page",
       path : '/login',
         // isAuthCorrect : isLoggedIn
-        isAuthCorrect : req.session.logedIn
+        isAuthCorrect : false
    
   })
 
