@@ -8,7 +8,7 @@ res.render('auth/login',{
     pageTitle : "Login Page",
       path : '/login',
         // isAuthCorrect : isLoggedIn
-        isAuthCorrect : false
+        isAuthCorrect : req.session.logedIn
    
   })
 
@@ -22,7 +22,7 @@ console.log(req.session)
 
     req.session.logedIn =true
     
-    res.session.user = user
+    req.session.user = user
     res.redirect('/')
   }).catch(err=>console.log(err))
 }
