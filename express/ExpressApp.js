@@ -44,7 +44,7 @@ const store = new mongostoreSession({
      collection : 'sessions'
 })
 app.use(session({
-     'secret':'Tamana Loves Cats and JS',
+     secret:'Tamana Loves Cats and JS',
      resave : false,
      saveUninitialized : false,
      store : store
@@ -55,9 +55,13 @@ app.use(session({
 
 app.use((req,res,next) =>{
      if (!req.session.user) {
+          console.log("Meeeee");
        return next();
+       
      }
-User.findById('68973df898beb0212720833f').then(user=>{
+// User.findById('68973df898beb0212720833f')
+User.findById(req.session.user._id)
+.then(user=>{
      req.user =user
      
      

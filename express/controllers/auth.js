@@ -17,7 +17,8 @@ res.render('auth/login',{
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
 console.log(req.session)
-  user.findById('68973df898beb0212720833f').then((user)=>{
+  user.findById('68973df898beb0212720833f')
+  .then((user)=>{
 
     req.session.logedIn =true
     

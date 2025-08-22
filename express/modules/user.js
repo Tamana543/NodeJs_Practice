@@ -13,7 +13,8 @@ email : {
      require:true
 },
 cart :{
-items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,quantity :{type : Number , require : true}}]
+items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,
+     quantity :{type : Number , require : true}}]
 }
 })
 UserSchema.methods.addToCart = function(product){
@@ -38,7 +39,7 @@ UserSchema.methods.addToCart = function(product){
           const updatedCart = {items : updatedCartItem} 
                // console.log("here",updatedCart);  
           this.cart = updatedCart
-          console.log(this.cart);
+          // console.log(this.cart);
           return  this.save()
      }
 
