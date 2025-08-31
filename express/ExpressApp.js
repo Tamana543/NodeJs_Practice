@@ -47,11 +47,7 @@ const store = new mongostoreSession({
      uri : MONGODB_URI,
      collection : 'sessions'
 })
-app.use((req, res, next) => {
-     console.log('session.loggedIn:', req.session?.loggedIn);
-  res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)
-  next();
-});
+
 app.use(session({
      secret:'Tamana Loves Cats and JS',
      resave : false,
@@ -59,7 +55,11 @@ app.use(session({
      store : store
       
 }))
-
+app.use((req, res, next) => {
+     // console.log('session.loggedIn:', req.session?.loggedIn);
+  res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)
+  next();
+});
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{

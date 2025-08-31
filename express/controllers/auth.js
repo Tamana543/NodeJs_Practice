@@ -7,6 +7,7 @@ exports.getLogin = (req,res)=>{
 res.render('auth/login',{
     pageTitle : "Login Page",
       path : '/login',
+      // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         // isAuthCorrect : false
    
