@@ -7,8 +7,8 @@ exports.getLogin = (req,res)=>{
 res.render('auth/login',{
     pageTitle : "Login Page",
       path : '/login',
-        // isAuthCorrect : isLoggedIn
-        isAuthCorrect : false
+        // isAuthCorrect : logedIn
+        // isAuthCorrect : false
    
   })
 
@@ -20,10 +20,14 @@ console.log(req.session)
   user.findById('68973df898beb0212720833f')
   .then((user)=>{
 
-    req.session.logedIn =true
+    req.session.loggedIn =true
     
     req.session.user = user
-    res.redirect('/')
+    req.session.save((err)=>{
+      console.log(err);
+
+      res.redirect('/')
+    })
   }).catch(err=>console.log(err))
 }
 exports.postLogout = (req,res)=>{

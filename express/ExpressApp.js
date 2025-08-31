@@ -13,6 +13,10 @@ const shopRoutes = require('./routes/shop')
 const authRoutes = require('./routes/auth')
 const User = require('./modules/user')
 
+//database : Mongoo
+const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
+
 // Wiew enjine hundlers 
 app.set('view engine','ejs')// setting the default templating enginge to the handlebar file 
 
@@ -25,7 +29,7 @@ app.set('views',path.join(__dirname,'views'))// In this line we are looking for 
 
 const mangoCreateDb = require('./util/database').mangoCreateDb
 
-const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
 
 
 
@@ -43,6 +47,11 @@ const store = new mongostoreSession({
      uri : MONGODB_URI,
      collection : 'sessions'
 })
+app.use((req, res, next) => {
+     console.log('session.loggedIn:', req.session?.loggedIn);
+  res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)
+  next();
+});
 app.use(session({
      secret:'Tamana Loves Cats and JS',
      resave : false,
@@ -54,6 +63,7 @@ app.use(session({
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{
+console.log(req.session.user); 
      if (!req.session.user) {
           console.log("Meeeee");
        return next();
@@ -73,6 +83,7 @@ User.findById(req.session.user._id)
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)
+
 app.use(authRoutes)
 
 app.use(errorController.get404)
@@ -86,6 +97,7 @@ app.use(errorController.get404)
 //mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 //Gt6yKZ,%x_PG*Vs
 // with mongoose 
+
 mongoose
 .connect(
     MONGODB_URI 
