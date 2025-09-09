@@ -9,12 +9,20 @@ res.render('auth/login',{
       path : '/login',
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
-        // isAuthCorrect : false
+        isAuthCorrect : false
    
   })
 
 
 }
+
+exports.getSignup = (req, res, next) => {
+  res.render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Signup',
+    isAuthenticated: false
+  });
+};
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
 console.log(req.session)
@@ -31,12 +39,13 @@ console.log(req.session)
     })
   }).catch(err=>console.log(err))
 }
+exports.postSignup = (req, res, next) => {};
 exports.postLogout = (req,res)=>{
 req.session.destroy((err)=>{
   console.log(err);
   // to delete a session 
   res.redirect('/')
 
-})
+});
 }
 

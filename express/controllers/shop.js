@@ -1,7 +1,7 @@
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Order = require('../modules/order')
-const order = require('../modules/order')
+
 
 
 
@@ -19,8 +19,8 @@ exports.getProductsShop = (req,res)=>{
       prods : products,
       pageTitle : 'Products',
         path: '/products',
-          isAuthCorrect : req.isLoggedIn
-    })
+          isAuthCorrect : req.session.isLoggedIn
+    })  
   }).catch(err=>console.log(err))
 
 
@@ -37,7 +37,7 @@ res.render('shop/index',{
      prodsExist : products.length > 0,
       activeShop: true,
      productCss : true,
-         isAuthCorrect : req.isLoggedIn
+         isAuthCorrect : req.session.isLoggedIn
      })
 }).catch(err=>console.log(err))
 
@@ -53,21 +53,21 @@ exports.getProductBId = (req,res,next)=>{
               product : product,
                 pageTitle : product.title,
                 path: '/products',
-          isAuthCorrect : req.isLoggedIn
+          isAuthCorrect : req.session.isLoggedIn
             })
           }).catch(err=>console.log(err))
 }
 exports.getCartShop = (req,res)=>{
 // console.log(req.user.getCart());
 // by Mongoose
-req.user.populate('cart.items.productId').then(user =>{
+req.user.populate('cart.items.productId').execPopulate().then(user =>{
 //  console.log(cart);
 const carts = user.cart.items;
  res.render('shop/cart', {
      path: '/cart',
      pageTitle : 'Cart', 
      prods : carts ,
-      isAuthCorrect : req.isLoggedIn
+      isAuthCorrect : req.session.isLoggedIn
      })
 
  }).catch(err=>{
@@ -114,7 +114,7 @@ req.user.deleteCartItem(productId).then(cart=>{
 
 exports.postOrderShop = (req,res,next)=>{
   console.log("Iam working")
-req.user.populate('cart.items.productId').then(user =>{
+req.user.populate('cart.items.productId').execPopulate().then(user =>{
 //  console.log(cart);
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : {...i.productId._doc}}
@@ -127,6 +127,7 @@ user : {
 products : product
  
 }); 
+
 console.log(order);  
 return order.save()
  }).then((result)=>{
@@ -155,7 +156,7 @@ Order.find({'user.userId': req.user._id}).then(result=>{
     pageTitle : "Ordered Page",
       path : '/order',
     order: result,
-         isAuthCorrect : req.isLoggedIn
+         isAuthCorrect : req.session.isLoggedIn
   })
 }).catch(err=>console.log(err))
 // with Mongodb
