@@ -103,18 +103,7 @@ mongoose
     MONGODB_URI 
 )
 .then(result=>{
-     User.findOne().then(user =>{
-          if(!user){
-               const user = new User({
-name:'Tamana',
-email : 'tamana.farzami33@gmail.com',
-cart: {
-            items: []
-          }
-})
- user.save()
-}
-})
+    
      app.listen(5430)
 })
 .catch(err=>console.log(err))

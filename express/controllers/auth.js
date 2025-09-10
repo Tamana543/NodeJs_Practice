@@ -41,7 +41,26 @@ console.log(req.session)
     })
   }).catch(err=>console.log(err))
 }
-exports.postSignup = (req, res, next) => {};
+exports.postSignup = (req, res, next) => {
+  const email = req.body.Email;
+  const password = req.body.password;
+  const confirmedPassword = req.body.confirmedPassword;
+  console.log("emailll",email);
+  user.findOne({email : email}).then(userExist =>{
+    console.log(userExist)
+    if(userExist){
+      return res.redirect('/')
+    }
+    const newUser = new user({
+     email : email,
+      password : password,
+      card : {item : []}
+    })
+    return newUser.save()
+  }).then(result=>{
+    res.redirect('/')
+  }).catch(err=>console.log(err))
+};
 exports.postLogout = (req,res)=>{
 req.session.destroy((err)=>{
   console.log(err);
