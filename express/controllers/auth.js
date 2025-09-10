@@ -1,3 +1,4 @@
+const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 
 exports.getLogin = (req,res)=>{
@@ -9,7 +10,7 @@ res.render('auth/login',{
       path : '/login',
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
-        isAuthCorrect : req.session.isloggedin
+        isAuthCorrect : false
    
   })
 
@@ -21,7 +22,7 @@ exports.getSignup = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
-    isAuthCorrect: req.session.isloggedin
+    isAuthCorrect: false
   });
 };
 exports.postLogin = (req,res)=>{
@@ -42,23 +43,26 @@ console.log(req.session)
   }).catch(err=>console.log(err))
 }
 exports.postSignup = (req, res, next) => {
-  const email = req.body.Email;
+  const email = req.body.email;
   const password = req.body.password;
   const confirmedPassword = req.body.confirmedPassword;
-  console.log("emailll",email);
-  user.findOne({email : email}).then(userExist =>{
-    console.log(userExist)
-    if(userExist){
-      return res.redirect('/')
+
+  user.findOne({email : email}).then(userDoc =>{
+    console.log("feeeee",userDoc);
+    if(userDoc){
+      return res.redirect('/signup')
     }
-    const newUser = new user({
+    return bcreypt.hash(password,12).then((hashedPassword) =>{
+ const newUser = new user({
      email : email,
-      password : password,
+      password : hashedPassword,
       card : {item : []}
     })
     return newUser.save()
   }).then(result=>{
     res.redirect('/')
+  })
+    
   }).catch(err=>console.log(err))
 };
 exports.postLogout = (req,res)=>{
