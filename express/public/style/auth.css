@@ -19,11 +19,16 @@ label {
 }
 #Name,
 #lastName,
-#password {
+#password,
+#confirmPassword {
   outline: none;
   background: none;
   border: none;
   border-bottom: 1px solid #df29f0;
+
+}
+.form-cotrol label{
+  font-size: 70%;
 }
 .submit {
   margin-top: 10%;
