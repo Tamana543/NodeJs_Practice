@@ -28,19 +28,28 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
 console.log(req.session)
-  user.findById('68973df898beb0212720833f')
-  .then((user)=>{
-    
+const email = req.body.email
+const password = req.body.password
+//Lugging in in the user
+user.findOne({email : email}).then((user)=>{
+  if(!user){
+    return res.redirect("/login")
+  }
+  
+  bcreypt.compare(password, user.password).then(isMatching=>{
+    if(isMatching){
+  
     req.session.isloggedin =true
-    console.log("Here", req.session);
-    
     req.session.user = user
-    req.session.save((err)=>{
+   return  req.session.save((err)=>{
       console.log(err);
-
       res.redirect('/')
     })
+    }
+    res.redirect('/login')
   }).catch(err=>console.log(err))
+}).catch(err=>console.log(err))
+
 }
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
