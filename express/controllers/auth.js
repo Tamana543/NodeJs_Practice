@@ -9,7 +9,7 @@ res.render('auth/login',{
       path : '/login',
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
-        isAuthCorrect : false
+        isAuthCorrect : req.session.isloggedin
    
   })
 
@@ -17,10 +17,11 @@ res.render('auth/login',{
 }
 
 exports.getSignup = (req, res, next) => {
+  console.log("Me",req.session.isloggedin);
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
-    isAuthenticated: false
+    isAuthCorrect: req.session.isloggedin
   });
 };
 exports.postLogin = (req,res)=>{
@@ -28,8 +29,9 @@ exports.postLogin = (req,res)=>{
 console.log(req.session)
   user.findById('68973df898beb0212720833f')
   .then((user)=>{
-
-    req.session.loggedIn =true
+    
+    req.session.isloggedin =true
+    console.log("Here", req.session);
     
     req.session.user = user
     req.session.save((err)=>{
