@@ -19,7 +19,7 @@ exports.getProductsShop = (req,res)=>{
       prods : products,
       pageTitle : 'Products',
         path: '/products',
-          isAuthCorrect : req.session.isLoggedIn
+          isAuthCorrect : req.session.isloggedin
     })  
   }).catch(err=>console.log(err))
 
@@ -37,7 +37,7 @@ res.render('shop/index',{
      prodsExist : products.length > 0,
       activeShop: true,
      productCss : true,
-         isAuthCorrect : req.session.isLoggedIn
+         isAuthCorrect : req.session.isloggedin
      })
 }).catch(err=>console.log(err))
 
@@ -53,7 +53,7 @@ exports.getProductBId = (req,res,next)=>{
               product : product,
                 pageTitle : product.title,
                 path: '/products',
-          isAuthCorrect : req.session.isLoggedIn
+          isAuthCorrect : req.session.isloggedin
             })
           }).catch(err=>console.log(err))
 }
@@ -67,7 +67,7 @@ const carts = user.cart.items;
      path: '/cart',
      pageTitle : 'Cart', 
      prods : carts ,
-      isAuthCorrect : req.session.isLoggedIn
+      isAuthCorrect : req.session.isloggedin
      })
 
  }).catch(err=>{
@@ -156,7 +156,7 @@ Order.find({'user.userId': req.user._id}).then(result=>{
     pageTitle : "Ordered Page",
       path : '/order',
     order: result,
-         isAuthCorrect : req.session.isLoggedIn
+         isAuthCorrect : req.session.isloggedin
   })
 }).catch(err=>console.log(err))
 // with Mongodb

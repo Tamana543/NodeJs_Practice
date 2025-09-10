@@ -18,7 +18,7 @@ res.render('auth/login',{
 }
 
 exports.getSignup = (req, res, next) => {
-  console.log("Me",req.session.isloggedin);
+  // console.log("Me",req.session.isloggedin);
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
@@ -62,6 +62,7 @@ exports.postSignup = (req, res, next) => {
       return res.redirect('/signup')
     }
     return bcreypt.hash(password,12).then((hashedPassword) =>{
+      req.session.isloggedin = true
  const newUser = new user({
      email : email,
       password : hashedPassword,

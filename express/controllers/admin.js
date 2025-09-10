@@ -14,7 +14,7 @@ exports.getAddProduct = (req,res,next)=>{
           addProductPage:true,
           editing : "False",
           product : Product,
-           isAuthCorrect : req.session.isLoggedIn
+           isAuthCorrect :req.session.isloggedin
           
      })
       
@@ -48,7 +48,7 @@ exports.showAdminProducts = (req,res)=>{
                prods : product ,
                pageTitle : 'Admin products',
                path: '/admin/products',
-                 isAuthCorrect : req.session.isLoggedIn
+                 isAuthCorrect : req.session.isloggedin
                })
      }).catch(err=>console.log(err))
 }
@@ -75,7 +75,7 @@ Product.findById(ProductId).then(product => {
              path: '/admin/edit-product',
              editing: editMode,
              product: product,
-              isAuthCorrect : req.session.isLoggedIn
+              isAuthCorrect : req.session.isloggedin
            });
          })
          .catch(err => console.log("hereeee",err));
