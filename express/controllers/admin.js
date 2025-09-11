@@ -7,6 +7,9 @@ const Product = require('../modules/product')
 
 // if you use this kind of export it will not export a function .
 exports.getAddProduct = (req,res,next)=>{
+     if(!req.session.isloggedin){
+      return res.redirect("/login")
+     }
 
      res.render('admin/edit-products',
           {pageTitle : "Add Product",
