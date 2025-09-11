@@ -1,25 +1,25 @@
 const productController = require('../controllers/shop')
-
+const rootAuth = require('../middleware/roots_auth') ;
 const express= require('express');
-const Product = require('../modules/product');
+
 
 
 const router = express.Router()
 
-router.get('/',productController.getShopPage)
+router.get('/',rootAuth,productController.getShopPage)
 
-router.get('/products',productController.getProductsShop)
+router.get('/products',rootAuth,productController.getProductsShop)
 
-router.get('/products/:productId',productController.getProductBId)// This way you can add and go through a randum id url and render it based its id, you can name it anything not only productId
+router.get('/products/:productId',rootAuth,productController.getProductBId)// This way you can add and go through a randum id url and render it based its id, you can name it anything not only productId
 
-router.get('/cart',productController.getCartShop)
+router.get('/cart',rootAuth,productController.getCartShop)
 
-router.post('/cart',productController.postCartShop)
-router.post('/cart-delete-item', productController.postDelCardView)
+router.post('/cart',rootAuth,productController.postCartShop)
+router.post('/cart-delete-item', rootAuth,productController.postDelCardView)
 
-router.get('/order',productController.getOrderShop)
+router.get('/order',rootAuth,productController.getOrderShop)
 
-router.post('/order_items',productController.postOrderShop)
+router.post('/order_items',rootAuth,productController.postOrderShop)
 
 
 
