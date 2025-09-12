@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser') // Import body-parser to parse incoming request bodies
 const mongoose = require('mongoose')
 const session = require('express-session')
+const csrf = require("csurf");
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 
 const mongostoreSession = require('connect-mongodb-session')(session)
@@ -35,6 +36,7 @@ const mangoCreateDb = require('./util/database').mangoCreateDb
 
 //Midlewares
 app.use(bodyParser.urlencoded({extended: false})) // Use body-parser middleware to parse URL-encoded bodies (like form submissions) and make the data available in req.body
+const csrfProtection = csrf()
 
 // express is working as a middleware here, it is not a server, it is a framework to build web applications ( middleware is a function that takes a request and response object and does something with them, like logging, parsing, etc.)
 
@@ -55,6 +57,7 @@ app.use(session({
      store : store
       
 }))
+app.use(csrfProtection)
 app.use((req, res, next) => {
      // console.log('session.loggedIn:', req.session?.loggedIn);
   res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)

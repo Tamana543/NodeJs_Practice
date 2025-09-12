@@ -37,7 +37,8 @@ res.render('shop/index',{
      prodsExist : products.length > 0,
       activeShop: true,
      productCss : true,
-         isAuthCorrect : req.session.isloggedin
+      isAuthCorrect : req.session.isloggedin,
+      csrfToken: req.csrfToken()
      })
 }).catch(err=>console.log(err))
 

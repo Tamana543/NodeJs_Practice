@@ -10,7 +10,8 @@ res.render('auth/login',{
       path : '/login',
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
-        isAuthCorrect : false
+        isAuthCorrect : false,
+        csrfToken : req.csrfToken()
    
   })
 
@@ -22,7 +23,8 @@ exports.getSignup = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
-    isAuthCorrect: false
+    isAuthCorrect: false,
+        csrfToken : req.csrfToken()
   });
 };
 exports.postLogin = (req,res)=>{
