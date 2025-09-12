@@ -83,6 +83,13 @@ User.findById(req.session.user._id)
 }).catch(err=>console.log(err))
 
 });
+// to add the common values that are needed to be shared during files 
+app.use((req, res,next)=>{
+   res.locals.isAuthCorrect = req.session.isloggedin;  
+   res.locals.csrfToken = req.csrfToken()
+   next()
+})
+
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes)

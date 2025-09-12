@@ -11,7 +11,7 @@ res.render('auth/login',{
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         isAuthCorrect : false,
-        csrfToken : req.csrfToken()
+        
    
   })
 
@@ -24,7 +24,7 @@ exports.getSignup = (req, res, next) => {
     path: '/signup',
     pageTitle: 'Signup',
     isAuthCorrect: false,
-        csrfToken : req.csrfToken()
+     
   });
 };
 exports.postLogin = (req,res)=>{
