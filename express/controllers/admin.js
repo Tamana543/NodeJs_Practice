@@ -110,9 +110,9 @@ exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId.trim();
 
+ console.log("Here",Product.findById(prodId));
      // using m0ongoose 
      Product.findByIdAndRemove(prodId).then(()=>{
-          // console.log(product);
           console.log("Deleted");
             res.redirect('/admin/products')
 
