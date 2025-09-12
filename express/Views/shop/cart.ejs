@@ -18,6 +18,7 @@
                 </ul>
                 <div class="centered">
                 <form action="/order_items" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken%>">
                     <button class="btn">Order</button>
                 </form>
                 </div>

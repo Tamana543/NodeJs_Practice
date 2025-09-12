@@ -56,17 +56,19 @@ exports.getProductBId = (req,res,next)=>{
             })
           }).catch(err=>console.log(err))
 }
-exports.getCartShop = (req,res)=>{
+exports.getCartShop =(req,res)=>{
 // console.log(req.user.getCart());
 // by Mongoose
-req.user.populate('cart.items.productId').execPopulate().then(user =>{
+console.log("Neee", req.user.populate('cart.items.productId'));
+ req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const carts = user.cart.items;
  res.render('shop/cart', {
      path: '/cart',
      pageTitle : 'Cart', 
      prods : carts ,
-      
+      isAuthenticated: req.session.isLoggedIn,
+      csrfToken : req.csrfToken()
      })
 
  }).catch(err=>{
