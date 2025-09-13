@@ -58,28 +58,31 @@ exports.showAdminProducts = (req,res)=>{
 
 exports.getEditProduct = (req,res,next)=>{
      const editMode = req.query.edit;
-     if(!editMode){
-          return res.redirect('/')
+     if(editMode){
+          const ProductId = req.params.productID;
+        console.log(ProductId);
+// for mongodb && mongoose
+     Product.findById(ProductId).then(product => {
+               
+               if (!product) {
+               return res.redirect('/');
+               }
+               res.render('admin/edit-products', {
+               pageTitle: 'Edit Product',
+               path: '/admin/edit-product',
+               editing: editMode,
+               product: product,
+               
+               });
+          })
+         .catch(err => console.log("hereeee",err));
+     }else {
+          console.log("Here");
+               return res.redirect('/')
      }
      // console.log("Received product ID:", req.params.productID);
      // console.log("Edit mode:", req.query.edit);
-     const ProductId = req.params.productId;
-  
-// for mongodb && mongoose
-Product.findById(ProductId).then(product => {
-          
-           if (!product) {
-             return res.redirect('/');
-           }
-           res.render('admin/edit-products', {
-             pageTitle: 'Edit Product',
-             path: '/admin/edit-product',
-             editing: editMode,
-             product: product,
-              
-           });
-         })
-         .catch(err => console.log("hereeee",err));
+    
 
 }
 
@@ -110,20 +113,12 @@ exports.postDeleteProduct = (req,res,next)=>{
    
      const prodId = req.body.productId.trim();
 
-//  console.log("Here",Product.findById(prodId));
+
      // using m0ongoose 
      Product.findByIdAndDelete(prodId).then(()=>{
           console.log("Deleted");
             res.redirect('/admin/products')
 
           }).catch(err=>console.log(err))
-     // using mangodb : 
-
-
-     //   Product.deleteProd(prodId).then(()=>{
-     //      // console.log(product);
-     //      console.log("Deleted");
-     //        res.redirect('/admin/products')
-
-     //      }).catch(err=>console.log(err))
+ 
 }

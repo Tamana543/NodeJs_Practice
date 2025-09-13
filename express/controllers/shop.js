@@ -59,7 +59,7 @@ exports.getProductBId = (req,res,next)=>{
 exports.getCartShop =(req,res)=>{
 // console.log(req.user.getCart());
 // by Mongoose
-console.log("Neee", req.user.populate('cart.items.productId'));
+
  req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const carts = user.cart.items;
@@ -85,11 +85,11 @@ exports.postCartShop = (req,res,next)=>{
 try {
   
   Product.findById(productId).then((product)=>{
-    console.log(req.user);
+
   return req.user.addToCart(product)
   }).then(
     (result)=>{
-      console.log(result)
+     
      res.redirect('/cart')
     }
   ).catch(err=>console.log(err))
@@ -114,7 +114,7 @@ req.user.deleteCartItem(productId).then(cart=>{
 }
 
 exports.postOrderShop = (req,res,next)=>{
-  console.log("Iam working")
+  
 req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const product = user.cart.items.map(i =>{
@@ -129,7 +129,6 @@ products : product
  
 }); 
 
-console.log(order);  
 return order.save()
  }).then((result)=>{
 return req.user.clearCart()

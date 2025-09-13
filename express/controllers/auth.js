@@ -29,7 +29,7 @@ exports.getSignup = (req, res, next) => {
 };
 exports.postLogin = (req,res)=>{
   // here you need to store users data so you can understand whose fie are these : cookie
-console.log(req.session)
+
 const email = req.body.email
 const password = req.body.password
 //Lugging in in the user
@@ -59,7 +59,7 @@ exports.postSignup = (req, res, next) => {
   const confirmedPassword = req.body.confirmedPassword;
 
   user.findOne({email : email}).then(userDoc =>{
-    console.log("feeeee",userDoc);
+
     if(userDoc){
       return res.redirect('/signup')
     }
@@ -79,7 +79,7 @@ exports.postSignup = (req, res, next) => {
 };
 exports.postLogout = (req,res)=>{
 req.session.destroy((err)=>{
-  console.log(err);
+ 
   // to delete a session 
   res.redirect('/')
 
