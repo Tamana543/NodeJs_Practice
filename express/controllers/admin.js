@@ -15,7 +15,7 @@ exports.getAddProduct = (req,res,next)=>{
           addProductPage:true,
           editing : "False",
           product : Product,
-       
+     
           
      })
       
@@ -29,10 +29,14 @@ exports.postAddProduct = (req,res)=>{
     // using MangoDb
      const productData = new Product(
           {title : title,
-               price:price, description:description,
+               price:price, 
+               description:description,
                imageUrl : imageUrl,
+              
                // productId : req.user,
-          userId : req.user})
+          userId : req.user,
+           csrfToken : req.csrfToken()
+               })
 
      productData.save().then(result => {// remember while using mangoose you do not need to add the save methood on your product module, mangoos contain it itself 
           //  console.log(result)
@@ -49,7 +53,7 @@ exports.showAdminProducts = (req,res)=>{
                prods : product ,
                pageTitle : 'Admin products',
                path: '/admin/products',
-              
+             
                })
      }).catch(err=>console.log(err))
 }
