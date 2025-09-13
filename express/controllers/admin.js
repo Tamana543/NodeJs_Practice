@@ -60,20 +60,22 @@ exports.getEditProduct = (req,res,next)=>{
      const editMode = req.query.edit;
      if(editMode){
           const ProductId = req.params.productID;
-        console.log(ProductId);
+     //    console.log(ProductId);
 // for mongodb && mongoose
      Product.findById(ProductId).then(product => {
                
                if (!product) {
                return res.redirect('/');
                }
+               console.log(req.csrfToken);
                res.render('admin/edit-products', {
                pageTitle: 'Edit Product',
                path: '/admin/edit-product',
                editing: editMode,
                product: product,
-               
+               csrfToken : req.csrfToken()
                });
+               
           })
          .catch(err => console.log("hereeee",err));
      }else {
