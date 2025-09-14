@@ -53,7 +53,7 @@ exports.showAdminProducts = (req,res)=>{
                prods : product ,
                pageTitle : 'Admin products',
                path: '/admin/products',
-             
+             csrfToken : req.csrfToken()
                })
      }).catch(err=>console.log(err))
 }
