@@ -4,8 +4,9 @@ const user = require("../modules/user")
 exports.getLogin = (req,res)=>{
  
   // const isLoggedIn =req.get('Cookie').trim().split('=')[1]==='true' ;
-
+console.log("here",req.flash('userError'));
 res.render('auth/login',{
+
     pageTitle : "Login Page",
       path : '/login',
       // isAuthCorrect: req.session.loggedIn || false
@@ -36,6 +37,7 @@ const password = req.body.password
 //Lugging in in the user
 user.findOne({email : email}).then((user)=>{
   if(!user){
+         req.flash('userError','User with this email address is not found :(')
     return res.redirect("/login")
   }
   
@@ -46,7 +48,7 @@ user.findOne({email : email}).then((user)=>{
     req.session.user = user
    return  req.session.save((err)=>{
       // console.log(err);
-      req.flash('userError','User with this email address is not found :(')
+ 
       res.redirect('/')
     })
     }
