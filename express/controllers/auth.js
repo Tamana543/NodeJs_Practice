@@ -4,7 +4,7 @@ const user = require("../modules/user")
 exports.getLogin = (req,res)=>{
  
   // const isLoggedIn =req.get('Cookie').trim().split('=')[1]==='true' ;
-console.log("here",req.flash('userError'));
+const errorMessage = req.flash('userError')
 res.render('auth/login',{
 
     pageTitle : "Login Page",
@@ -12,7 +12,7 @@ res.render('auth/login',{
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         isAuthCorrect : false,
-        userNotFoundErr : req.flash('userError')
+        userNotFoundErr : errorMessage
         
    
   })
