@@ -15,7 +15,7 @@ exports.getAddProduct = (req,res,next)=>{
           addProductPage:true,
           editing : "False",
           product : Product,
-     
+      csrfToken : req.csrfToken()
           
      })
       
@@ -35,7 +35,7 @@ exports.postAddProduct = (req,res)=>{
               
                // productId : req.user,
           userId : req.user,
-           csrfToken : req.csrfToken()
+
                })
 
      productData.save().then(result => {// remember while using mangoose you do not need to add the save methood on your product module, mangoos contain it itself 
