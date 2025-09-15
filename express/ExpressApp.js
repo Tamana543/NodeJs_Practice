@@ -4,6 +4,7 @@ const bodyParser = require('body-parser') // Import body-parser to parse incomin
 const mongoose = require('mongoose')
 const session = require('express-session')
 const csrf = require("csurf");
+const flash = require('connect-flash')
 const app = express() // Create an Express application (it is a function call as the express module exports a function)
 
 const mongostoreSession = require('connect-mongodb-session')(session)
@@ -58,6 +59,7 @@ app.use(session({
       
 }))
 app.use(csrfProtection)
+app.use(flash())
 app.use((req, res, next) => {
      // console.log('session.loggedIn:', req.session?.loggedIn);
   res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)

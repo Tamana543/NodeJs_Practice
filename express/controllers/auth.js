@@ -11,6 +11,7 @@ res.render('auth/login',{
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         isAuthCorrect : false,
+        userNotFoundErr : req.flash('userError')
         
    
   })
@@ -44,7 +45,8 @@ user.findOne({email : email}).then((user)=>{
     req.session.isloggedin =true
     req.session.user = user
    return  req.session.save((err)=>{
-      console.log(err);
+      // console.log(err);
+      req.flash('userError','User with this email address is not found :(')
       res.redirect('/')
     })
     }
