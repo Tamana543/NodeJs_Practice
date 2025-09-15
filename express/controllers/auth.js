@@ -4,7 +4,12 @@ const user = require("../modules/user")
 exports.getLogin = (req,res)=>{
  
   // const isLoggedIn =req.get('Cookie').trim().split('=')[1]==='true' ;
-const errorMessage = req.flash('userError')
+let errorMessage = req.flash('userError')
+if(errorMessage.length > 0){
+  errorMessage = errorMessage
+}else {
+  errorMessage = null
+}
 res.render('auth/login',{
 
     pageTitle : "Login Page",

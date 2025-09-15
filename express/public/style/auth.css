@@ -7,7 +7,7 @@ form {
      display: flex;
   flex-direction: column;
   justify-content: space-between;
-     padding: 15% 5%;
+     padding: 10% 5%;
   gap: 10px;
   
 }
@@ -40,6 +40,12 @@ label {
   box-shadow: inset 0px 0px 0px 1px #df29f0;
 
   color: #000;
+}
+.user_err {
+  padding: 2%;
+
+ background-color: #d468d4;
+ color: #fff;
 }
 .window {
      display: block;
