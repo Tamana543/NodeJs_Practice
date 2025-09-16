@@ -4,6 +4,12 @@
      
 </head>
 <%- include('../includes/navigation.ejs') %>
+<%if(emailExist) { %>
+
+ 
+   <div class="user_err"><%= emailExist %></div>
+   
+   <% }%>
 <div class="window log_in-window">
  <form method="post" class="flex" action="/signup">
       <h3>Signup</h3>

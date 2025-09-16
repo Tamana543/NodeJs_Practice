@@ -5,6 +5,7 @@ exports.getLogin = (req,res)=>{
  
   // const isLoggedIn =req.get('Cookie').trim().split('=')[1]==='true' ;
 let errorMessage = req.flash('userError')
+
 if(errorMessage.length > 0){
   errorMessage = errorMessage
 }else {
@@ -17,7 +18,7 @@ res.render('auth/login',{
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         isAuthCorrect : false,
-        userNotFoundErr : errorMessage
+        errorMessage : errorMessage
         
    
   })
@@ -26,11 +27,19 @@ res.render('auth/login',{
 }
 
 exports.getSignup = (req, res, next) => {
+  let emailExist = req.flash('passwordErr')
+ console.log("Here", emailExist);
+if(emailExist.length > 0){
+  emailExist = emailExist
+}else {
+  emailExist = null
+}
   // console.log("Me",req.session.isloggedin);
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
     isAuthCorrect: false,
+    emailExist: emailExist
      
   });
 };
@@ -56,8 +65,10 @@ user.findOne({email : email}).then((user)=>{
  
       res.redirect('/')
     })
+    }else {
+      req.flash('passwordErr','Incorrect Password :/')
+      res.redirect('/login')
     }
-    res.redirect('/login')
   }).catch(err=>console.log(err))
 }).catch(err=>console.log(err))
 
@@ -70,6 +81,7 @@ exports.postSignup = (req, res, next) => {
   user.findOne({email : email}).then(userDoc =>{
 
     if(userDoc){
+      req.flash('userExist','There is an accout for this email,login')
       return res.redirect('/signup')
     }
     return bcreypt.hash(password,12).then((hashedPassword) =>{
