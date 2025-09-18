@@ -27,19 +27,19 @@ res.render('auth/login',{
 }
 
 exports.getSignup = (req, res, next) => {
-  let emailExist = req.flash('passwordErr')
- console.log("Here", emailExist);
-if(emailExist.length > 0){
-  emailExist = emailExist
+  let errorMessage = req.flash('userError')
+
+if(errorMessage.length > 0){
+  errorMessage = errorMessage
 }else {
-  emailExist = null
+  errorMessage = null
 }
   // console.log("Me",req.session.isloggedin);
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
     isAuthCorrect: false,
-    emailExist: emailExist
+    errorMessage : errorMessage
      
   });
 };
@@ -66,7 +66,7 @@ user.findOne({email : email}).then((user)=>{
       res.redirect('/')
     })
     }else {
-      req.flash('passwordErr','Incorrect Password :/')
+      req.flash('userError','Incorrect Password :/')
       res.redirect('/login')
     }
   }).catch(err=>console.log(err))
@@ -81,7 +81,7 @@ exports.postSignup = (req, res, next) => {
   user.findOne({email : email}).then(userDoc =>{
 
     if(userDoc){
-      req.flash('userExist','There is an accout for this email,login')
+      req.flash('userError','User already exist, try login ᓚᘏᗢ')
       return res.redirect('/signup')
     }
     return bcreypt.hash(password,12).then((hashedPassword) =>{
