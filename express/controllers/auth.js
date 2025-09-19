@@ -1,5 +1,14 @@
 const bcreypt = require("bcrypt")
 const user = require("../modules/user")
+const nodemailer = require("nodemailer");
+const nodemailerTransp = require("nodemailer-sendgrid-transport")
+
+
+const transport = nodemailer.createTransport(nodemailerTransp({
+  auth:{
+    api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
+  }
+}))
 
 exports.getLogin = (req,res)=>{
  
@@ -94,6 +103,12 @@ exports.postSignup = (req, res, next) => {
     return newUser.save()
   }).then(result=>{
     res.redirect('/')
+    return transport.sendMail({
+      to : email,
+      from : "Book Online Shop",
+      subject : "Sign up completed",
+      html : "<div><h1> Sign up completed</h1></div>"
+    })
   })
     
   }).catch(err=>console.log(err))
