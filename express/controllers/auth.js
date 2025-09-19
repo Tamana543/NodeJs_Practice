@@ -4,11 +4,13 @@ const nodemailer = require("nodemailer");
 const nodemailerTransp = require("nodemailer-sendgrid-transport")
 
 
-const transport = nodemailer.createTransport(nodemailerTransp({
-  auth:{
-    api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
-  }
-}))
+// const transport = nodemailer.createTransport(nodemailerTransp({
+//   auth:{
+//     api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
+//   }
+// }))
+
+  
 
 exports.getLogin = (req,res)=>{
  
@@ -102,13 +104,14 @@ exports.postSignup = (req, res, next) => {
     })
     return newUser.save()
   }).then(result=>{
-    res.redirect('/')
-    return transport.sendMail({
-      to : email,
-      from : "Book Online Shop",
-      subject : "Sign up completed",
-      html : "<div><h1> Sign up completed</h1></div>"
-    })
+     fetch('https://api.mailgun.net/v5/sandbox/auth_recipients?email=your-email@example.com', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Basic ' + Buffer.from('90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b').toString('base64')
+  }
+})
+.then(res =>  res.redirect('/'))
+.catch(err => console.log('Error:', err.message));
   })
     
   }).catch(err=>console.log(err))
