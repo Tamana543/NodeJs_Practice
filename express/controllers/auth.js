@@ -2,17 +2,12 @@ const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
 const nodemailerTransp = require("nodemailer-sendgrid-transport")
-const punycode = require("punycode")
-const SibApiV3Sdk = require('sib-api-v3-sdk');
-const defaultClient = SibApiV3Sdk.ApiClient.instance;
-const apiKey = defaultClient.authentications['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']
-apiKey.apiKey = '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';
-// const transport = nodemailer.createTransport(nodemailerTransp({
-//   auth:{
-//     api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
-//   }
-// }))
 
+const transport = nodemailer.createTransport(nodemailerTransp({
+  auth: {
+  api_key : ""  
+  }
+}))
   
 
 exports.getLogin = (req,res)=>{
@@ -107,17 +102,7 @@ exports.postSignup = (req, res, next) => {
     })
     return newUser.save()
   }).then(result=>{
-    const apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
-    const emailCampaigns = new SibApiV3Sdk.CreateEmailCampaign();
-    // Define the campaign settings\
-emailCampaigns.name = "Campaign sent via the API";
-emailCampaigns.subject = "Test emails";
-emailCampaigns.sender = {"name": "Tamana", "email": "tamanafarzami33@gmail.com"};
-emailCampaigns.type = "classic";
-    // # Content that will be sent\
-htmlContent: 'Congratulations! You successfully made your first  API.',
-// # Select the recipients\
-recipients= {listIds: [2, 7]}
+    res.redirect('/')
 // here
   })
     
@@ -131,4 +116,27 @@ req.session.destroy((err)=>{
 
 });
 }
-
+// Eamil hundling not completed work more 
+/**
+ const apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
+    const emailCampaigns = new SibApiV3Sdk.CreateEmailCampaign();
+    // Define the campaign settings\
+emailCampaigns.name = "Campaign sent via the API";
+emailCampaigns.subject = "Test emails";
+emailCampaigns.sender = {"name": "Tamana", "email": "tamanafarzami33@gmail.com"};
+emailCampaigns.type = "classic";
+    // # Content that will be sent\
+htmlContent: 'Congratulations! You successfully made your first  API.',
+// # Select the recipients\
+recipients= {listIds: [email]}
+const punycode = require("punycode")
+const SibApiV3Sdk = require('sib-api-v3-sdk');
+const defaultClient = SibApiV3Sdk.ApiClient.instance;
+const apiKey = defaultClient.authentications['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']
+// apiKey.apiKey = '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';
+// const transport = nodemailer.createTransport(nodemailerTransp({
+//   auth:{
+//     api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
+//   }
+// }))0
+ */
