@@ -60,11 +60,7 @@ app.use(session({
 }))
 app.use(csrfProtection)
 app.use(flash())
-app.use((req, res, next) => {
-     // console.log('session.loggedIn:', req.session?.loggedIn);
-  res.locals.isAuthCorrect =!!(req.session && req.session.loggedIn)
-  next();
-});
+
 // sequalizer userTable middleware
 
 app.use((req,res,next) =>{

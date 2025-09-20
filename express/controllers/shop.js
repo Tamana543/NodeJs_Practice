@@ -1,4 +1,3 @@
-const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
 const Order = require('../modules/order')
 
@@ -34,9 +33,7 @@ res.render('shop/index',{
     prods : products ,
       pageTitle : 'All products',
      path: '/',
-     prodsExist : products.length > 0,
-      activeShop: true,
-     productCss : true,
+     
 
      })
 }).catch(err=>console.log(err))
@@ -59,7 +56,7 @@ exports.getProductBId = (req,res,next)=>{
 exports.getCartShop =(req,res)=>{
 // console.log(req.user.getCart());
 // by Mongoose
-
+console.log(req.user)
  req.user.populate('cart.items.productId').then(user =>{
 //  console.log(cart);
 const carts = user.cart.items;
@@ -85,7 +82,7 @@ exports.postCartShop = (req,res,next)=>{
 try {
   
   Product.findById(productId).then((product)=>{
-
+ console.log("Me",req);
   return req.user.addToCart(product)
   }).then(
     (result)=>{
@@ -122,7 +119,7 @@ const product = user.cart.items.map(i =>{
 });
 const order = new Order({
 user : {
-    name : req.user.name,
+   email : req.user.email,
     userId : req.user
 },
 products : product
@@ -130,10 +127,13 @@ products : product
 }); 
 
 return order.save()
- }).then((result)=>{
+ })
+ .then((result)=>{
 return req.user.clearCart()
  
-}).then(()=> res.redirect('/order')).catch(err=>console.log(err))
+})
+.then(()=> res.redirect('/order'))
+.catch(err=>console.log(err))
 
 // with Mongodb
 /**
@@ -150,7 +150,8 @@ return req.user.clearCart()
 
 exports.getOrderShop = (req,res)=>{
 // with mongoose 
-Order.find({'user.userId': req.user._id}).then(result=>{
+Order.find({'user.userId': req.user._id})
+.then(result=>{
 
   res.render('shop/order',{
     pageTitle : "Ordered Page",
