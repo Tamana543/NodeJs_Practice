@@ -164,6 +164,7 @@ if(!user){
   req.flash('errorMessage',"User with this email address not found!")
   res.redirect('/reset')
 }
+console.log(user.resetToken);
 user.resetToken = token
 user.resetExpiredToken = Date.now() + 360000 // to milisecond ;
 return user.save() 
