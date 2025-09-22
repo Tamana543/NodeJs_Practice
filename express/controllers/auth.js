@@ -133,6 +133,24 @@ req.session.destroy((err)=>{
 
 });
 }
+
+exports.getReset = (req,res,next)=>{
+  let errorMessage = req.flash('userError')
+
+if(errorMessage.length > 0){
+  errorMessage = errorMessage
+}else {
+  errorMessage = null
+}
+  // console.log("Me",req.session.isloggedin);
+  res.render('auth/resetPassword', {
+    path: '/reset',
+    pageTitle: 'Reset Password',
+    isAuthCorrect: false,
+    errorMessage : errorMessage
+     
+  });
+}
 // Eamil hundling not completed work more 
 /**
  const apiInstance = new SibApiV3Sdk.EmailCampaignsApi();

@@ -4,14 +4,14 @@
      
 </head>
 <%- include('../includes/navigation.ejs') %>
+<%if(errorMessage) { %>
+
+
+<div class="user_err"><%= errorMessage %></div>
+
+<% }%>
 <div class="window log_in-window">
   <form method="post" class="flex" action="/login">
-   <%if(errorMessage) { %>
-
- 
-   <div class="user_err"><%= errorMessage %></div>
-   
-   <% }%>
       <h3>LogIn</h3>
         <div class="name flex">
           <label for="email">Email</label>

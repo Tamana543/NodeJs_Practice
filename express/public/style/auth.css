@@ -38,12 +38,13 @@ label {
   background: none;
   /* border: 1px solid #df29f0; */
   box-shadow: inset 0px 0px 0px 1px #df29f0;
-
   color: #000;
 }
 .user_err {
-  padding: 2%;
-
+  margin: 0 auto;
+  margin-top: 3%;
+  padding: 1%;
+width: 30%;
  background-color: #d468d4;
  color: #fff;
 }
@@ -79,12 +80,14 @@ border-bottom: 1px solid white ;
 height: 20%;
 }
 .reset_password{ 
-padding-bottom: 15%;
+margin-bottom: 15%;
 text-decoration: none;
-
+padding-bottom :2% ;
+border-bottom: 1px solid #d468d4;
 color: #d468d4;
 }
 .reset_password:hover {
   color: #9302a0;
  font-weight: bold;
 }
+
