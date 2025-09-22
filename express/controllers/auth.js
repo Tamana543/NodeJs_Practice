@@ -112,7 +112,7 @@ exports.postSignup = (req, res, next) => {
       address: "Tamanafarzami33@gmail.com",
       name:"Tamana Farzami"
     }
-    const recipients = [email]
+    const recipients = email
     transport.sendMail({
       from: sender,
       to:recipients,
@@ -159,6 +159,31 @@ if(error){
   res.redirect('/reset')
 }
 const token = buffer.toString('hex')
+user.findOne({email : req.body.email}).then((user)=>{
+if(!user){
+  req.flash('errorMessage',"User with this email address not found!")
+  res.redirect('/reset')
+}
+user.resetToken = token
+user.resetExpiredToken = Date.now() + 360000 // to milisecond ;
+return user.save() 
+}).then(respond=>{
+   const sender = {
+      address: "Tamanafarzami33@gmail.com",
+      name:"Tamana Farzami"
+    }
+    const recipients = user.body.email
+transport.sendMail({
+      from: sender,
+      to:recipients,
+      subject: "Reset Password",
+      html: `<p>Reset your password from here</p> 
+      <a href="http://localhost:5430/reset/${token}" > Reset Password</a>
+      `,
+        category: "Integration Test",
+    })
+}).catch(err=>console.log(err)
+)
 })
 // console.log(randumToken);
 }

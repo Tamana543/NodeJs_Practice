@@ -13,7 +13,7 @@ password : {
      require : true
 },
 resetToken : String,
-resetExpiredToken : String,
+resetExpiredToken : Date,
 cart :{
 items : [{productId : {type : schema.Types.ObjectId, require : true,ref:'Product'} ,
      quantity :{type : Number , require : true}}]
