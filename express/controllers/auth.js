@@ -1,3 +1,4 @@
+const crypto = require("crypto")
 const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
@@ -150,6 +151,16 @@ if(errorMessage.length > 0){
     errorMessage : errorMessage
      
   });
+}
+exports.postReset = (req,res,next)=>{
+crypto.randomBytes(32,(error , buffer)=>{
+if(error){
+  console.log(error);
+  res.redirect('/reset')
+}
+const token = buffer.toString('hex')
+})
+// console.log(randumToken);
 }
 // Eamil hundling not completed work more 
 /**
