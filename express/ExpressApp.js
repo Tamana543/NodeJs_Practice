@@ -16,7 +16,7 @@ const authRoutes = require('./routes/auth')
 const User = require('./modules/user')
 
 //database : Mongoo
-const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/'
 
 
 // Wiew enjine hundlers 

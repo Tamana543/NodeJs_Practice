@@ -8,13 +8,21 @@ const { MailtrapTransport } = require("mailtrap");
 
 
 const TOKEN = "b40df4df3c8c12691bd0c83120c73c0b";
-const transport = nodemailer.createTransport(MailtrapTransport({
-  auth: {
-  token : TOKEN  
-  }
-}))
+// const transport = nodemailer.createTransport(MailtrapTransport({
+//   auth: {
+//   token : TOKEN  
+//   }
+// }))
 
-  
+  // Looking to send emails in production? Check out our Email API/SMTP product!
+const transport = nodemailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "e45d30079ebad9",
+    pass: "80d8b774fb7321"
+  }
+});
 
 exports.getLogin = (req,res)=>{
  
