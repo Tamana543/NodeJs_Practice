@@ -188,6 +188,25 @@ transport.sendMail({
 })
 // console.log(randumToken);
 }
+
+exports.newPassword = (req,res,next)=>{
+  
+   let errorMessage = req.flash('userError')
+
+if(errorMessage.length > 0){
+  errorMessage = errorMessage
+}else {
+  errorMessage = null
+}
+  // console.log("Me",req.session.isloggedin);
+  res.render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Signup',
+    isAuthCorrect: false,
+    errorMessage : errorMessage
+     
+  });
+}
 // Eamil hundling not completed work more 
 /**
  const apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
