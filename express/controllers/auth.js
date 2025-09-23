@@ -189,8 +189,9 @@ transport.sendMail({
 // console.log(randumToken);
 }
 
-exports.newPassword = (req,res,next)=>{
-  
+exports.getNewPassword = (req,res,next)=>{
+  const token = req.params.token;
+  console.log(token);
    let errorMessage = req.flash('userError')
 
 if(errorMessage.length > 0){
@@ -199,11 +200,12 @@ if(errorMessage.length > 0){
   errorMessage = null
 }
   // console.log("Me",req.session.isloggedin);
-  res.render('auth/signup', {
-    path: '/signup',
-    pageTitle: 'Signup',
+  res.render('auth/newPassword', {
+    path: '/newPassword',
+    pageTitle: 'New Password',
     isAuthCorrect: false,
-    errorMessage : errorMessage
+    errorMessage : errorMessage,
+    userId : user._id
      
   });
 }
