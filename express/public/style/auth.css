@@ -42,6 +42,9 @@ label {
 }
 .user_err {
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 3%;
   padding: 1%;
 width: 30%;

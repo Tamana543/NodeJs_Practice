@@ -145,7 +145,7 @@ req.session.destroy((err)=>{
 }
 
 exports.getReset = (req,res,next)=>{
-  let errorMessage = req.flash('userError')
+  let errorMessage = req.flash('error')
 
 if(errorMessage.length > 0){
   errorMessage = errorMessage
@@ -171,7 +171,7 @@ const token = buffer.toString('hex')
 user.findOne({email : req.body.email}).then((userSearch)=>{
 
 if(!userSearch){
-  req.flash('errorMessage','The email address not found')
+  req.flash('error','The email address not found :(')
   
   res.redirect('/reset')
 }
@@ -206,7 +206,7 @@ exports.getNewPassword = (req,res,next)=>{
   const token = req.params.token;
   // console.log(token);
   user.findOne({resetToken : token , resetExpiredToken : {$gt : Date.now()}}).then(user =>{
-  let errorMessage = req.flash('errorMessage')
+  let errorMessage = req.flash('passwordRepeated')
 
 if(errorMessage.length > 0){
  errorMessage = errorMessage
