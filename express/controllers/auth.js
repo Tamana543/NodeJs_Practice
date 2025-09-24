@@ -168,9 +168,10 @@ if(error){
 }
 const token = buffer.toString('hex')
 user.findOne({email : req.body.email}).then((userSearch)=>{
-  console.log(userSearch);
+
 if(!userSearch){
-  req.flash('errorMessage',"User with this email address not found!")
+  req.flash('errorMessage','The email address not found')
+  
   res.redirect('/reset')
 }
 // console.log(user.resetToken);
