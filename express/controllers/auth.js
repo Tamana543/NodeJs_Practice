@@ -167,21 +167,24 @@ if(error){
   res.redirect('/reset')
 }
 const token = buffer.toString('hex')
-user.findOne({email : req.body.email}).then((user)=>{
-if(!user){
+user.findOne({email : req.body.email}).then((userSearch)=>{
+  console.log(userSearch);
+if(!userSearch){
   req.flash('errorMessage',"User with this email address not found!")
   res.redirect('/reset')
 }
-console.log(user.resetToken);
-user.resetToken = token
-user.resetExpiredToken = Date.now() + 360000 // to milisecond ;
-return user.save() 
+// console.log(user.resetToken);
+userSearch.resetToken = token
+userSearch.resetExpiredToken = Date.now() + 360000 // to milisecond ;
+return userSearch.save() 
 }).then(respond=>{
    const sender = {
       address: "Tamanafarzami33@gmail.com",
       name:"Tamana Farzami"
     }
-    const recipients = user.body.email
+
+    const recipients = req.body.email
+     res.redirect('/');
 transport.sendMail({
       from: sender,
       to:recipients,
