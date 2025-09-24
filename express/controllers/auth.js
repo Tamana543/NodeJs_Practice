@@ -3,6 +3,7 @@ const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
 const { MailtrapTransport } = require("mailtrap");
+const { now } = require("mongoose");
 
 
 
@@ -203,23 +204,26 @@ transport.sendMail({
 
 exports.getNewPassword = (req,res,next)=>{
   const token = req.params.token;
-  console.log(token);
-   let errorMessage = req.flash('userError')
+  // console.log(token);
+  user.findOne({resetToken : token , resetExpiredToken : {$gt : Date.now()}}).then(user =>{
+  let errorMessage = req.flash('errorMessage')
 
 if(errorMessage.length > 0){
-  errorMessage = errorMessage
+ errorMessage = errorMessage
 }else {
-  errorMessage = null
+ errorMessage = null
 }
+
+res.render('auth/newPassword', {
+  path: '/newPassword',
+  pageTitle: 'New Password',
+  isAuthCorrect: false,
+  errorMessage : errorMessage,
+  userId : user._id.toString()
+   
+});
+}).catch(err=>console.log(err))
   // console.log("Me",req.session.isloggedin);
-  res.render('auth/newPassword', {
-    path: '/newPassword',
-    pageTitle: 'New Password',
-    isAuthCorrect: false,
-    errorMessage : errorMessage,
-    userId : user._id
-     
-  });
 }
 // Eamil hundling not completed work more 
 /**
