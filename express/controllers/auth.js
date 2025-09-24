@@ -16,12 +16,28 @@ const TOKEN = "b40df4df3c8c12691bd0c83120c73c0b";
 // }))
 
   // Looking to send emails in production? Check out our Email API/SMTP product!
+// const transport = nodemailer.createTransport({
+//   host: "sandbox.smtp.mailtrap.io",
+//   port: 2525,
+//   auth: {
+//     user: "e45d30079ebad9",
+//     pass: "80d8b774fb7321"
+//   }
+// });
+// const transport = nodemailer.createTransport(MailtrapTransport({
+//   auth: {
+//   token : TOKEN  
+//   }
+// }))
+
+ // Looking to send emails in production? Check out our Email API/SMTP product!
 const transport = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
+   host: "smtp.gmail.com",
+  port: 465,             // or 587
+  secure: true,
   auth: {
-    user: "e45d30079ebad9",
-    pass: "80d8b774fb7321"
+    user: "tamanafarzami33@gmail.com",
+    pass: "jcuk kfph ulyx griq"
   }
 });
 
@@ -188,7 +204,7 @@ return userSearch.save()
     const recipients = req.body.email
      res.redirect('/');
 transport.sendMail({
-      from: sender,
+      from:"Tamanafarzami33@gmail.com" ,
       to:recipients,
       subject: "Reset Password",
       html: `<p>Reset your password from here</p> 
