@@ -4,6 +4,7 @@ const user = require("../modules/user")
 const nodemailer = require("nodemailer");
 const { MailtrapTransport } = require("mailtrap");
 const { now } = require("mongoose");
+const { userInfo } = require("os");
 
 
 
@@ -235,11 +236,24 @@ res.render('auth/newPassword', {
   pageTitle: 'New Password',
   isAuthCorrect: false,
   errorMessage : errorMessage,
-  userId : user._id.toString()
-   
+  userId : user._id.toString(),
+  passwordToken : token 
 });
 }).catch(err=>console.log(err))
   // console.log("Me",req.session.isloggedin);
+}
+
+exports.postNewPassword = (req,res,next)=>{
+  const newPassword = req.body.password;
+  const UserId = req.body.userId;
+  const newToken = req.body.passwordToken
+  let user;
+  user.findOne({resetToken : newToken , resetExpiredToken : {$gt : Date.now()}, _id :UserId}).then(user=>{
+  return bcreypt.hash(newPassword , 12)
+  }).then(hashedPassword =>{
+    
+  }).catch(err=>console.log(err))
+  res.redirect('/login')
 }
 // Eamil hundling not completed work more 
 /**
