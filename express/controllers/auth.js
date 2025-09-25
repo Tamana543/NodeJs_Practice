@@ -249,14 +249,20 @@ exports.postNewPassword = (req,res,next)=>{
   const newToken = req.body.passwordToken
   let resetUser;
   user.findOne({resetToken : newToken , resetExpiredToken : {$gt : Date.now()}, _id :UserId}).then(userEn=>{
+    if(!userEn){
+      req.flash('erroMessage','user not found')
+    }
     resetUser= userEn
   return bcreypt.hash(newPassword , 12)
   }).then(hashedPassword =>{
 resetUser.password = hashedPassword;
 resetUser.resetToken = undefined;
 resetUser.resetExpiredToken = undefined
+return resetUser.save()
+  }).then(respond=>{
+    res.redirect('/login')
+
   }).catch(err=>console.log(err))
-  res.redirect('/login')
 }
 // Eamil hundling not completed work more 
 /**
