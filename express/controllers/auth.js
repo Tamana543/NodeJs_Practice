@@ -247,11 +247,14 @@ exports.postNewPassword = (req,res,next)=>{
   const newPassword = req.body.password;
   const UserId = req.body.userId;
   const newToken = req.body.passwordToken
-  let user;
-  user.findOne({resetToken : newToken , resetExpiredToken : {$gt : Date.now()}, _id :UserId}).then(user=>{
+  let resetUser;
+  user.findOne({resetToken : newToken , resetExpiredToken : {$gt : Date.now()}, _id :UserId}).then(userEn=>{
+    resetUser= userEn
   return bcreypt.hash(newPassword , 12)
   }).then(hashedPassword =>{
-    
+resetUser.password = hashedPassword;
+resetUser.resetToken = undefined;
+resetUser.resetExpiredToken = undefined
   }).catch(err=>console.log(err))
   res.redirect('/login')
 }
