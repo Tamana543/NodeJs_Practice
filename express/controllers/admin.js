@@ -1,6 +1,7 @@
 const path = require('path') // Import the path module to work with file and directory paths (if not use this the node js will point to the all your pc ads driveC)
 const rootDir = require('../util/paths') 
 const Product = require('../modules/product')
+const user = require('../modules/user')
 
 
 
@@ -26,15 +27,15 @@ exports.postAddProduct = (req,res)=>{
      const imageUrl =req.body.imageUrl;
      const price  =req.body.price ;
      const description  =req.body.description ;
+    
     // using MangoDb
+    
      const productData = new Product(
           {title : title,
                price:price, 
                description:description,
-               imageUrl : imageUrl,
-              
-               // productId : req.user,
-          userId : req.user,
+               imageUrl: imageUrl,
+    userId: req.user_id
 
                })
 
@@ -47,7 +48,7 @@ exports.showAdminProducts = (req,res)=>{
    //using Mangodb
      // Product.fetchALL()
      // using mongoose 
-     Product.find()
+     Product.find({userId : req.user._id})
      .then(product=>{
            res.render('admin/products',{
                prods : product ,
