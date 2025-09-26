@@ -105,15 +105,18 @@ exports.postEditedProduct = (req,res,next)=>{
      // with mongoose 
      Product.findById(prodID)
           .then(product=>{
+               if(product.productId.toString() !== req.user._id.toString()){
+                    return res.redirect('/')
+               }
                product.title = updatedTitle;
                product.imageUrl = updatedImageUrl;
                product.price = updatedPrice;
                product.description = updatedDescription
-     return product.save()
-     }).then(result=>{
+     return product.save().then(result=>{
           console.log("Product Updated");
            res.redirect('/admin/products')
      }).catch(err=>console.log(err))
+     })
 }
 
 exports.postDeleteProduct = (req,res,next)=>{
@@ -122,7 +125,7 @@ exports.postDeleteProduct = (req,res,next)=>{
 
 
      // using m0ongoose 
-     Product.findByIdAndDelete(prodId).then(()=>{
+     Product.deleteOne({_id: prodId , productId : req.user._id}).then(()=>{
           console.log("Deleted");
             res.redirect('/admin/products')
 
