@@ -35,7 +35,7 @@ exports.postAddProduct = (req,res)=>{
                price:price, 
                description:description,
                imageUrl: imageUrl,
-    userId: req.user_id
+    productId: req.user._id 
 
                })
 
@@ -48,7 +48,7 @@ exports.showAdminProducts = (req,res)=>{
    //using Mangodb
      // Product.fetchALL()
      // using mongoose 
-     Product.find({userId : req.user._id})
+     Product.find({productId : req.user._id})
      .then(product=>{
            res.render('admin/products',{
                prods : product ,
