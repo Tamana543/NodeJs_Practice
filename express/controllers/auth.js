@@ -2,7 +2,7 @@ const crypto = require("crypto")
 const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
-const {validationResult}=require('express-validation')
+const {validationResult}=require('express-validator')
 
 
 
@@ -119,7 +119,12 @@ exports.postSignup = (req, res, next) => {
 const validated = validationResult(req)
 if(!validated.isEmpty()){
   console.log(validated.array())
-  return res.status(422).render('')
+  let error = validated.array()[0].msg
+  return res.status(422).render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Signup',
+    isAuthCorrect: false,
+    errorMessage : error })
 }
   user.findOne({email : email}).then(userDoc =>{
 
