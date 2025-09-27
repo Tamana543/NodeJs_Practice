@@ -2,9 +2,7 @@ const crypto = require("crypto")
 const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
-const { MailtrapTransport } = require("mailtrap");
-const { now } = require("mongoose");
-const { userInfo } = require("os");
+const {validationResult}=require('express-validation')
 
 
 
@@ -118,7 +116,11 @@ exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const confirmedPassword = req.body.confirmedPassword;
-
+const validated = validationResult(req)
+if(!validated.isEmpty()){
+  console.log(validated.array())
+  return res.status(422).render('')
+}
   user.findOne({email : email}).then(userDoc =>{
 
     if(userDoc){
