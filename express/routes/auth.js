@@ -11,7 +11,16 @@ router.post('/login',authController.postLogin)
 
 router.post('/logout',authController.postLogout)
 
-router.post('/signup',check('email').isEmail(), authController.postSignup);
+router.post('/signup',check('email')
+.isEmail()
+.withMessage("Please enter an valid email. ")
+.custom((email,{req})=>{
+if(email == 'tamanafarzami22@gmail.com'){
+     throw new Error("This user is blocked..")
+
+}
+return true
+}), authController.postSignup);
 
 
 router.get('/signup', authController.getSignup);
