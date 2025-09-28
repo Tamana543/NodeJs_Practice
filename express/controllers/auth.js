@@ -78,7 +78,12 @@ if(errorMessage.length > 0){
     path: '/signup',
     pageTitle: 'Signup',
     isAuthCorrect: false,
-    errorMessage : errorMessage
+    errorMessage : errorMessage,
+    oldData : {
+    email : '',
+    password : '',
+    confirmPassword : '',
+  }
      
   });
 };
@@ -123,7 +128,13 @@ if(!validated.isEmpty()){
     path: '/signup',
     pageTitle: 'Signup',
     isAuthCorrect: false,
-    errorMessage : error })
+    errorMessage : error,
+  oldData : {
+    email : email,
+    password : password,
+    confirmPassword : req.body.confirmPassword,
+  }
+  })
 }
 // user email exist( transformed to the route validation part)
 

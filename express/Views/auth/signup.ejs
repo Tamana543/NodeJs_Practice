@@ -10,15 +10,15 @@
       <h3>Signup</h3>
         <div class="name flex">
           <label for="Email">Email</label>
-          <input type="email" name="email" id="password" />
+          <input type="email" name="email" id="password" value="<%= oldData.email %>"/>
         </div>
         <div class="last_name flex">
           <label for="last-name" class="last_name-label">Password</label>
-          <input type="password" name="password" id="password" />
+          <input type="password" name="password" id="password" value="<%= oldData.password %>" />
         </div>
  <div class="form-control flex">
                 <label for="confirmPassword" width=60 >Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword">
+                <input type="password" name="confirmPassword" id="confirmPassword" value="<%= oldData.confirmPassword %>">
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button type="submit" class="submit">Signup</button>
