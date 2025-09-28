@@ -22,7 +22,7 @@ check('email')
 // }
 // return true
 
-user.findOne({email : email}).then(userDoc =>{
+return user.findOne({email : email}).then(userDoc =>{
 if(userDoc){
       return Promise.reject("User already exist, try login ᓚᘏᗢ")
 }}
