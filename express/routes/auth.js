@@ -28,7 +28,14 @@ body('password').isStrongPassword({
      minUppercase:1,
      minSymbols: 1,
      minNumbers: 1
-}).withMessage('Password must be at least 5 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.')
+}).withMessage('Password must be at least 5 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.'),
+body('confirmPassword').custom((value,{req})=>{
+     if(value !== req.body.password){
+          throw new Error("Passwords Should Match -_-");
+          
+     }
+     return true
+})
 ], authController.postSignup);
 
 
