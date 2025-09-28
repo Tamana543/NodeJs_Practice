@@ -115,7 +115,6 @@ user.findOne({email : email}).then((user)=>{
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const confirmedPassword = req.body.confirmedPassword;
 const validated = validationResult(req)
 if(!validated.isEmpty()){
   console.log(validated.array())
@@ -126,13 +125,9 @@ if(!validated.isEmpty()){
     isAuthCorrect: false,
     errorMessage : error })
 }
-  user.findOne({email : email}).then(userDoc =>{
+// user email exist( transformed to the route validation part)
 
-    if(userDoc){
-      req.flash('userError','User already exist, try login ᓚᘏᗢ')
-      return res.redirect('/signup')
-    }
-    return bcreypt.hash(password,12).then((hashedPassword) =>{
+     bcreypt.hash(password,12).then((hashedPassword) =>{
       req.session.isloggedin = true
  const newUser = new user({
      email : email,
@@ -155,10 +150,8 @@ if(!validated.isEmpty()){
     }).then((respond)=>console.log(respond)).catch(err=>console.log("Here",err))
     res.redirect('/')
 // here
-  })
-    
-  }).catch(err=>console.log(err))
-};
+  })}
+  
 exports.postLogout = (req,res)=>{
 req.session.destroy((err)=>{
  

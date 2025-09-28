@@ -2,7 +2,7 @@ const authController =  require('../controllers/auth')
 const express = require('express')
 const {check,body} = require('express-validator')
 const router = express.Router()
-
+const user = require('../modules/user')
 
 
 router.get('/login',authController.getLogin)
@@ -16,11 +16,17 @@ check('email')
 .isEmail()
 .withMessage("Please enter an valid email. ")
 .custom((email,{req})=>{
-if(email == 'tamanafarzami22@gmail.com'){
-     throw new Error("This user is blocked..")
+     //blacking expample
+// if(email == 'tamanafarzami22@gmail.com'){
+//      throw new Error("This user is blocked..")
+// }
+// return true
 
-}
-return true
+user.findOne({email : email}).then(userDoc =>{
+if(userDoc){
+      return Promise.reject("User already exist, try login ᓚᘏᗢ")
+}}
+)
 }),
 body('password').isStrongPassword({
      minLength: 6,
