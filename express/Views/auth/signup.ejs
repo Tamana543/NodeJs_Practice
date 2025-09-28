@@ -4,12 +4,7 @@
      
 </head>
 <%- include('../includes/navigation.ejs') %>
-<%if(errorMessage) { %>
 
-
- <div class="user_err"><%= errorMessage %></div>
- 
- <% }%>
 <div class="window log_in-window">
   <form method="post" class="flex" action="/signup" style="gap: 0% !important;" novalidate>
       <h3>Signup</h3>
@@ -29,4 +24,10 @@
         <button type="submit" class="submit">Signup</button>
       </form>
       </div>
+      <%if(errorMessage) { %>
+
+
+ <div class="user_err"><%= errorMessage %></div>
+ 
+ <% }%>
 <%- include('../includes/end.ejs') %>
