@@ -17,6 +17,8 @@ const User = require('./modules/user')
 
 //database : Mongoo
 const MONGODB_URI =  'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/'
+// const MONGODB_URI = 'mongodb+srv://tamanafarzami33:jn2K309ZE6C3Re3y@cluster0.ufecoqb.mongodb.net/test?retryWrites=true&w=majority';
+
 
 
 // Wiew enjine hundlers 
@@ -106,9 +108,11 @@ app.use(errorController.get404)
 //Gt6yKZ,%x_PG*Vs
 // with mongoose 
 
-mongoose
 .connect(
-    MONGODB_URI 
+    MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+} 
 )
 .then(result=>{
     
