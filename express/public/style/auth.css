@@ -93,4 +93,7 @@ color: #d468d4;
   color: #9302a0;
  font-weight: bold;
 }
-
+.signupForm input.invalid {
+border: 1px solid rgb(255, 3, 3) !important;
+border-top: none !important;
+}

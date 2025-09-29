@@ -2,7 +2,8 @@ const crypto = require("crypto")
 const bcreypt = require("bcrypt")
 const user = require("../modules/user")
 const nodemailer = require("nodemailer");
-const {validationResult}=require('express-validator')
+const {validationResult}=require('express-validator');
+const { error } = require("console");
 
 
 
@@ -83,7 +84,8 @@ if(errorMessage.length > 0){
     email : '',
     password : '',
     confirmPassword : '',
-  }
+  },
+  validationError :[] 
      
   });
 };
@@ -133,7 +135,8 @@ if(!validated.isEmpty()){
     email : email,
     password : password,
     confirmPassword : req.body.confirmPassword,
-  }
+  },
+    validationError :validated.array()
   })
 }
 // user email exist( transformed to the route validation part)
@@ -159,7 +162,7 @@ if(!validated.isEmpty()){
       text : "Congratulation, your account has been successfully authorized!",
         category: "Integration Test",
     }).then((respond)=>console.log(respond)).catch(err=>console.log("Here",err))
-    res.redirect('/')
+    res.redirect('/login')
 // here
   })}
   
