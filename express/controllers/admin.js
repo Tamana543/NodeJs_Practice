@@ -30,6 +30,7 @@ exports.postAddProduct = (req,res)=>{
     
     // using MangoDb
     
+    console.log(req.user)
      const productData = new Product(
           {title : title,
                price:price, 

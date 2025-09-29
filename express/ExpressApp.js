@@ -108,13 +108,10 @@ app.use(errorController.get404)
 //Gt6yKZ,%x_PG*Vs
 // with mongoose 
 
-.connect(
-    MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-} 
-)
-.then(result=>{
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(result=>{
     
      app.listen(5430)
 })

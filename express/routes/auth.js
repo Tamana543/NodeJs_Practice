@@ -16,7 +16,7 @@ check('email')
 .isEmail()
 .withMessage("Please enter an valid email. ")
 .custom((email,{req})=>{
-     //blacking expample
+     
 // if(email == 'tamanafarzami22@gmail.com'){
 //      throw new Error("This user is blocked..")
 // }
