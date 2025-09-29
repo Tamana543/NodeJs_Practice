@@ -21,11 +21,21 @@
         </div>
         <div class="last_name flex">
           <label for="last-name" class="last_name-label">Password</label>
-          <input type="password" name="password" id="password" value="<%= oldData.password %>" />
+          <input 
+          class="<%= validationError.find(e => e.path == 'password' ) ? 'invalid' : '' %>"
+          type="password" 
+          name="password" 
+          id="password" 
+          value="<%= oldData.password %>" />
         </div>
  <div class="form-control flex">
                 <label for="confirmPassword" width=60 >Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword" value="<%= oldData.confirmPassword %>">
+                <input
+                class="<%= validationError.find(e => e.path == 'confirmPassword' ) ? 'invalid' : '' %>"
+                 type="password" 
+                 name="confirmPassword" 
+                 id="confirmPassword"
+                value="<%= oldData.confirmPassword %>">
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button type="submit" class="submit">Signup</button>
