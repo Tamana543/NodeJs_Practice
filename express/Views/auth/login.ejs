@@ -10,11 +10,25 @@
       <h3>LogIn</h3>
         <div class="name flex">
           <label for="email">Email</label>
-          <input type="email" name="email" id="Name" />
+          <% console.log(validationError) %>
+          <% console.log(oldData) %>
+          <input
+          class="<%= validationError.find(e => e.path == 'email' ? 'invalid':'') %>"
+           type="email" 
+           name="email" 
+           id="Name" 
+           value="<%= oldData.email %>"
+           />
         </div>
         <div class="last_name flex">
           <label for="password" class="last_name-label">Password</label>
-          <input type="password" name="password" id="lastName" />
+          <input 
+          class="<%= validationError.find(e => e.path == 'password' ? 'invalid' : '') %>"
+          type="password"
+           name="password"
+            id="lastName" 
+            value="<%= oldData.password %>"
+            />
         </div>
 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button type="submit" class="submit">Submit</button>

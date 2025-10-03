@@ -58,7 +58,14 @@ res.render('auth/login',{
       // isAuthCorrect: req.session.loggedIn || false
         // isAuthCorrect : logedIn
         isAuthCorrect : false,
-        errorMessage : errorMessage
+        errorMessage : errorMessage,
+         oldData : {
+    email : '',
+    password : '',
+
+  },
+    validationError :[]
+  
         
    
   })
@@ -109,7 +116,15 @@ user.findOne({email : email}).then((user)=>{
    return  req.session.save((err)=>{
       // console.log(err);
  
-      res.redirect('/')
+      res.redirect('/',{
+        oldData : {
+    email : email,
+    password : password,
+  },
+    validationError :validated.array()
+  
+    
+      })
     })
     }else {
       req.flash('userError','Incorrect Password :/')
