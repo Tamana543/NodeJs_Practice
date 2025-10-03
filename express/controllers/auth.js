@@ -4,6 +4,7 @@ const user = require("../modules/user")
 const nodemailer = require("nodemailer");
 const {validationResult}=require('express-validator');
 const { error } = require("console");
+const path = require("path");
 
 
 
@@ -104,8 +105,21 @@ const password = req.body.password
 //Lugging in in the user
 user.findOne({email : email}).then((user)=>{
   if(!user){
-         req.flash('userError','User with this email address is not found :(')
-    return res.redirect("/login")
+    //      req.flash('userError','User with this email address is not found :(')
+    // return res.redirect("/login")
+    return res.render('auth/login',{
+       path: '/login',
+    pageTitle: 'login',
+    isAuthCorrect: false,
+   errorMessage:  'Incorrect Password or email :/',
+   
+          oldData : {
+            email : email,
+            password : password
+          },
+          validationError :[{path : 'email', path : 'password'}] 
+        
+    })
   }
   
   bcreypt.compare(password, user.password).then(isMatching=>{
@@ -116,19 +130,25 @@ user.findOne({email : email}).then((user)=>{
    return  req.session.save((err)=>{
       // console.log(err);
  
-      res.redirect('/',{
-        oldData : {
-    email : email,
-    password : password,
-  },
-    validationError :validated.array()
-  
-    
-      })
+      res.redirect('/')
     })
     }else {
-      req.flash('userError','Incorrect Password :/')
-      res.redirect('/login')
+      // req.flash('userError','Incorrect Password :/')
+      return res.status(422).render('auth/login',
+        
+        {
+           path: '/login',
+    pageTitle: 'login',
+    isAuthCorrect: false,
+    errorMessage :  'Incorrect Password :/',
+          userError : 'Incorrect Password :/',
+          oldData : {
+            email : email,
+            password : password
+          },
+          validationError :[{path : 'email', path : 'password'}] 
+        }
+      )
     }
   }).catch(err=>console.log(err))
 }).catch(err=>console.log(err))
