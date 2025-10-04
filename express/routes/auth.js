@@ -7,14 +7,16 @@ const user = require('../modules/user')
 
 router.get('/login',authController.getLogin)
 
-router.post('/login',authController.postLogin)
+router.post('/login',[
+     check('email').isEmail().withMessage("Incorrect Password or email :/")
+],authController.postLogin)
 
 router.post('/logout',authController.postLogout)
 
 router.post('/signup',[
 check('email')
 .isEmail()
-.withMessage("Please enter an valid email. ")
+.withMessage("Please enter an valid email. ").normalizeEmail()
 .custom((email,{req})=>{
      
 // if(email == 'tamanafarzami22@gmail.com'){
@@ -34,8 +36,8 @@ body('password').isStrongPassword({
      minUppercase:1,
      minSymbols: 1,
      minNumbers: 1
-}).withMessage('Password must be at least 5 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.'),
-body('confirmPassword').custom((value,{req})=>{
+}).withMessage('Password must be at least 5 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one symbol.').trim(),
+body('confirmPassword').trim().custom((value,{req})=>{
      if(value !== req.body.password){
           throw new Error("Passwords Should Match -_-");
           
